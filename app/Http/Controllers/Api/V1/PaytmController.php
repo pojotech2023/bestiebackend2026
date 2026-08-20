@@ -1,0 +1,254 @@
+<?php
+namespace App\Http\Controllers\api\v1;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Config;
+use App\Models\PaymentRequest;
+use App\Traits\Processor;
+use Illuminate\Support\Facades\Http;
+use paytm\paytmchecksum\PaytmChecksum;
+use App\Models\Order;
+use App\Models\OrderPayment;
+use Illuminate\Support\Facades\Log;
+
+class PaytmController extends Controller
+{
+    use Processor;
+
+    private mixed $config_values;
+    private PaymentRequest $payment;
+    private User $user;
+
+    public function __construct(PaymentRequest $payment, User $user)
+    {
+        // Step 1: Try payment_config table first
+        $config = $this->payment_config('paytm', 'payment_config');
+
+        if (!is_null($config)) {
+            if ($config->mode == 'live') {
+                $this->config_values = json_decode($config->live_values);
+            } else {
+                $this->config_values = json_decode($config->test_values);
+            }
+
+            $isLive = ($config->mode == 'live');
+            $PAYTM_STATUS_URL = $isLive
+                ? 'https://secure.paytmpayments.com/merchant-status/getTxnStatus'
+                : 'https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
+            $PAYTM_TXN_URL = $isLive
+                ? 'https://secure.paytmpayments.com/theia/processTransaction'
+                : 'https://securegw-stage.paytm.in/theia/processTransaction';
+
+            Config::set('paytm_config', [
+                'PAYTM_ENVIRONMENT'          => $isLive ? 'PROD' : 'TEST',
+                'PAYTM_MERCHANT_KEY'         => $this->config_values->merchant_key ?? '',
+                'PAYTM_MERCHANT_MID'         => $this->config_values->merchant_id ?? '',
+                'PAYTM_MERCHANT_WEBSITE'     => $this->config_values->merchant_website_link ?? 'DEFAULT',
+                'PAYTM_REFUND_URL'           => $this->config_values->refund_url ?? '',
+                'PAYTM_STATUS_QUERY_URL'     => $PAYTM_STATUS_URL,
+                'PAYTM_STATUS_QUERY_NEW_URL' => $PAYTM_STATUS_URL,
+                'PAYTM_TXN_URL'              => $PAYTM_TXN_URL,
+            ]);
+
+            Log::info('Paytm config loaded from payment_config table');
+
+        } else {
+            // Step 2: Fallback — business_settings table
+            $paytm_settings = \App\Models\BusinessSetting::where('key', 'paytm')->first();
+
+            if ($paytm_settings) {
+                $values = json_decode($paytm_settings->value, true);
+
+                $mid  = $values['merchant_id']  ?? '';
+                $mkey = $values['merchant_key'] ?? '';
+                $website = $values['merchant_website'] ?? 'DEFAULT';
+                $is_sandbox = $values['is_sandbox'] ?? 0;
+
+                $isLive = ($is_sandbox == 0);
+                $PAYTM_STATUS_URL = $isLive
+                    ? 'https://secure.paytmpayments.com/merchant-status/getTxnStatus'
+                    : 'https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
+
+                Config::set('paytm_config', [
+                    'PAYTM_ENVIRONMENT'          => $isLive ? 'PROD' : 'TEST',
+                    'PAYTM_MERCHANT_KEY'         => $mkey,
+                    'PAYTM_MERCHANT_MID'         => $mid,
+                    'PAYTM_MERCHANT_WEBSITE'     => $website,
+                    'PAYTM_REFUND_URL'           => '',
+                    'PAYTM_STATUS_QUERY_URL'     => $PAYTM_STATUS_URL,
+                    'PAYTM_STATUS_QUERY_NEW_URL' => $PAYTM_STATUS_URL,
+                    'PAYTM_TXN_URL'              => $isLive
+                        ? 'https://secure.paytmpayments.com/theia/processTransaction'
+                        : 'https://securegw-stage.paytm.in/theia/processTransaction',
+                ]);
+
+                Log::info('Paytm config loaded from business_settings', [
+                    'mid'        => $mid,
+                    'is_sandbox' => $is_sandbox,
+                    'isLive'     => $isLive,
+                ]);
+            } else {
+                Log::error('Paytm config NOT FOUND anywhere!');
+            }
+        }
+
+        $this->payment = $payment;
+        $this->user    = $user;
+    }
+
+    public function generateToken(Request $request)
+    {
+        $amount  = (float) $request->amount;
+        $orderId = $request->order_id;
+
+        // ✅ CORRECT order
+        $mid  = config('paytm_config.PAYTM_MERCHANT_MID');
+        $mkey = config('paytm_config.PAYTM_MERCHANT_KEY');
+
+        Log::info('Paytm generateToken called', [
+            'order_id' => $orderId,
+            'amount'   => $amount,
+            'mid'      => $mid,
+            'mkey_len' => strlen($mkey),
+        ]);
+
+        if (empty($mid) || empty($mkey)) {
+            Log::error('Paytm MID or KEY is empty!');
+            return response()->json([
+                'status'  => false,
+                'message' => 'Paytm configuration missing. Please contact support.',
+            ], 400);
+        }
+
+        $body = [
+            "requestType" => "Payment",
+            "mid"         => $mid,
+            "websiteName" => "DEFAULT",
+            "orderId"     => (string) $orderId,
+            "callbackUrl" => url('/api/v1/paytm/callback'),
+            "txnAmount"   => [
+                "value"    => sprintf('%.2f', $amount),
+                "currency" => "INR"
+            ],
+            "userInfo" => [
+                "custId" => "CUST_" . (auth()->id() ?? 1)
+            ]
+        ];
+
+        $checksum = PaytmChecksum::generateSignature(json_encode($body, JSON_UNESCAPED_SLASHES), $mkey);
+
+        $payload = [
+            "body" => $body,
+            "head" => ["signature" => $checksum]
+        ];
+
+        Log::info('Paytm initiateTransaction request', [
+            'url' => "https://secure.paytmpayments.com/theia/api/v1/initiateTransaction?mid={$mid}&orderId={$orderId}",
+            'mid' => $mid,
+        ]);
+
+        $response = Http::withBody(json_encode($payload, JSON_UNESCAPED_SLASHES), 'application/json')
+            ->post("https://secure.paytmpayments.com/theia/api/v1/initiateTransaction?mid={$mid}&orderId={$orderId}")
+            ->json();
+
+        Log::info('Paytm initiateTransaction response', ['response' => $response]);
+
+        if (!isset($response['body']['txnToken'])) {
+            Log::error('Paytm token generation failed', ['response' => $response]);
+            return response()->json([
+                "status"         => false,
+                "message"        => "Token generation failed",
+                "paytm_response" => $response
+            ], 400);
+        }
+
+        return response()->json([
+            "status"      => true,
+            "mid"         => $mid,
+            "orderId"     => $orderId,
+            "txnToken"    => $response['body']['txnToken'],
+            "amount"      => $amount,
+            "callbackUrl" => url('/api/v1/paytm/callback'),
+            "isStaging"   => false,
+            "checksum"    => $checksum
+        ]);
+    }
+
+    public function callback(Request $request)
+    {
+        try {
+            Log::info('Paytm Callback Response:', $request->all());
+
+            $paytmParams = $request->all();
+            $checksum    = $request->input('CHECKSUMHASH');
+
+            // ✅ KEY use பண்றோம்
+            $isVerifySignature = PaytmChecksum::verifySignature(
+                $paytmParams,
+                config('paytm_config.PAYTM_MERCHANT_KEY'),
+                $checksum
+            );
+
+            if ($isVerifySignature) {
+                $orderId = $request->ORDERID;
+                $txnId   = $request->TXNID;
+                $status  = $request->STATUS;
+                $amount  = $request->TXNAMOUNT;
+                $date    = $request->TXNDATE;
+
+                Log::info('Paytm callback verified', [
+                    'order_id' => $orderId,
+                    'status'   => $status,
+                    'txn_id'   => $txnId,
+                ]);
+
+                OrderPayment::updateOrCreate(
+                    ['order_id' => $orderId],
+                    [
+                        'transaction_ref' => $txnId,
+                        'amount'          => $amount,
+                        'payment_status'  => $status,
+                        'payment_method'  => 'paytm',
+                        'created_at'      => $date,
+                        'updated_at'      => $date
+                    ]
+                );
+
+                $order = Order::where('id', $orderId)->first();
+
+                if (!$order) {
+                    Log::error('Paytm callback: Order not found: ' . $orderId);
+                    return response()->json(['message' => 'Order not found'], 200);
+                }
+
+                if ($status === 'TXN_SUCCESS') {
+                    $order->update([
+                        'order_status'          => 'confirmed',
+                        'payment_status'        => 'paid',
+                        'transaction_reference' => $txnId
+                    ]);
+                    Log::info('Paytm payment SUCCESS', ['order_id' => $orderId]);
+                } else {
+                    $order->update([
+                        'order_status'          => 'failed',
+                        'payment_status'        => 'unpaid',
+                        'transaction_reference' => $txnId
+                    ]);
+                    Log::warning('Paytm payment FAILED', ['order_id' => $orderId, 'status' => $status]);
+                }
+
+                return response()->json(['message' => 'Payment recorded'], 200);
+
+            } else {
+                Log::error('Paytm Checksum Mismatch');
+                return response()->json(['message' => 'Checksum failed'], 200);
+            }
+
+        } catch (\Exception $e) {
+            Log::error('Paytm Webhook crash: ' . $e->getMessage());
+            return response()->json(['status' => 'error'], 200);
+        }
+    }
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap:https://bestie.co.in/sitemap.xml
