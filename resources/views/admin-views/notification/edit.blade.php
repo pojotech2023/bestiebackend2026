@@ -9,7 +9,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="{{ asset('public/assets/admin/img/bell.png')}}" alt="public">
+                            <img src="{{ asset('assets/admin/img/bell.png')}}" alt="public">
                         </div>
                         <span>{{translate('messages.notification_update')}}</span>
                     </h1>
@@ -58,7 +58,7 @@
                                 <center class="mb-3">
                                     <img class="initial-30" id="viewer"
                                         src="{{ asset('storage/notification')}}/{{$notification['image']}}"
-                                        onerror="this.src='{{ asset('public/assets/admin/img/900x400/img1.jpg')}}'"
+                                        onerror="this.src='{{ asset('assets/admin/img/900x400/img1.jpg')}}'"
                                         alt="image"/>
                                 </center>
                                 <label>{{translate('messages.notification_banner')}}</label><small class="text-danger">* ( {{translate('messages.ratio_3:1')}} )</small>

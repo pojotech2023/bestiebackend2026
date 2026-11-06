@@ -110,7 +110,7 @@
                                 </label>
                                 <center class="mt-auto mb-auto">
                                     <img class="initial-12" id="viewer"
-                                         src="{{ asset('public/assets/admin/img/900x400/img1.jpg')}}" alt="campaign image"/>
+                                         src="{{ asset('assets/admin/img/900x400/img1.jpg')}}" alt="campaign image"/>
                                 </center>
                                 <div class="form-group">
                                     <div class="custom-file">
@@ -235,7 +235,7 @@
         <script>
             $('#reset_btn').click(function(){
                 $('#choice_item').val(null).trigger('change');
-                $('#viewer').attr('src','{{ asset('public/assets/admin/img/900x400/img1.jpg')}}');
+                $('#viewer').attr('src','{{ asset('assets/admin/img/900x400/img1.jpg')}}');
             })
         </script>
 @endpush

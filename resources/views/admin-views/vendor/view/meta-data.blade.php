@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 
 @endpush
 
@@ -43,7 +43,7 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <span class="card-header-icon">
-                            <img class="w--22" src="{{ asset('public/assets/admin/img/restaurant.png')}}" alt="">
+                            <img class="w--22" src="{{ asset('assets/admin/img/restaurant.png')}}" alt="">
                         </span>
                         <span class="p-md-1"> {{translate('messages.restaurant_meta_data')}}</span>
                     </h5>
@@ -169,7 +169,7 @@
                                                 </label>
                                                 <center>
                                                     <img class="img--110 min-height-170px min-width-170px" id="viewer"
-                                                        onerror="this.src='{{ asset('public/assets/admin/img/upload.png') }}'"
+                                                        onerror="this.src='{{ asset('assets/admin/img/upload.png') }}'"
                                                         src="{{asset('storage/app/public/restaurant').'/'.$restaurant->meta_image}}" alt="{{$restaurant->name}}"
                                                         alt="{{ translate('meta_image') }}" />
                                                 </center>

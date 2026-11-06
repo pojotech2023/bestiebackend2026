@@ -8,24 +8,24 @@
     <title>@yield('title')</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/assets/installation')}}/assets/img/favicon.svg">
+    <link rel="shortcut icon" href="{{ asset('assets/installation')}}/assets/img/favicon.svg">
 
     <!-- Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('public/assets/installation')}}/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/installation')}}/assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/installation')}}/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/installation')}}/assets/css/style.css">
 </head>
 
 <body>
-<section style="background-image: url('{{ asset('public/assets/installation')}}/assets/img/page-bg.png')"
+<section style="background-image: url('{{ asset('assets/installation')}}/assets/img/page-bg.png')"
          class="w-100 min-vh-100 bg-img position-relative py-5">
 
     <!-- Logo -->
     <div class="logo">
-        <img src="{{ asset('public/assets/installation')}}/assets/img/favicon.svg" alt="">
+        <img src="{{ asset('assets/installation')}}/assets/img/favicon.svg" alt="">
     </div>
 
     <div class="custom-container">
@@ -35,7 +35,7 @@
         <footer class="footer py-3 mt-4">
             <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 align-items-center">
                 <div class="footer-logo">
-                    <img src="{{ asset('public/assets/installation')}}/assets/img/logo.svg" alt="">
+                    <img src="{{ asset('assets/installation')}}/assets/img/logo.svg" alt="">
                 </div>
                 <p class="copyright-text mb-0">© {{date("Y")}} | All Rights Reserved</p>
             </div>
@@ -45,8 +45,8 @@
 </body>
 
 <!-- Script Goes Here -->
-<script src="{{ asset('public/assets/installation')}}/assets/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('public/assets/installation')}}/assets/js/script.js"></script>
+<script src="{{ asset('assets/installation')}}/assets/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('assets/installation')}}/assets/js/script.js"></script>
 {!! Toastr::message() !!}
 
 </html>

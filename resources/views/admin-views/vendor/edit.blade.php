@@ -2,7 +2,7 @@
 
 @section('title', translate('Update_restaurant_info'))
 @push('css_or_js')
-    <link href="{{ asset('public/assets/admin/css/tags-input.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/tags-input.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="content container-fluid initial-57">
@@ -117,7 +117,7 @@
                                     </label>
                                     <center>
                                         <img class="img--110 min-height-170px min-width-170px" id="viewer"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/upload.png') }}'"
+                                            onerror="this.src='{{ asset('assets/admin/img/upload.png') }}'"
                                             src="{{ asset('storage/app/public/restaurant/' . $restaurant->logo) }}"
                                             alt="logo image" />
                                     </center>
@@ -133,7 +133,7 @@
                                     </label>
                                     <center>
                                         <img class="img--vertical min-height-170px min-width-170px" id="coverImageViewer"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/upload-img.png') }}'"
+                                            onerror="this.src='{{ asset('assets/admin/img/upload-img.png') }}'"
                                             src="{{ asset('storage/app/public/restaurant/cover/' . $restaurant->cover_photo) }}"
                                             alt="Fav icon" />
                                     </center>
@@ -345,7 +345,7 @@
                                     <div class="js-form-message form-group">
                                         <label class="input-label"
                                             for="signupSrPassword">{{ translate('messages.password') }}
-                                            <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Must_contain_at_least_8_or_more_characters') }}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
+                                            <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Must_contain_at_least_8_or_more_characters') }}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
 
                                         </label>
 
@@ -414,7 +414,7 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin') }}/js/tags-input.min.js"></script>
+    <script src="{{ asset('assets/admin') }}/js/tags-input.min.js"></script>
 <script>
     $(document).on('ready', function() {
         $('.offcanvas').on('click', function(){
@@ -425,7 +425,7 @@
         })
     });
 </script>
-<script src="{{ asset('public/assets/admin/js/spartan-multi-image-picker.js') }}"></script>
+<script src="{{ asset('assets/admin/js/spartan-multi-image-picker.js') }}"></script>
 <script type="text/javascript">
     $(function() {
         $("#coba").spartanMultiImagePicker({
@@ -435,7 +435,7 @@
             groupClassName: 'col-lg-2 col-md-4 col-sm-4 col-6',
             maxFileSize: '',
             placeholderImage: {
-                image: '{{ asset('public/assets/admin/img/400x400/img2.jpg') }}',
+                image: '{{ asset('assets/admin/img/400x400/img2.jpg') }}',
                 width: '100%'
             },
             dropFileLabel: "Drop Here",

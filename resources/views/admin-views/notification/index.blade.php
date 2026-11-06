@@ -9,7 +9,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="{{ asset('public/assets/admin/img/bell.png')}}" alt="public">
+                            <img src="{{ asset('assets/admin/img/bell.png')}}" alt="public">
                         </div>
                         <span>{{translate('messages.notification')}}</span>
                     </h1>
@@ -78,7 +78,7 @@
                                 <label class="form-label">&nbsp;</label>
                                 <center class="mb-3">
                                     <img class="initial-30" id="viewer"
-                                        src="{{ asset('public/assets/admin/img/900x400/img1.png')}}" alt="image"/>
+                                        src="{{ asset('assets/admin/img/900x400/img1.png')}}" alt="image"/>
                                 </center>
                                 <label>{{translate('messages.notification_banner')}}</label><small class="text-danger">* ( {{translate('messages.ratio_3:1')}} )</small>
                                 <div class="custom-file">
@@ -129,11 +129,11 @@
                         <div id="usersExportDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
                             <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="{{route('admin.notification.export', ['type'=>'excel', request()->getQueryString()])}}">
-                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('public/assets/admin')}}/svg/components/excel.svg" alt="Image Description">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('assets/admin')}}/svg/components/excel.svg" alt="Image Description">
                                 {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="{{route('admin.notification.export', ['type'=>'csv', request()->getQueryString()])}}">
-                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg" alt="Image Description">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg" alt="Image Description">
                                 {{translate('messages.csv')}}
                             </a>
                         </div>
@@ -171,7 +171,7 @@
                                 {{substr($notification['description'],0,25)}}{{strlen($notification['description'])>25?'...':''}}
                             </td>
                             <td>
-                                <img class="initial-31" src="{{ asset('storage/notification')}}/{{$notification['image']}}" onerror="this.src='{{ asset('public/assets/admin/img/900x400/img1.jpg')}}'">
+                                <img class="initial-31" src="{{ asset('storage/notification')}}/{{$notification['image']}}" onerror="this.src='{{ asset('assets/admin/img/900x400/img1.jpg')}}'">
                             </td>
                             <td>
                                 {{$notification->zone_id==null?translate('messages.all'):($notification->zone?$notification->zone->name:translate('messages.zone_deleted'))}}
@@ -248,7 +248,7 @@
 
                 @if($notifications->count() === 0)
                 <div class="empty--data">
-                    <img src="{{ asset('public/assets/admin/img/empty.png')}}" alt="public">
+                    <img src="{{ asset('assets/admin/img/empty.png')}}" alt="public">
                     <h5>{{translate('no_data_found')}}</h5>
                 </div>
                 @endif
@@ -387,7 +387,7 @@
         $('#description').val(null);
         startPicker.clear();
         endPicker.clear();
-        $('#viewer').attr('src', '{{ asset('public/assets/admin/img/900x400/img1.png')}}');
+        $('#viewer').attr('src', '{{ asset('assets/admin/img/900x400/img1.png')}}');
         $('#customFileEg1').val(null);
         $('#duplicate_image').val(null);
     });

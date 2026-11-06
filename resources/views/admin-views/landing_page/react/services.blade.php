@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -62,7 +62,7 @@
             @csrf
             <h5 class="card-title mb-3 mt-3">
                 <span class="card-header-icon mr-2">
-                    <img src="{{ asset('public/assets/admin/img/react_services.png')}}" alt="" class="mw-100">
+                    <img src="{{ asset('assets/admin/img/react_services.png')}}" alt="" class="mw-100">
                 </span>
 
                 <span>{{translate('messages.Service_List_Section')}}</span>
@@ -179,13 +179,13 @@
                                 <span class="dropdown-header">{{ translate('messages.download_options') }}</span>
                                 <a id="export-excel" class="dropdown-item" href="{{ route('admin.react_landing_page.service_export', ['type' => 'excel', request()->getQueryString()]) }}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                         alt="Image Description">
                                     {{ translate('messages.excel') }}
                                 </a>
                                 <a id="export-csv" class="dropdown-item" href="{{ route('admin.react_landing_page.service_export', ['type' => 'csv', request()->getQueryString()]) }}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                        src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
                                     {{ translate('messages.csv') }}
                                 </a>

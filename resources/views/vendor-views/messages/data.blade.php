@@ -10,7 +10,7 @@
         <div class="chat-user-info-img d-none d-md-block">
             <img class="avatar-img"
                     src="{{asset('storage/app/public/profile/'.$user['image'])}}"
-                    onerror="this.src='{{ asset('public/assets/admin')}}/img/160x160/img1.jpg'"
+                    onerror="this.src='{{ asset('assets/admin')}}/img/160x160/img1.jpg'"
                     alt="Image Description">
         </div>
         <div class="chat-user-info-content">
@@ -26,7 +26,7 @@
         class="chat-user-info d-flex border-bottom p-3 align-items-center customer-list">
         <div class="chat-user-info-img d-none d-md-block">
             <img class="avatar-img"
-                    src='{{ asset('public/assets/admin')}}/img/160x160/img1.jpg'
+                    src='{{ asset('assets/admin')}}/img/160x160/img1.jpg'
                     alt="Image Description">
         </div>
         <div class="chat-user-info-content">

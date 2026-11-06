@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -65,11 +65,11 @@
                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
                         <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                         <a id="export-excel" class="dropdown-item" href="{{route('admin.restaurant.disbursement-export', ['id'=>$restaurant->id,'type'=>'excel'])}}">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('public/assets/admin')}}/svg/components/excel.svg" alt="Image Description">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('assets/admin')}}/svg/components/excel.svg" alt="Image Description">
                             {{translate('messages.excel')}}
                         </a>
                         <a id="export-csv" class="dropdown-item" href="{{route('admin.restaurant.disbursement-export', ['id'=>$restaurant->id,'type'=>'csv'])}}">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg" alt="Image Description">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg" alt="Image Description">
                             {{translate('messages.csv')}}
                         </a>
                     </div>

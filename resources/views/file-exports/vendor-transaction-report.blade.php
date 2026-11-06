@@ -120,8 +120,8 @@
                 </td>
                 <td>{{ \App\CentralLogics\Helpers::format_currency($ot?->additional_charge) }}</td>
                 <td>{{ \App\CentralLogics\Helpers::format_currency($ot->delivery_fee_comission) }}</td>
-                <td>{{ \App\CentralLogics\Helpers::format_currency($ot['admin_commission'] + $ot->delivery_fee_comission) }}</td>
-                <td>{{ \App\CentralLogics\Helpers::format_currency($ot->restaurant_amount - $ot->tax) }}</td>
+                <td>{{ \App\CentralLogics\Helpers::format_currency($ot['admin_commission'] + $ot->delivery_fee_comission + $ot->tax) }}</td>
+                <td>{{ \App\CentralLogics\Helpers::format_currency($ot->restaurant_amount) }}</td>
                 @if ($ot->received_by == 'admin')
                     <td>{{ translate('messages.admin') }}</td>
                 @elseif ($ot->received_by == 'deliveryman')

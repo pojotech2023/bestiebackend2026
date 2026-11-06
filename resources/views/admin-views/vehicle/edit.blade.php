@@ -95,7 +95,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="input-label text-capitalize" for="title">{{translate('messages.extra_charges')}} ({{ \App\CentralLogics\Helpers::currency_symbol() }}) <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('This_amount_will_be_added_with_delivery_charge')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="public/img"></span></label>
+                                        <label class="input-label text-capitalize" for="title">{{translate('messages.extra_charges')}} ({{ \App\CentralLogics\Helpers::currency_symbol() }}) <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('This_amount_will_be_added_with_delivery_charge')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="public/img"></span></label>
                                         <input type="number" step="0.001"id="extra_charges" class="form-control h--45px" value="{{ $vehicle->extra_charges }}"  min="0" required name="extra_charges">
                                     </div>
                                 </div>
@@ -105,13 +105,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="input-label text-capitalize" for="title">{{translate('messages.starting_coverage_area')}} ({{ translate('messages.km') }})<span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.This_value_is_the_minimum_distance_for_a_vehicle_in_this_category_to_serve_an_order.')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="public/img"></span></label>
+                                        <label class="input-label text-capitalize" for="title">{{translate('messages.starting_coverage_area')}} ({{ translate('messages.km') }})<span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.This_value_is_the_minimum_distance_for_a_vehicle_in_this_category_to_serve_an_order.')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="public/img"></span></label>
                                         <input type="number"step="0.001" id="starting_coverage_area" class="form-control h--45px" value="{{ $vehicle->starting_coverage_area }}"  min="0" required name="starting_coverage_area">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="input-label text-capitalize" for="title">{{translate('messages.maximum_coverage_area')}} ({{ translate('messages.km') }})<span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.This_value_is_the_maximum_distance_for_a_vehicle_in_this_category_to_serve_an_order')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="public/img"></span></label>
+                                        <label class="input-label text-capitalize" for="title">{{translate('messages.maximum_coverage_area')}} ({{ translate('messages.km') }})<span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.This_value_is_the_maximum_distance_for_a_vehicle_in_this_category_to_serve_an_order')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="public/img"></span></label>
                                         <input type="number" step="0.001" id="maximum_coverage_area" class="form-control h--45px" value="{{ $vehicle->maximum_coverage_area }}" min="0"  required name="maximum_coverage_area">
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                                 </label>
                                 <center class="mt-auto mb-auto">
                                     <img class="initial-12" id="viewer"
-                                         src="{{ asset('public/assets/admin/img/900x400/img1.jpg')}}" alt="vehicle image"/>
+                                         src="{{ asset('assets/admin/img/900x400/img1.jpg')}}" alt="vehicle image"/>
                                 </center>
                                 <div class="form-group">
                                     <div class="custom-file">
@@ -206,7 +206,7 @@
         <script>
             $('#reset_btn').click(function(){
                 $('#choice_item').val(null).trigger('change');
-                $('#viewer').attr('src','{{ asset('public/assets/admin/img/900x400/img1.jpg')}}');
+                $('#viewer').attr('src','{{ asset('assets/admin/img/900x400/img1.jpg')}}');
             })
             $(".lang_link").click(function(e){
                     e.preventDefault();

@@ -3,7 +3,7 @@
 @section('title',translate('Add_new_campaign'))
 
 @push('css_or_js')
-    <link href="{{ asset('public/assets/admin/css/tags-input.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/tags-input.min.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -348,7 +348,7 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin')}}/js/tags-input.min.js"></script>
+    <script src="{{ asset('assets/admin')}}/js/tags-input.min.js"></script>
 
 
     <script>
@@ -743,7 +743,7 @@
                 // $('#choice_attributes').val(null).trigger('change');
                 // $('#customer_choice_options').val(null).trigger('change');
                 // $('#variant_combination').val(null).trigger('change');
-                // $('#viewer').attr('src','{{ asset('public/assets/admin/img/900x400/img1.jpg')}}');
+                // $('#viewer').attr('src','{{ asset('assets/admin/img/900x400/img1.jpg')}}');
                 location.reload(true);
             })
         </script>

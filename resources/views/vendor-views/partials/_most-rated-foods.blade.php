@@ -14,7 +14,7 @@
         <div class="col-md-4 col-6">
             <a href="{{route('vendor.food.view',[$item['id']])}}" class="grid-card top--rated-food pb-4">
                 <center>
-                    <img class="initial-42" src="{{asset('storage/app/public/product')}}/{{$item['image']}}" onerror="this.src='{{ asset('public/assets/admin/img/100x100/2.png')}}'" alt="{{$item->name}} image">
+                    <img class="initial-42" src="{{asset('storage/app/public/product')}}/{{$item['image']}}" onerror="this.src='{{ asset('assets/admin/img/100x100/2.png')}}'" alt="{{$item->name}} image">
                 </center>
                 <div class="text-center mt-3">
                     <h5 class="name m-0 mb-1">

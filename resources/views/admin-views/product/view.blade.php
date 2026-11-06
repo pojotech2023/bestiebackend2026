@@ -232,7 +232,7 @@ $reviewsInfo = $product->rating()->first();
                     <div class="card-body d-flex flex-column justify-content-center">
                     @if($product->restaurant)
                         <a class="resturant--information-single" href="{{route('admin.restaurant.view', $product->restaurant_id)}}" title="{{$product->restaurant['name']}}">
-                            <img class="avatar-img initial-54" onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                            <img class="avatar-img initial-54" onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                             src="{{asset('storage/app/public/restaurant/'.$product->restaurant->logo)}}"
                             alt="Image Description">
                             <div class="text-center">
@@ -393,13 +393,13 @@ $reviewsInfo = $product->rating()->first();
                         <span class="dropdown-header">{{ translate('messages.download_options') }}</span>
                         <a id="export-excel" class="dropdown-item" href="{{ route('admin.food.food_wise_reviews_export', ['type' => 'excel', 'restaurant'=> $product->restaurant?->name,'id' => $product['id'],request()->getQueryString()]) }}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                 alt="Image Description">
                             {{ translate('messages.excel') }}
                         </a>
                         <a id="export-csv" class="dropdown-item" href="{{ route('admin.food.food_wise_reviews_export', ['type' => 'csv', 'restaurant'=> $product->restaurant?->name, 'id' => $product['id'], request()->getQueryString()]) }}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                 alt="Image Description">
                             .{{ translate('messages.csv') }}
                         </a>
@@ -446,7 +446,7 @@ $reviewsInfo = $product->rating()->first();
                                     href="{{route('admin.customer.view',[$review['user_id']])}}">
                                         <div class="avatar avatar-circle">
                                             <img class="avatar-img" width="75" height="75"
-                                                onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                                                onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                                                 src="{{asset('storage/app/public/profile/'.$review->customer->image)}}"
                                                 alt="Image Description">
                                         </div>

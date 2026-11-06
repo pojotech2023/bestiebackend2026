@@ -61,13 +61,13 @@
                                 <span class="dropdown-header">{{translate('messages.options')}}</span>
                                 <a id="export-copy" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/illustrations/copy.svg"
+                                            src="{{ asset('assets/admin')}}/svg/illustrations/copy.svg"
                                             alt="Image Description">
                                     {{translate('messages.copy')}}
                                 </a>
                                 <a id="export-print" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/illustrations/print.svg"
+                                            src="{{ asset('assets/admin')}}/svg/illustrations/print.svg"
                                             alt="Image Description">
                                     {{translate('messages.print')}}
                                 </a>
@@ -75,31 +75,31 @@
                                 <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                                 {{-- <a id="export-excel" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                            src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                             alt="Image Description">
                                     {{translate('messages.excel')}}
                                 </a>
                                 <a id="export-csv" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                            src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
                                     {{translate('messages.csv')}}
                                 </a> --}}
                                 <a id="export-excel" class="dropdown-item" href="{{route('admin.customer.export', ['type'=>'excel',request()->getQueryString()])}}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                         alt="Image Description">
                                     {{ translate('messages.excel') }}
                                 </a>
                                 <a id="export-csv" class="dropdown-item" href="{{route('admin.customer.export', ['type'=>'csv',request()->getQueryString()])}}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                        src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
                                     .{{ translate('messages.csv') }}
                                 </a>
                                 <a id="export-pdf" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/components/pdf.svg"
+                                            src="{{ asset('assets/admin')}}/svg/components/pdf.svg"
                                             alt="Image Description">
                                     {{translate('messages.pdf')}}
                                 </a>
@@ -381,7 +381,7 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3 w-7rem" src="{{ asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                        '<img class="mb-3 w-7rem" src="{{ asset('assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
                         '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
                         '</div>'
                 }

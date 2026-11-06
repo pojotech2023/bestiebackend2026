@@ -117,7 +117,7 @@
                             <div class="row mt-4 pt-lg-3">
                                 <div class="col-md-6 col-lg-4 col-12">
                                     <center>
-                                        <img class="initial-57-1" id="viewer" onerror="this.src='{{ asset('public/assets/admin/img/100x100/restaurant-default-image.png') }}'" src="{{ asset('storage/app/public/restaurant/' . $restaurant->logo) }}" alt="Product thumbnail" />
+                                        <img class="initial-57-1" id="viewer" onerror="this.src='{{ asset('assets/admin/img/100x100/restaurant-default-image.png') }}'" src="{{ asset('storage/app/public/restaurant/' . $restaurant->logo) }}" alt="Product thumbnail" />
                                     </center>
 
                                     <div class="form-group">
@@ -134,7 +134,7 @@
                                 <div class="col-md-6 col-lg-4 col-12">
                                     <div class="cover-photo">
                                         <center>
-                                            <img class="initial-57-1" id="coverImageViewer" onerror="this.src='{{ asset('public/assets/admin/img/300x100/restaurant-default-image.png') }}'" src="{{ asset('storage/app/public/restaurant/cover/' . $restaurant->cover_photo) }}"
+                                            <img class="initial-57-1" id="coverImageViewer" onerror="this.src='{{ asset('assets/admin/img/300x100/restaurant-default-image.png') }}'" src="{{ asset('storage/app/public/restaurant/cover/' . $restaurant->cover_photo) }}"
                                                 alt="Product thumbnail" />
                                         </center>
 

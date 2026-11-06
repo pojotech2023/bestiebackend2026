@@ -91,14 +91,14 @@
                         <div class="col-lg-6 col-xl-5 left-side">
 
                             <div class="qr-wrapper">
-                                <div class="qr-wrap-top-bg" style="background-image: url({{ asset('public/assets/admin/img/qr-bg.svg')}})">
-                                    <img width="429" src="{{ asset('public/assets/admin/img/bg-logo.png')}}" alt="" class="qr-code-bg-logo">
+                                <div class="qr-wrap-top-bg" style="background-image: url({{ asset('assets/admin/img/qr-bg.svg')}})">
+                                    <img width="429" src="{{ asset('assets/admin/img/bg-logo.png')}}" alt="" class="qr-code-bg-logo">
                                 </div>
-                                <div class="qr-wrap-bottom-bg" style="background-image: url({{ asset('public/assets/admin/img/line-shape.svg')}})"></div>
+                                <div class="qr-wrap-bottom-bg" style="background-image: url({{ asset('assets/admin/img/line-shape.svg')}})"></div>
                                 <div class="d-flex justify-content-center">
                                     <a href="" class="qr-logo">
                                         <img width="200" src="{{asset('storage/app/public/restaurant')}}/{{$restaurant->logo}}" class="mw-100"
-                                                onerror="this.src='{{ asset('public/assets/admin/img/logo2.png')}}'" alt="">
+                                                onerror="this.src='{{ asset('assets/admin/img/logo2.png')}}'" alt="">
                                     </a>
                                 </div>
                                 <div class="d-flex justify-content-center mt-3">
@@ -108,14 +108,14 @@
                                 </div>
                                 <div class="text-center mt-4">
                                     <div >
-                                        <img src="{{ asset('public/assets/admin/img/scan-me.png')}}" class="mw-100" alt="">
+                                        <img src="{{ asset('assets/admin/img/scan-me.png')}}" class="mw-100" alt="">
                                     </div>
                                     <br>
                                     <div class="my-3">
                                         {!! $code !!}
                                         {{-- <div class="d-flex justify-content-center">
                                             <div class="bg-white rounded">
-                                                <img width="218" src="{{ asset('public/assets/admin/img/qr-code.png')}}" class="mw-100" alt="">
+                                                <img width="218" src="{{ asset('assets/admin/img/qr-code.png')}}" class="mw-100" alt="">
                                             </div>
                                         </div> --}}
                                     </div>

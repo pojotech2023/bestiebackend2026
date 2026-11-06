@@ -76,7 +76,7 @@
                                             <span>
                                                 {{translate('Payment_Note')}}
                                                 <span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.This_Section_will_be_field_by_the_customer.') }}" alt="">
-                                                    <img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                    <img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="">
                                                 </span>
                                             </span>
 
@@ -117,7 +117,7 @@
             <div class="d-flex align-items-center flex-column gap-3 text-center">
                 <h3>{{translate('Offline Payment')}}
                 </h3>
-                <img width="100" src="{{ asset('public/assets/admin/img/offline_payment.png')}}" alt="">
+                <img width="100" src="{{ asset('assets/admin/img/offline_payment.png')}}" alt="">
                 <p class="text-muted">{{translate('This view is from the user app.')}} <br class="d-none d-sm-block"> {{translate('This_is_how_customer_will_see_in_the_app')}}</p>
             </div>
             <div class="rounded p-4 mt-3" id="offline_payment_top_part">
@@ -127,7 +127,7 @@
                     <h4 id="payment_modal_method_name"><span></span></h4>
                     <div class="text-primary d-flex align-items-center gap-2">
                         {{translate('Pay_on_this_account')}}
-                        <img width="25" src="{{ asset('public/assets/admin/img/tick.png')}}" alt="">
+                        <img width="25" src="{{ asset('assets/admin/img/tick.png')}}" alt="">
                     </div>
                 </div>
                     <div class="d-flex text-wrap flex-column gap-2" id="methodNameDisplay"> </div>

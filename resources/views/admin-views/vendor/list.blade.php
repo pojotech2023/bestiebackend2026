@@ -228,14 +228,14 @@
                                     <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.restaurant.restaurants-export', ['type'=>'excel',
                    request()->getQueryString()])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
                                         {{translate('messages.excel')}}
                                     </a>
 
                                     <a id="export-excel" class="dropdown-item" href="{{route('admin.restaurant.restaurants-export', ['type'=>'csv',request()->getQueryString()])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                    src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                                    src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                     alt="Image Description">
                                                     {{translate('messages.csv')}}
                                     </a>
@@ -275,7 +275,7 @@
                                     <td>
                                         <a href="{{route('admin.restaurant.view', $dm->id)}}" alt="view restaurant" class="table-rest-info">
                                         <img
-                                                onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png')}}'"
+                                                onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png')}}'"
                                                 src="{{asset('storage/app/public/restaurant')}}/{{$dm['logo']}}">
                                             <div class="info">
                                                 <span class="d-block text-body">

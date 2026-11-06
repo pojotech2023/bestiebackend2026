@@ -150,19 +150,19 @@
                                         <span class="dropdown-header">{{ translate('messages.download_options') }}</span>
                                         <a id="export-excel" class="dropdown-item" href="{{route('admin.customer.wallet.export', ['type'=>'excel',request()->getQueryString()])}}">
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                                src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                                 alt="Image Description">
                                             {{ translate('messages.excel') }}
                                         </a>
                                         <a id="export-csv" class="dropdown-item" href="{{route('admin.customer.wallet.export', ['type'=>'csv',request()->getQueryString()])}}">
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                                src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                                 alt="Image Description">
                                             .{{ translate('messages.csv') }}
                                         </a>
                                         {{-- <a id="export-pdf" class="dropdown-item" href="javascript:;">
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin') }}/svg/components/pdf.svg"
+                                                src="{{ asset('assets/admin') }}/svg/components/pdf.svg"
                                                 alt="Image Description">
                                             {{ translate('messages.pdf') }}
                                         </a> --}}
@@ -250,10 +250,10 @@
 
 @push('script_2')
 
-    <script src="{{ asset('public/assets/admin')}}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{ asset('assets/admin')}}/vendor/chart.js/dist/Chart.min.js"></script>
     <script
-        src="{{ asset('public/assets/admin')}}/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js"></script>
-    <script src="{{ asset('public/assets/admin')}}/js/hs.chartjs-matrix.js"></script>
+        src="{{ asset('assets/admin')}}/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js"></script>
+    <script src="{{ asset('assets/admin')}}/js/hs.chartjs-matrix.js"></script>
 
     <script>
         $(document).on('ready', function () {

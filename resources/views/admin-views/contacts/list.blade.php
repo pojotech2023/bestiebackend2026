@@ -127,7 +127,7 @@
           },
           language: {
             zeroRecords: '<div class="text-center p-4">' +
-                '<img class="w-7rem mb-3" src="{{ asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                '<img class="w-7rem mb-3" src="{{ asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
                 '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
                 '</div>'
           }

@@ -3,8 +3,8 @@
 @section('title',translate('messages.settings'))
 
 @push('css_or_js')
-<link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
-<link href="{{ asset('public/assets/admin/css/tags-input.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
+<link href="{{ asset('assets/admin/css/tags-input.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -28,7 +28,7 @@
                             <i class="tio-settings-outlined"></i>
                         </span>
                         {{translate('messages.Close_Restaurant_Temporarily')}}
-                        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_this_restaurant_will_be_closed_temporarily_and_hidden_from_customer_app_and_web_app._Restaurant_owners_can_re-open_this_restaurant_anytime_by_turning_off_this_button.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_this_restaurant_will_be_closed_temporarily_and_hidden_from_customer_app_and_web_app._Restaurant_owners_can_re-open_this_restaurant_anytime_by_turning_off_this_button.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
 
                     </h4>
                     <label class="switch toggle-switch-lg m-0">
@@ -54,7 +54,7 @@
                         <div class="form-group m-0">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="schedule_order">
                                 <span class="pr-2">{{translate('messages.scheduled_Delivery')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('With_this_feature_enabled,_customers_can_choose_their_preferred_delivery_time_and_calendar_selection_from_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('With_this_feature_enabled,_customers_can_choose_their_preferred_delivery_time_and_calendar_selection_from_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
 
@@ -73,7 +73,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="delivery">
                                 <span class="pr-2">
                                     {{translate('messages.Home_Delivery')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_customers_can_order_food_for_home_delivery.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_customers_can_order_food_for_home_delivery.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" name="delivery" class="toggle-switch-input"
                                 onclick="toogleStatusModal(event,'delivery','dm-self-reg-on.png','dm-self-reg-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('Home_Delivery')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('Home_Delivery')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_order_food_for_home_delivery.')}}</p>`,`<p>{{translate('If_disabled,_the_home_delivery_option_will_be_hidden_from_your_restaurant.')}}</p>`)"
@@ -99,7 +99,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="free_delivery">
                                 <span class="pr-2">
                                     {{translate('messages.free_delivery')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this option is on, customers will get free delivery')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this option is on, customers will get free delivery')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" name="free_delivery" class="toggle-switch-input"
                                 onclick="toogleStatusModal(event,'free_delivery','free-delivery-on.png','free-delivery-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('free_delivery')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('free_delivery')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_order_food_for_free_delivery.')}}</p>`,`<p>{{translate('If_disabled,_the_free_delivery_option_will_be_hidden_from_your_restaurant.')}}</p>`)"
@@ -118,7 +118,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="take_away">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.Takeaway')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_customers_can_pick_up_their_food_from_your_restaurant')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_customers_can_pick_up_their_food_from_your_restaurant')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
                                 onclick="toogleStatusModal(event,'take_away','takeaway-on.png','takeaway-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('Takeaway')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('Takeaway')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_place_takeaway/self-pickup_orders.')}}</p>`,`<p>{{translate('If_disabled,_the_takeaway_option_will_be_hidden_from_your_restaurant.')}}</p>`)"
@@ -137,7 +137,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="veg">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.veg')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_your_restaurant_will_be_shown_on_the_Veg_Restaurant_section_of_the_User_App.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_your_restaurant_will_be_shown_on_the_Veg_Restaurant_section_of_the_User_App.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
 
@@ -157,7 +157,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="non_veg">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.non_veg')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_your_restaurant_will_be_shown_on_the_Non_Veg_Restaurant_section_of_the_User_App.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_your_restaurant_will_be_shown_on_the_Non_Veg_Restaurant_section_of_the_User_App.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
                                     onclick="toogleStatusModal(event,'non_veg','veg-on.png','veg-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('non_veg')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('non_veg')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_find_your_restaurant_in_the_veg_restaurant_list.')}}</p>`,`<p>{{translate('If_disabled,_your_restaurant_will_be_hidden_from_the_veg_restaurant_list.')}}</p>`)"
@@ -179,7 +179,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="order_subscription_active">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.Subscription_based_Order')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_customers_can_place_subscription_based_orders_from_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled,_customers_can_place_subscription_based_orders_from_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
                                      onclick="toogleStatusModal(event,'order_subscription_active','restaurant-reg-on.png','restaurant-reg-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('Subscription_based_Order')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('Subscription_based_Order')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_order_food_on_a_subscription_basis_from_your_restaurant.')}}</p>`,`<p>{{translate('If_disabled,_the_subscription-based_order_option_will_be_hidden_from_your_restaurant.')}}</p>`)"
@@ -200,7 +200,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="cutlery">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.cutlery')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this option is on , customer can choose cutlery in user app.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this option is on , customer can choose cutlery in user app.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
                                 onclick="toogleStatusModal(event,'cutlery','restaurant-reg-on.png','restaurant-reg-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('cutlery')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('cutlery')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_order_food_with_or_without_cutlery_from_your_restaurant.')}}</p>`,`<p>{{translate('If_disabled,_the_cutlery_option_will_be_hidden_from_your_restaurant.')}}</p>`)"
@@ -221,7 +221,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="instant_order">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.instant_order')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('With_this_feature,_customers_can_order_instantly')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('With_this_feature,_customers_can_order_instantly')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
                                 onclick="toogleStatusModal(event,'instant_order','veg-on.png','veg-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('instant_order')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('instant_order')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_order_instantly.')}}</p>`,`<p>{{translate('If_disabled,_customers_can_not_order_instantly.')}}</p>`)"
@@ -241,7 +241,7 @@
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 form-control" for="customer_date_order_sratus">
                                 <span class="pr-2 text-capitalize">
                                     {{translate('messages.customer_date_order_sratus')}}:
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('With_this_feature,_customers_can_not_select_schedule_date_over_the_given_days')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('With_this_feature,_customers_can_not_select_schedule_date_over_the_given_days')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input"
                                 onclick="toogleStatusModal(event,'customer_date_order_sratus','schedule-on.png','schedule-off.png','{{translate('Want_to_enable_the')}} <strong>{{translate('customer_date_order_sratus')}}</strong> {{translate('option')}} ?','{{translate('Want_to_disable_the')}} <strong>{{translate('customer_date_order_sratus')}}</strong> {{translate('option')}} ?',`<p>{{translate('If_enabled,_customers_can_not_select_schedule_date_over_the_given_days._and_you_must_set_a_date_on_the')}} <b>{{ translate('Customer_Can_Order_Within_field') }}</b></p>`,`<p>{{translate('If_disabled,_customers_can_select_any_schedule_date.')}}</p>`)"
@@ -276,7 +276,7 @@
                         <div class="col-sm-{{$data?'4':'6'}} col-12">
                             <div class="form-group m-0">
                                 <label class="input-label text-capitalize" for="title">{{ translate('Customer_Can_Order_Within') }} ({{ translate('messages.Days') }})
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('customers_can_not_select_schedule_date_over_this_given_days.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('customers_can_not_select_schedule_date_over_this_given_days.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                 </label>
                                 <input type="number" name="customer_order_date"  id="customer_order_date" {{ $restaurant?->restaurant_config?->customer_date_order_sratus == 1 ? 'required' :'readonly' }} min="0" max="99999999" class="form-control" placeholder="30" value="{{ $restaurant?->restaurant_config?->customer_order_date ??'0'}}">
                             </div>
@@ -285,7 +285,7 @@
                         <div class="col-sm-{{$data?'4':'6'}} col-12">
                             <div class="form-group m-0">
                                 <label class="input-label text-capitalize" for="title">{{translate('messages.minimum_order_amount')}}
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Specify_the_minimum_order_amount_required_for_customers_when_ordering_from_this_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Specify_the_minimum_order_amount_required_for_customers_when_ordering_from_this_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
 
                                 </label>
                                 <input type="number" name="minimum_order" step="0.01" min="0" max="100000" class="form-control" placeholder="100" value="{{$restaurant->minimum_order??'0'}}">
@@ -350,7 +350,7 @@
                     <div class="col-sm-{{$data?'4':'6'}} col-12">
                         <div class="form-group m-0">
                             <label class="input-label" for="cuisine">{{ translate('messages.cuisine') }}
-                                <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Choose_your_preferred_cuisines_from_the_drop-down_menu,_and_customers_can_see_them_in_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Choose_your_preferred_cuisines_from_the_drop-down_menu,_and_customers_can_see_them_in_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                                     </label>
                             <select name="cuisine_ids[]" id="cuisine"  multiple="multiple"
                                 data-placeholder="{{ translate('messages.select_Cuisine') }}"
@@ -372,7 +372,7 @@
                     <div class="col-sm-{{$data?'4':'6'}} col-12">
                         <div class="form-group m-0">
                             <label class="input-label" for="cuisine">{{ translate('messages.tags') }}
-                                {{-- <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Choose_your_preferred_cuisines_from_the_drop-down_menu,_and_customers_can_see_them_in_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span> --}}
+                                {{-- <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Choose_your_preferred_cuisines_from_the_drop-down_menu,_and_customers_can_see_them_in_your_restaurant.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span> --}}
                                     </label>
                                 <input type="text" class="form-control" name="tags"  value="@foreach($restaurant->tags as $c) {{$c->tag.','}} @endforeach" placeholder="Enter tags" data-role="tagsinput">
 
@@ -392,7 +392,7 @@
             <div class="card-header">
                 <h5 class="card-title">
                     <span class="card-header-icon">
-                        <img class="w--22" src="{{ asset('public/assets/admin/img/restaurant.png')}}" alt="">
+                        <img class="w--22" src="{{ asset('assets/admin/img/restaurant.png')}}" alt="">
                     </span>
                     <span class="p-md-1"> {{translate('messages.restaurant_meta_data')}}</span>
                 </h5>
@@ -514,7 +514,7 @@
                                             </label>
                                             <center>
                                                 <img class="img--110 min-height-170px min-width-170px" id="viewer"
-                                                    onerror="this.src='{{ asset('public/assets/admin/img/upload.png') }}'"
+                                                    onerror="this.src='{{ asset('assets/admin/img/upload.png') }}'"
                                                     src="{{asset('storage/app/public/restaurant').'/'.$restaurant->meta_image}}" alt="{{$restaurant->name}}"
                                                     alt="{{ translate('meta_image') }}" />
                                             </center>
@@ -583,7 +583,7 @@
 @endsection
 
 @push('script_2')
-<script src="{{ asset('public/assets/admin') }}/js/tags-input.min.js"></script>
+<script src="{{ asset('assets/admin') }}/js/tags-input.min.js"></script>
     <script>
         function restaurant_open_status(e) {
             Swal.fire({

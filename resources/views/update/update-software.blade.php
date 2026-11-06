@@ -25,7 +25,7 @@
                                                       data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                                       data-bs-html="true"
                                                       data-bs-title="The username of your codecanyon account">
-                                                      <img src="{{ asset('public/assets/installation')}}/assets/img/svg-icons/info2.svg" class="svg" alt="">
+                                                      <img src="{{ asset('assets/installation')}}/assets/img/svg-icons/info2.svg" class="svg" alt="">
                                                 </span>
                                             </label>
                                             <input type="text" id="username" class="form-control" name="username"
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="d-flex gap-3 align-items-center mt-4">
                                     <img
-                                        src="{{ asset('public/assets/installation')}}/assets/img/svg-icons/php-version.svg"
+                                        src="{{ asset('assets/installation')}}/assets/img/svg-icons/php-version.svg"
                                         alt="">
                                     <div
                                         class="d-flex align-items-center gap-2 justify-content-between flex-grow-1">
@@ -53,7 +53,7 @@
                                         @php($phpVersion = number_format((float)phpversion(), 2, '.', ''))
                                         @if ($phpVersion >= 8.1)
                                             <img width="20"
-                                                 src="{{ asset('public/assets/installation')}}/assets/img/svg-icons/check.png"
+                                                 src="{{ asset('assets/installation')}}/assets/img/svg-icons/check.png"
                                                  alt="">
                                         @else
                                             <span class="cursor-pointer" data-bs-toggle="tooltip"
@@ -63,7 +63,7 @@
                                                        <a href='https://support.cpanel.net/hc/en-us/articles/360052624713-How-to-change-the-PHP-version-for-a-domain-in-cPanel-or-WHM'
                                                        class='d-block' target='_blank'>See how to update</a> ">
                                                     <img
-                                                        src="{{ asset('public/assets/installation')}}/assets/img/svg-icons/info.svg"
+                                                        src="{{ asset('assets/installation')}}/assets/img/svg-icons/info.svg"
                                                         class="svg text-danger" alt="">
                                                 </span>
                                         @endif

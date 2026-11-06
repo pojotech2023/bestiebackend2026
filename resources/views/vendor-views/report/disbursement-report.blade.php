@@ -18,32 +18,32 @@
         <!-- Reports -->
         <div class="disbursement-report mb-20">
             <div class="__card-3 rebursement-item">
-                <img src="{{ asset('public/assets/admin/img/report/new/trx1.png')}}" class="icon" alt="report/new">
+                <img src="{{ asset('assets/admin/img/report/new/trx1.png')}}" class="icon" alt="report/new">
                 <h3 class="title text-008958">{{\App\CentralLogics\Helpers::format_currency($pending)}}
                 </h3>
                 <h6 class="subtitle">{{ translate('Pending_Disbursements') }}</h6>
                 <div class="info-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ translate('All_the_pending_disbursement_requests_that_require_admin’s_action_(complete/cancel).') }}">
-                    <img src="{{ asset('public/assets/admin/img/report/new/info1.png')}}" alt="report/new">
+                    <img src="{{ asset('assets/admin/img/report/new/info1.png')}}" alt="report/new">
                 </div>
             </div>
 
             <div class="__card-3 rebursement-item">
-                <img src="{{ asset('public/assets/admin/img/report/new/trx5.png')}}" class="icon" alt="report/new">
+                <img src="{{ asset('assets/admin/img/report/new/trx5.png')}}" class="icon" alt="report/new">
                 <h3 class="title text-FF7E0D">{{\App\CentralLogics\Helpers::format_currency($completed)}}
                 </h3>
                 <h6 class="subtitle">{{ translate('Completed_Disbursements') }}</h6>
                 <div class="info-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ translate('The_amount_of_disbursement_is_completed.') }}">
-                    <img src="{{ asset('public/assets/admin/img/report/new/info5.png')}}" alt="report/new">
+                    <img src="{{ asset('assets/admin/img/report/new/info5.png')}}" alt="report/new">
                 </div>
             </div>
 
             <div class="__card-3 rebursement-item">
-                <img src="{{ asset('public/assets/admin/img/report/new/trx3.png')}}" class="icon" alt="report/new">
+                <img src="{{ asset('assets/admin/img/report/new/trx3.png')}}" class="icon" alt="report/new">
                 <h3 class="title text-FF5A54">{{\App\CentralLogics\Helpers::format_currency($canceled)}}
                 </h3>
                 <h6 class="subtitle">{{ translate('Cancele_ Transactions') }}</h6>
                 <div class="info-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ translate('See_all_the_canceled_disbursement_amounts_here.') }}">
-                    <img src="{{ asset('public/assets/admin/img/report/new/info3.png')}}" alt="report/new">
+                    <img src="{{ asset('assets/admin/img/report/new/info3.png')}}" alt="report/new">
                 </div>
             </div>
         </div>
@@ -139,11 +139,11 @@
                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
                         <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                         <a id="export-excel" class="dropdown-item" href="{{route('vendor.report.disbursement-report-export', ['type'=>'excel',request()->getQueryString()])}}">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('public/assets/admin')}}/svg/components/excel.svg" alt="Image Description">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('assets/admin')}}/svg/components/excel.svg" alt="Image Description">
                             {{translate('messages.excel')}}
                         </a>
                         <a id="export-csv" class="dropdown-item" href="{{route('vendor.report.disbursement-report-export', ['type'=>'excel',request()->getQueryString()])}}">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg" alt="Image Description">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg" alt="Image Description">
                             {{translate('messages.csv')}}
                         </a>
                     </div>

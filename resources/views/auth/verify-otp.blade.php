@@ -20,13 +20,13 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/vendor.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/vendor/icon-set/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/vendor.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/vendor/icon-set/style.css">
     <!-- CSS Front Template -->
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/theme.minc619.css?v=1.0">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/style.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/toastr.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/theme.minc619.css?v=1.0">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/toastr.css">
 
 </head>
 
@@ -114,11 +114,11 @@
 <!-- ========== END MAIN CONTENT ========== -->
 
 <!-- JS Implementing Plugins -->
-<script src="{{ asset('public/assets/admin')}}/js/vendor.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/vendor.min.js"></script>
 
 <!-- JS Front -->
-<script src="{{ asset('public/assets/admin')}}/js/theme.min.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/toastr.js"></script>
+<script src="{{ asset('assets/admin')}}/js/theme.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/toastr.js"></script>
 {!! Toastr::message() !!}
 
 @if ($errors->any())
@@ -174,7 +174,7 @@
 
 <!-- IE Support -->
 <script>
-    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{ asset('public/assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
+    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{ asset('assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
 </script>
 
 <script>

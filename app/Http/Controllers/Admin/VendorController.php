@@ -1010,9 +1010,10 @@ class VendorController extends Controller
         return back();
     }
 
-    public function withdraw()
+    public function withdraw(Request $request)
     {
-        $key = isset($request['search']) ? explode(' ', $request['search']) : [];
+        $search = $request->query('search', $request->input('search'));
+        $key = !empty($search) ? array_values(array_filter(explode(' ', trim($search)))) : [];
 
         $all = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'all' ? 1 : 0;
         $active = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'approved' ? 1 : 0;
@@ -1020,9 +1021,6 @@ class VendorController extends Controller
         $pending = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'pending' ? 1 : 0;
 
         $withdraw_req = WithdrawRequest::with(['vendor','vendor.restaurants'])
-            ->when($all, function ($query) {
-                return $query;
-            })
             ->when($active, function ($query) {
                 return $query->where('approved', 1);
             })
@@ -1032,17 +1030,35 @@ class VendorController extends Controller
             ->when($pending, function ($query) {
                 return $query->where('approved', 0);
             })
-            ->when(isset($key), function ($query) use ($key) {
+            ->when(count($key) > 0, function ($query) use ($key) {
                 return $query->whereHas('vendor', function ($query) use ($key) {
-                    $query->whereHas('restaurants', function ($q) use ($key) {
-                        foreach ($key as $value) {
-                            $q->where('name', 'like', "%{$value}%");
-                        }
+                    $query->where(function ($qVendor) use ($key) {
+                        $qVendor->whereHas('restaurants', function ($q) use ($key) {
+                            $q->where(function ($subQuery) use ($key) {
+                                foreach ($key as $value) {
+                                    $subQuery->where(function ($s) use ($value) {
+                                        $s->where('name', 'like', "%{$value}%")
+                                          ->orWhere('phone', 'like', "%{$value}%");
+                                    });
+                                }
+                            });
+                        })
+                        ->orWhere(function ($q) use ($key) {
+                            foreach ($key as $value) {
+                                $q->where(function ($sub) use ($value) {
+                                    $sub->where('phone', 'like', "%{$value}%")
+                                        ->orWhere('f_name', 'like', "%{$value}%")
+                                        ->orWhere('l_name', 'like', "%{$value}%")
+                                        ->orWhere('email', 'like', "%{$value}%");
+                                });
+                            }
+                        });
                     });
                 });
             })
             ->latest()
-            ->paginate(config('default_pagination'));
+            ->paginate(config('default_pagination'))
+            ->withQueryString();
 
         return view('admin-views.wallet.withdraw', compact('withdraw_req'));
     }
@@ -1762,37 +1778,52 @@ class VendorController extends Controller
     public function withdraw_list_export(Request $request)
     {
         try{
-        $key = isset($request['search']) ? explode(' ', $request['search']) : [];
+            $search = $request->query('search', $request->input('search'));
+            $key = !empty($search) ? array_values(array_filter(explode(' ', trim($search)))) : [];
 
-        $all = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'all' ? 1 : 0;
-        $active = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'approved' ? 1 : 0;
-        $denied = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'denied' ? 1 : 0;
-        $pending = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'pending' ? 1 : 0;
+            $all = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'all' ? 1 : 0;
+            $active = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'approved' ? 1 : 0;
+            $denied = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'denied' ? 1 : 0;
+            $pending = session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'pending' ? 1 : 0;
 
-        $withdraw_req = WithdrawRequest::with(['vendor'])
-            ->when($all, function ($query) {
-                return $query;
-            })
-            ->when($active, function ($query) {
-                return $query->where('approved', 1);
-            })
-            ->when($denied, function ($query) {
-                return $query->where('approved', 2);
-            })
-            ->when($pending, function ($query) {
-                return $query->where('approved', 0);
-            })
-            ->when(isset($key), function ($query) use ($key) {
-                return $query->whereHas('vendor', function ($query) use ($key) {
-                    $query->whereHas('restaurants', function ($q) use ($key) {
-                        foreach ($key as $value) {
-                            $q->where('name', 'like', "%{$value}%");
-                        }
+            $withdraw_req = WithdrawRequest::with(['vendor','vendor.restaurants'])
+                ->when($active, function ($query) {
+                    return $query->where('approved', 1);
+                })
+                ->when($denied, function ($query) {
+                    return $query->where('approved', 2);
+                })
+                ->when($pending, function ($query) {
+                    return $query->where('approved', 0);
+                })
+                ->when(count($key) > 0, function ($query) use ($key) {
+                    return $query->whereHas('vendor', function ($query) use ($key) {
+                        $query->where(function ($qVendor) use ($key) {
+                            $qVendor->whereHas('restaurants', function ($q) use ($key) {
+                                $q->where(function ($subQuery) use ($key) {
+                                    foreach ($key as $value) {
+                                        $subQuery->where(function ($s) use ($value) {
+                                            $s->where('name', 'like', "%{$value}%")
+                                              ->orWhere('phone', 'like', "%{$value}%");
+                                        });
+                                    }
+                                });
+                            })
+                            ->orWhere(function ($q) use ($key) {
+                                foreach ($key as $value) {
+                                    $q->where(function ($sub) use ($value) {
+                                        $sub->where('phone', 'like', "%{$value}%")
+                                            ->orWhere('f_name', 'like', "%{$value}%")
+                                            ->orWhere('l_name', 'like', "%{$value}%")
+                                            ->orWhere('email', 'like', "%{$value}%");
+                                    });
+                                }
+                            });
+                        });
                     });
-                });
-            })
-            ->latest()
-            ->get();
+                })
+                ->latest()
+                ->get();
             $data = [
                 'withdraw_requests'=>$withdraw_req,
                 'search'=>$request->search??null,

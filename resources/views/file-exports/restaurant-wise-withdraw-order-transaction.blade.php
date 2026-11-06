@@ -32,7 +32,7 @@
                 <td>{{$dt->order_id}}</td>
                 <td>{{ \App\CentralLogics\Helpers::time_date_format($dt?->created_a) }}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->order_amount)}}</td>
-                    <td>{{\App\CentralLogics\Helpers::format_currency($dt->restaurant_amount - $dt->tax)}}</td>
+                    <td>{{\App\CentralLogics\Helpers::format_currency($dt->restaurant_amount)}}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->admin_commission)}}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->delivery_charge)}}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->tax)}}</td>

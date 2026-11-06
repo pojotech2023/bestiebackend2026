@@ -24,7 +24,7 @@
                 <center>
                     <img class="initial-42"
                         src="{{asset('storage/app/public/product')}}/{{$item['image']}}"
-                        onerror="this.src='{{ asset('public/assets/admin/img/100x100/2.png')}}'"
+                        onerror="this.src='{{ asset('assets/admin/img/100x100/2.png')}}'"
                         alt="{{$item->name}} image">
                 </center>
                 <div class="text-center mt-3">

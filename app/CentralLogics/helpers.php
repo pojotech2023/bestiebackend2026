@@ -875,6 +875,8 @@ class Helpers
 
                 $item['delivery_address'] = $item->delivery_address ? json_decode($item->delivery_address, true) : null;
                 $item['details_count'] = (int)$item->details->count();
+                $item['order_image'] = null;
+                $item['image'] = null;
                 unset($item['details']);
                 array_push($storage, $item);
             }
@@ -912,6 +914,8 @@ class Helpers
             }
             $data['delivery_address'] = $data->delivery_address ? json_decode($data->delivery_address, true) : null;
             $data['details_count'] = (int)$data->details->count();
+            $data['order_image'] = null;
+            $data['image'] = null;
             unset($data['details']);
         }
         return $data;
@@ -1148,31 +1152,71 @@ class Helpers
             'Content-Type: application/json'
         ];
  
+        if (empty($fcm_token)) {
+            return null;
+        }
+
+        $order_type = (string) ($data['order_type'] ?? 'delivery');
+        $is_buddy = ($order_type === 'bestie_buddy');
+        $channel_id = $data['android_channel_id'] ?? ($is_buddy ? 'bestie_buddy_channel_loud_v2' : 'bestie_order_channel_loud_v2');
+        $sound = $data['sound'] ?? ($is_buddy ? 'notification_buddy' : 'notification');
+        $title = (string) ($data['title'] ?? '');
+        $body = (string) ($data['description'] ?? ($data['body'] ?? ''));
+
         $dataPayload = [
-            'title'           => (string) $data['title'],
-            'body'            => (string) $data['description'],
-            'image'           => (string) $data['image'],
-            'order_id'        => (string) ($data['order_id'] ?? ''),
-            'type'            => (string) ($data['type'] ?? ''),
-            'conversation_id' => (string) ($data['conversation_id'] ?? ''),
-            'sender_type'     => (string) ($data['sender_type'] ?? ''),
-            'order_type'      => (string) ($data['order_type'] ?? ''),
-            'is_read'         => '0',
+            'title'              => $title,
+            'body'               => $body,
+            'description'        => $body,
+            'image'              => (string) ($data['image'] ?? ''),
+            'order_id'           => (string) ($data['order_id'] ?? ''),
+            'type'               => (string) ($data['type'] ?? 'new_order'),
+            'order_type'         => $order_type,
+            'sound'              => $sound,
+            'android_channel_id' => $channel_id,
+            'click_action'       => 'FLUTTER_NOTIFICATION_CLICK',
+            'conversation_id'    => (string) ($data['conversation_id'] ?? ''),
+            'sender_type'        => (string) ($data['sender_type'] ?? ''),
+            'is_read'            => '0',
         ];
- 
-        $click_action = $web_push_link ? ['click_action' => $web_push_link] : [];
- 
+
+        $notification = [
+            'title' => $title,
+            'body'  => $body,
+        ];
+        if (!empty($data['image'])) {
+            $notification['image'] = (string) $data['image'];
+        }
+
         $payload = [
             'message' => [
                 'token'        => $fcm_token,
                 'data'         => $dataPayload,
-                'notification' => array_merge([
-                    'title' => $data['title'],
-                    'body'  => $data['description'],
-                    'image' => $data['image'],
-                ], $click_action),
+                'notification' => $notification,
+                'android'      => [
+                    'priority'     => 'HIGH',
+                    'notification' => [
+                        'channel_id'   => $channel_id,
+                        'sound'        => $sound,
+                        'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+                    ],
+                ],
+                'apns'         => [
+                    'payload' => [
+                        'aps' => [
+                            'sound' => $sound . '.wav',
+                        ],
+                    ],
+                ],
             ]
         ];
+
+        if ($web_push_link) {
+            $payload['message']['webpush'] = [
+                'notification' => [
+                    'click_action' => $web_push_link,
+                ],
+            ];
+        }
  
         $postdata = json_encode($payload);
  
@@ -1307,30 +1351,54 @@ class Helpers
             "Content-Type: application/json"
         ];
 
+        $order_type = (string) ($data['order_type'] ?? 'delivery');
+        $is_buddy = ($order_type === 'bestie_buddy');
+        $is_dm_topic = (strpos($topic, 'delivery_man_') !== false || strpos($topic, 'restaurant_dm_') !== false);
+        $channel_id = $data['android_channel_id'] ?? ($is_buddy ? 'bestie_buddy_channel_loud_v2' : ($is_dm_topic ? 'bestie_order_channel_loud_v2' : 'stackfood'));
+        $sound = $data['sound'] ?? ($is_buddy ? 'notification_buddy' : 'notification');
+        $title = (string) $data['title'];
+        $body = (string) ($data['description'] ?? ($data['body'] ?? ''));
+
         $dataPayload = [
-            "title"      => (string) $data['title'],
-            "body"       => (string) $data['description'],
-            "image"      => (string) ($data['image'] ?? ''),
-            "order_id"   => (string) ($data['order_id'] ?? ''),
-            "order_type" => (string) ($data['order_type'] ?? ''),
-            "is_read"    => "0",
-            "type"       => (string) $type
+            "title"              => $title,
+            "body"               => $body,
+            "description"        => $body,
+            "image"              => (string) ($data['image'] ?? ''),
+            "order_id"           => (string) ($data['order_id'] ?? ''),
+            "order_type"         => $order_type,
+            "sound"              => $sound,
+            "android_channel_id" => $channel_id,
+            "click_action"       => $web_push_link ?? 'FLUTTER_NOTIFICATION_CLICK',
+            "is_read"            => "0",
+            "type"               => (string) ($data['type'] ?? $type ?? 'order_request')
         ];
+
+        $notification = [
+            "title" => $title,
+            "body"  => $body,
+        ];
+        if (!empty($data['image'])) {
+            $notification['image'] = (string) $data['image'];
+        }
 
         $payload = [
             "message" => [
                 "topic" => $topic,
-                "notification" => [
-                    "title" => (string) $data['title'],
-                    "body"  => (string) $data['description'],
-                    "image" => (string) ($data['image'] ?? ''),
-                ],
+                "notification" => $notification,
                 "data" => $dataPayload,
                 "android" => [
+                    "priority" => "HIGH",
                     "notification" => [
-                        "sound"        => "notification.wav",
-                        "channel_id"   => "stackfood",
-                        "click_action" => $web_push_link ?? ''
+                        "sound"        => $sound,
+                        "channel_id"   => $channel_id,
+                        "click_action" => $web_push_link ?? 'FLUTTER_NOTIFICATION_CLICK'
+                    ]
+                ],
+                "apns" => [
+                    "payload" => [
+                        "aps" => [
+                            "sound" => $sound . ".wav"
+                        ]
                     ]
                 ],
                 "webpush" => [
@@ -1623,6 +1691,7 @@ class Helpers
                     'order_id' => $order->id,
                     'image' => '',
                     'type' => 'new_order_admin',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_topic($data, 'admin_message', 'order_request', url('/').'/admin/order/list/all');
             }
@@ -1647,6 +1716,7 @@ class Helpers
                     'order_id' => $order->id,
                     'image' => '',
                     'type' => 'order_status',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_device($user_fcm, $data);
                 DB::table('user_notifications')->insert([
@@ -1664,6 +1734,7 @@ class Helpers
                     'order_id' => $order->id,
                     'image' => '',
                     'type' => 'order_status',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_device($order?->customer?->cm_firebase_token, $data);
                 DB::table('user_notifications')->insert([
@@ -1681,6 +1752,7 @@ class Helpers
                     'order_id' => $order->id,
                     'image' => '',
                     'type' => 'order_status',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_device($order->restaurant->vendor->firebase_token, $data);
                 DB::table('user_notifications')->insert([
@@ -1703,7 +1775,8 @@ class Helpers
                         'order_id' => $order->id,
                         'image' => '',
                         'type' => 'new_order',
-                    ];
+                        'order_type' => $order->order_type ?? 'delivery',
+                ];
                     self::send_push_notif_to_device($order->restaurant->vendor->firebase_token, $data);
                     DB::table('user_notifications')->insert([
                         'data' => json_encode($data),
@@ -1719,7 +1792,8 @@ class Helpers
                         'description' => translate('messages.new_order_push_description'),
                         'order_id' => $order->id,
                         'image' => '',
-                    ];
+                        'order_type' => $order->order_type ?? 'delivery',
+                ];
 
                     if($order->zone){
                         if($order->vehicle_id){
@@ -1738,6 +1812,7 @@ class Helpers
                     'order_id' => $order->id,
                     'image' => '',
                     'type' => 'new_order',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_device($order->restaurant->vendor->firebase_token, $data);
                 DB::table('user_notifications')->insert([
@@ -1757,6 +1832,7 @@ class Helpers
                     'order_id' => $order->id,
                     'image' => '',
                     'type' => 'new_order',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_device($order->restaurant->vendor->firebase_token, $data);
 
@@ -1779,7 +1855,8 @@ class Helpers
                         'description' => translate('messages.new_order_push_description'),
                         'order_id' => $order->id,
                         'image' => '',
-                    ];
+                        'order_type' => $order->order_type ?? 'delivery',
+                ];
 
                     self::send_push_notif_to_topic($data, "restaurant_dm_" . $order->restaurant_id, 'new_order');
                 } else {
@@ -1789,7 +1866,8 @@ class Helpers
                         'order_id' => $order->id,
                         'image' => '',
                         'type' => 'new_order',
-                    ];
+                        'order_type' => $order->order_type ?? 'delivery',
+                ];
 
                     self::send_push_notif_to_device($order->restaurant->vendor->firebase_token, $data);
 
@@ -1810,6 +1888,7 @@ class Helpers
                     'description' => translate('messages.new_order_push_description'),
                     'order_id' => $order->id,
                     'image' => '',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 if (($order->restaurant->restaurant_model == 'commission' && $order->restaurant->self_delivery_system)
                 || ($order->restaurant->restaurant_model == 'subscription' &&  isset($order->restaurant->restaurant_sub) && $order->restaurant->restaurant_sub->self_delivery)
@@ -1833,7 +1912,8 @@ class Helpers
                     'description' => $order->order_status == 'processing' ? translate('messages.Proceed_for_cooking') : translate('messages.ready_for_delivery'),
                     'order_id' => $order->id,
                     'image' => '',
-                    'type' => 'order_status'
+                    'type' => 'order_status',
+                    'order_type' => $order->order_type ?? 'delivery',
                 ];
                 self::send_push_notif_to_device($order->delivery_man->fcm_token, $data);
                 DB::table('user_notifications')->insert([
@@ -1985,13 +2065,84 @@ class Helpers
     public static function upload(string $dir, string $format, $image = null)
     {
         if ($image != null) {
-            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $format;
+            $cleanDir = trim(str_replace('\\', '/', $dir), '/');
+            $imageFormats = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'bmp'];
+            $isImage = in_array(strtolower($format), $imageFormats) && class_exists('\Intervention\Image\Facades\Image');
+
+            // WebP compression: convert images (except animated GIFs) to WebP for high speed & tiny payload
+            $convertToWebp = $isImage && function_exists('imagewebp') && strtolower($format) !== 'gif';
+            $finalFormat = $convertToWebp ? 'webp' : $format;
+            $imageName = \Carbon\Carbon::now()->toDateString() . '-' . uniqid() . '.' . $finalFormat;
+
             if (!Storage::disk('public')->exists($dir)) {
                 Storage::disk('public')->makeDirectory($dir);
             }
-            Storage::disk('public')->put($dir . $imageName, file_get_contents($image));
-            return $imageName;
+
+            if ($isImage) {
+                try {
+                    $img = \Intervention\Image\Facades\Image::make($image);
+                    $img->orientate();
+
+                    $quality = 80;
+                    if ($cleanDir === 'category' || $cleanDir === 'cuisine') {
+                        // Category / cuisine icons: resize to max 200x200
+                        $img->resize(200, 200, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $quality = 85;
+                    } elseif ($cleanDir === 'banner' || $cleanDir === 'react_promotional_banner' || $cleanDir === 'campaign') {
+                        // Banners / campaigns: max width 1000px
+                        $img->resize(1000, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $quality = 80;
+                    } elseif ($cleanDir === 'restaurant/cover') {
+                        // Restaurant cover photo: max width 1200px (16:9 / 2:1 display)
+                        $img->resize(1200, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $quality = 80;
+                    } elseif ($cleanDir === 'restaurant' || $cleanDir === 'vendor') {
+                        // Restaurant / vendor logos: max 500x500
+                        $img->resize(500, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $quality = 85;
+                    } elseif ($cleanDir === 'product') {
+                        // Food / Product image: max 800x800
+                        $img->resize(800, 800, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $quality = 80;
+                    } else {
+                        // Generic image optimization: max 800x800
+                        $img->resize(800, 800, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $quality = 80;
+                    }
+
+                    $encoded = (string) $img->encode($finalFormat, $quality);
+                    Storage::disk('public')->put($dir . $imageName, $encoded);
+                    return $imageName;
+                } catch (\Throwable $e) {
+                    $fallbackName = \Carbon\Carbon::now()->toDateString() . '-' . uniqid() . '.' . $format;
+                    Storage::disk('public')->put($dir . $fallbackName, file_get_contents($image));
+                    return $fallbackName;
+                }
+            } else {
+                $imageName = \Carbon\Carbon::now()->toDateString() . '-' . uniqid() . '.' . $format;
+                Storage::disk('public')->put($dir . $imageName, file_get_contents($image));
+                return $imageName;
+            }
         }
+        return null;
     }
 
     public static function update(string $dir, $old_image, string $format, $image = null)
@@ -3562,7 +3713,7 @@ class Helpers
         if(!request()->header('latitude') || !request()->header('longitude')){
             return 'out_of_range';
         }
-            $zone = Zone::where('id', $restaurant->zone_id)->whereContains('coordinates', new Point(request()->header('latitude') && request()->header('longitude'), POINT_SRID))->first();
+            $zone = Zone::where('id', $restaurant->zone_id)->whereContains('coordinates', new Point((float) request()->header('latitude'), (float) request()->header('longitude'), POINT_SRID))->first();
         if(!$zone) {
             return 'out_of_range';
         }

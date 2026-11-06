@@ -16,17 +16,17 @@
     <link rel="shortcut icon" href="favicon.ico">
     <!-- Font -->
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/vendor.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/vendor/icon-set/style.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/vendor.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/vendor/icon-set/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/custom.css">
     <!-- CSS Front Template -->
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/theme.minc619.css?v=1.0">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/theme.minc619.css?v=1.0">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css')}}">
 
     <script
-        src="{{ asset('public/assets/admin')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/toastr.css">
+        src="{{ asset('assets/admin')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/toastr.css">
     {{--stripe--}}
     <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
     <script src="https://js.stripe.com/v3/"></script>
@@ -118,12 +118,12 @@
 </div>
 
 <!-- JS Front -->
-<script src="{{ asset('public/assets/admin')}}/js/custom.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/vendor.min.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/theme.min.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/sweet_alert.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/toastr.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/bootstrap.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/custom.js"></script>
+<script src="{{ asset('assets/admin')}}/js/vendor.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/theme.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/sweet_alert.js"></script>
+<script src="{{ asset('assets/admin')}}/js/toastr.js"></script>
+<script src="{{ asset('assets/admin')}}/js/bootstrap.min.js"></script>
 
 {!! Toastr::message() !!}
 

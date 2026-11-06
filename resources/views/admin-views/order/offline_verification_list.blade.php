@@ -19,7 +19,7 @@
                 <div class="col-xl-12 col-md-12 col-sm-12 mb-3 mb-sm-0">
                     <h1 class="page-header-title text-capitalize m-0">
                         <span class="page-header-icon">
-                            <img src="{{ asset('public/assets/admin/img/fi_273177.svg')}}" class="w--26" alt="">
+                            <img src="{{ asset('assets/admin/img/fi_273177.svg')}}" class="w--26" alt="">
                         </span>
                         <span>
                         {{translate('messages.Verify_Offline_Payments')}}
@@ -97,13 +97,13 @@
                             <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="{{route("admin.order.export",['status'=> 'offline_payments' , 'payment_status'=>$status,'type'=>'excel' , request()->getQueryString() ])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
                                 {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="{{route("admin.order.export",['status'=> 'offline_payments' , 'payment_status'=>$status,'type'=>'csv' , request()->getQueryString() ])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
                                 .{{translate('messages.csv')}}
                             </a>
@@ -397,7 +397,7 @@
 @endsection
 
 @push('script_2')
-    <!-- <script src="{{ asset('public/assets/admin')}}/js/bootstrap-select.min.js"></script> -->
+    <!-- <script src="{{ asset('assets/admin')}}/js/bootstrap-select.min.js"></script> -->
     <script>
 
 $(document).on("click", ".offline_payment_cancelation_note", function () {
@@ -464,7 +464,7 @@ $(document).on("click", ".offline_payment_cancelation_note", function () {
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="w-7rem mb-3" src="{{ asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                        '<img class="w-7rem mb-3" src="{{ asset('assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
 
                         '</div>'
                 }

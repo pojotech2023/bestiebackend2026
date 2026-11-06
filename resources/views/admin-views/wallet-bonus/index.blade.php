@@ -8,7 +8,7 @@
         <div class="page-header d-flex flex-wrap align-items-center justify-content-between">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/add.png')}}" class="w--26" alt="">
+                    <img src="{{ asset('assets/admin/img/add.png')}}" class="w--26" alt="">
                 </span>
                 <span>
                     {{translate('messages.wallet_bonus_setup')}}
@@ -376,7 +376,7 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                    '<img class="w-7rem mb-3" src="{{ asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                    '<img class="w-7rem mb-3" src="{{ asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
 
                     '</div>'
                 }

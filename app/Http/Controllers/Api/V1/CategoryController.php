@@ -15,7 +15,10 @@ class CategoryController extends Controller
     public function get_categories(Request $request)
     {
         try {
-            $zone_id=  $request->header('zoneId') ? json_decode($request->header('zoneId'), true) : [];
+            $zone_id = $request->header('zoneId') ? json_decode($request->header('zoneId'), true) : [];
+            if (!is_array($zone_id)) {
+                $zone_id = is_numeric($request->header('zoneId')) ? [(int)$request->header('zoneId')] : [];
+            }
             $name= $request->query('name');
             $categories = Category::withCount(['products','childes'])->with(['childes' => function($query)  {
                 $query->withCount(['products','childes']);
@@ -110,10 +113,12 @@ class CategoryController extends Controller
         $data = CategoryLogic::products($additional_data);
         $data['products'] = Helpers::product_data_formatting($data['products'] , true, false, app()->getLocale());
 
-        if(auth('api')->user() !== null){
-            $customer_id =auth('api')->user()->id;
-            Helpers::visitor_log('category',$customer_id,$id,false);
-        }
+        try {
+            if(auth('api')->user() !== null){
+                $customer_id = auth('api')->user()->id;
+                Helpers::visitor_log('category',$customer_id,$id,false);
+            }
+        } catch (\Throwable $e) {}
 
         return response()->json($data, 200);
     }

@@ -24,7 +24,7 @@
                         <span class="sold--count-badge"><span>{{translate('messages.sold')}}</span> <span>:</span> <span>{{$item['order_count']}}</span></span>
                         <img class="initial-43"
                             src="{{asset('storage/app/public/product')}}/{{$item['image']}}"
-                            onerror="this.src='{{ asset('public/assets/admin/img/100x100/food.png')}}'"
+                            onerror="this.src='{{ asset('assets/admin/img/100x100/food.png')}}'"
                             alt="{{$item->name}} image">
                     </div>
                     <div class="text-center mt-2">

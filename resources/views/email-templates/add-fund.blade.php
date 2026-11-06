@@ -110,7 +110,7 @@
         <img src="{{asset('/storage/app/public/business/'.$logo)}}" alt="{{$company_name}}" style="height: 15px; width:auto;">
       </div>
 
-      <img src="{{ asset('public/assets/admin/img/tick.png')}}" style="height: 50px; width:50px; margin-top:40px;">
+      <img src="{{ asset('assets/admin/img/tick.png')}}" style="height: 50px; width:50px; margin-top:40px;">
 
       <div class="congrats-box">
           <span style="font-weight: 700;font-size: 22px;line-height: 135.5%; display:block; margin-bottom:10px;">{{translate('messages.Transaction Sucessfull')}}</span>
@@ -162,7 +162,7 @@
                           @foreach ($social_media as $item)
                             <div style="display: inline-block;" >
                               <a href="{{$item->link}}" target=”_blank”>
-                              <img src="{{ asset('public/assets/admin/img/'.$item->name.'.png')}}" alt="" style="height: 14px; width:14px; padding: 0px 3px 0px 5px;">
+                              <img src="{{ asset('assets/admin/img/'.$item->name.'.png')}}" alt="" style="height: 14px; width:14px; padding: 0px 3px 0px 5px;">
                               </a>
                             </div>
                           @endforeach

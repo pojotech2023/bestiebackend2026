@@ -85,25 +85,34 @@ class OrderLogic
 
         // Calculate order amount excluding commission (what restaurant sees)
         $order_amount = $order->order_amount - $order->additional_charge - $order->delivery_charge - $order->total_commission_amount - $order->dm_tips + $order->coupon_discount_amount + $restaurant_discount_amount;
+        // Food base strictly excludes tax so tax goes to Admin, NOT to restaurant
+        $food_base = $order_amount - $order->total_tax_amount;
 
         $restaurant_logic = $restaurant ? $restaurant->admin_commission_logic : null;
         $global_logic = \App\Models\BusinessSetting::where('key', 'admin_commission_logic')->first()?->value ?? 'new';
         $logic = $restaurant_logic ?: $global_logic;
 
         if($restaurant->restaurant_model == 'subscription' && isset($rest_sub)){
-            $comission_amount =0;
-            $subscription_mode= 1;
-            $commission_percentage= 0;
+            $comission_amount = 0;
+            $total_admin_commission = 0;
+            $subscription_mode = 1;
+            $commission_percentage = 0;
+            $restaurant_amount = $food_base - $restaurant_coupon_discount_subsidy;
         }
         else{
-            if ($logic == 'old') {
-                $food_base = $order_amount - $order->total_tax_amount;
-                $comission_amount = $comission ? ($food_base / 100) * $comission : 0;
-            } else {
+            if ($order->total_commission_amount > 0 || $logic == 'new') {
                 $comission_amount = 0;
+                $total_admin_commission = $order->total_commission_amount;
+                $subscription_mode = 0;
+                $commission_percentage = $comission;
+                $restaurant_amount = $food_base - $restaurant_coupon_discount_subsidy;
+            } else {
+                $comission_amount = $comission ? round(($food_base / 100) * $comission, config('round_up_to_digit')) : 0;
+                $total_admin_commission = $comission_amount;
+                $subscription_mode = 0;
+                $commission_percentage = $comission;
+                $restaurant_amount = $food_base - $comission_amount - $restaurant_coupon_discount_subsidy;
             }
-            $subscription_mode= 0;
-            $commission_percentage= $comission;
         }
 
         if(($restaurant->restaurant_model == 'subscription' &&  $rest_sub?->self_delivery == 1) || ($restaurant->restaurant_model != 'subscription' && $restaurant->self_delivery_system)){
@@ -117,12 +126,6 @@ class OrderLogic
             $comission_on_actual_delivery_fee = ($order->delivery_charge > 0) ? $comission_on_delivery : 0;
         }
 
-        // Restaurant amount does NOT include commission (that goes to admin)
-        $restaurant_amount = $order_amount - $comission_amount - $restaurant_coupon_discount_subsidy;
-        
-        // Total admin commission = platform commission + 15% food commission
-        $total_admin_commission = $comission_amount + $order->total_commission_amount;
-
         try{
             OrderTransaction::insert([
                 'vendor_id' =>$order->restaurant->vendor->id,
@@ -134,7 +137,7 @@ class OrderLogic
                 //add a new column. add the comission here
                 'delivery_charge'=>$order->delivery_charge - $comission_on_actual_delivery_fee,//minus here
                 'original_delivery_charge'=>$order->original_delivery_charge - $comission_on_delivery,//calculate the comission with this. minus here
-                'tax'=>0,
+                'tax'=> $order->total_tax_amount,
                 'received_by'=> $received_by?$received_by:'admin',
                 'zone_id'=>$order->zone_id,
                 'status'=> $status,
@@ -173,7 +176,7 @@ class OrderLogic
                 }
             }
 
-            $adminWallet->total_commission_earning = $adminWallet->total_commission_earning + $comission_amount + $comission_on_actual_delivery_fee - $admin_subsidy - $admin_coupon_discount_subsidy -$restaurant_discount_amount + $order->additional_charge;
+            $adminWallet->total_commission_earning = $adminWallet->total_commission_earning + $total_admin_commission + $order->total_tax_amount + $comission_on_actual_delivery_fee - $admin_subsidy - $admin_coupon_discount_subsidy -$restaurant_discount_amount + $order->additional_charge;
 
             if(($restaurant->restaurant_model == 'subscription' &&  $rest_sub?->self_delivery == 1) || ($restaurant->restaurant_model != 'subscription' && $restaurant->self_delivery_system == 1))
             {

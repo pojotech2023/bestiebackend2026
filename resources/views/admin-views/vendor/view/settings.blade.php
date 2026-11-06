@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 
 @endpush
 
@@ -431,7 +431,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label class="input-label text-capitalize" for="title">{{ translate('Customer_Can_Order_Within') }} ({{ translate('messages.Days') }})
-                                <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Enter_the_number_of_days_customers_can_select_for_scheduled_orders.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span>
+                                <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Enter_the_number_of_days_customers_can_select_for_scheduled_orders.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span>
                             </label>
                             <input type="number" name="customer_order_date"  id="customer_order_date" {{ $restaurant?->restaurant_config?->customer_date_order_sratus == 1 ? 'required' :'readonly' }} min="0" max="99999999" class="form-control" placeholder="30" value="{{ $restaurant?->restaurant_config?->customer_order_date ?? '' }}">
                         </div>

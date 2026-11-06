@@ -10,7 +10,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center __gap-15px">
                 <h1 class="page-header-title mr-3 mb-0">
                     <span class="page-header-icon">
-                        <img src="{{ asset('public/assets/admin/img/email-setting.png') }}" class="w--26" alt="">
+                        <img src="{{ asset('assets/admin/img/email-setting.png') }}" class="w--26" alt="">
                     </span>
                     <span>
                         {{ translate('messages.Email_Templates') }}
@@ -108,7 +108,7 @@
                                     <br>
                                     <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{ asset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <img src="{{ asset('assets/admin/img/pointer.png')}}" class="mr-2" alt="">
                                             {{translate('Header_Content')}}
                                         </h5>
                                         @if ($language)
@@ -200,7 +200,7 @@
                                     <br>
                                     {{-- <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{ asset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <img src="{{ asset('assets/admin/img/pointer.png')}}" class="mr-2" alt="">
                                             {{translate('Button_Content')}}
                                         </h5>
                                         <div class="__bg-F8F9FC-card">
@@ -280,7 +280,7 @@
                                     <br> --}}
                                     <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{ asset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <img src="{{ asset('assets/admin/img/pointer.png')}}" class="mr-2" alt="">
                                             {{translate('Footer_Content')}}
                                         </h5>
                                         <div class="__bg-F8F9FC-card">

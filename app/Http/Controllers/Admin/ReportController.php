@@ -107,8 +107,8 @@ class ReportController extends Controller
                     ->orderBy('created_at', 'desc')
                     // ->notRefunded()
                     ->selectRaw('SUM(original_delivery_charge + dm_tips) as deliveryman_earned,
-                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN restaurant_amount - tax ELSE 0 END) as restaurant_earned,
-                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN admin_commission + delivery_fee_comission ELSE 0 END) as admin_earned')
+                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN restaurant_amount ELSE 0 END) as restaurant_earned,
+                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN admin_commission + delivery_fee_comission + tax ELSE 0 END) as admin_earned')
                     ->first();
 
                     $admin_earned= $order_trans_data->admin_earned;
@@ -198,8 +198,8 @@ class ReportController extends Controller
                     ->orderBy('created_at', 'desc')
                     // ->notRefunded()
                     ->selectRaw('SUM(original_delivery_charge + dm_tips) as deliveryman_earned,
-                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN restaurant_amount - tax ELSE 0 END) as restaurant_earned,
-                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN admin_commission + delivery_fee_comission ELSE 0 END) as admin_earned')
+                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN restaurant_amount ELSE 0 END) as restaurant_earned,
+                    SUM(CASE WHEN status NOT IN ("refunded_with_delivery_charge", "refunded_without_delivery_charge") OR status IS NULL THEN admin_commission + delivery_fee_comission + tax ELSE 0 END) as admin_earned')
                     ->first();
 
                 $order_data = Order::when(isset($zone), function ($query) use ($zone) {

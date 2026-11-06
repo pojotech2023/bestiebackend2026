@@ -6,7 +6,7 @@
                 href="{{ route('admin.food.view', [$food['id']]) }}">
                 <img class="avatar avatar-lg mr-3"
                     src="{{ asset('storage/app/public/product') }}/{{ $food['image'] }}"
-                    onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png') }}'"
+                    onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png') }}'"
                     alt="{{ $food->name }} image">
                 <div class="media-body">
                     <h5 class="text-hover-primary mb-0">

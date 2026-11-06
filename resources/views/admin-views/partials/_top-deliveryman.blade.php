@@ -21,7 +21,7 @@
             <div class="col-md-4 col-6" onclick="location.href='{{route('admin.delivery-man.preview',[$item['id']])}}'">
                 <div class="grid-card top--deliveryman">
                     <center>
-                        <img class="initial-41" onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                        <img class="initial-41" onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                         src="{{asset('storage/app/public/delivery-man')}}/{{$item['image']??''}}">
                     </center>
                     <div class="text-center mt-2">

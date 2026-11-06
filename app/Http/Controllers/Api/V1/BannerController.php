@@ -21,7 +21,10 @@ class BannerController extends Controller
         }
         $longitude= $request->header('longitude');
         $latitude= $request->header('latitude');
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $zone_id = json_decode($request->header('zoneId'), true);
+        if (!is_array($zone_id)) {
+            $zone_id = is_numeric($request->header('zoneId')) ? [(int)$request->header('zoneId')] : [];
+        }
         $banners = BannerLogic::get_banners($zone_id);
         $campaigns = Campaign::whereHas('restaurants', function($query)use($zone_id){
             $query->whereIn('zone_id', $zone_id)->where('status',1);

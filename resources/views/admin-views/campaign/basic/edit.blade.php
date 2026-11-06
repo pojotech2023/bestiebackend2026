@@ -127,7 +127,7 @@
                                 <center class="mt-auto mb-auto">
                                     <img class="initial-11" id="viewer"
                                          src="{{asset('storage/app/public/campaign')}}/{{$campaign->image}}"
-                                         onerror="this.src='{{ asset('public/assets/admin/img/900x400/img1.png')}}'"
+                                         onerror="this.src='{{ asset('assets/admin/img/900x400/img1.png')}}'"
                                          alt="campaign image"/>
                                 </center>
                                 <div class="form-group">

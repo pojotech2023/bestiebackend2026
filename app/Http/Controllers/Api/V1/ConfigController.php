@@ -260,15 +260,11 @@ class ConfigController extends Controller
 
     public function get_zone(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'lat' => 'required',
-            'lng' => 'required',
-        ]);
-
-        if ($validator->errors()->count() > 0) {
-            return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+        if (!is_numeric($request->lat) || !is_numeric($request->lng)) {
+            return response()->json(['errors' => ['message' => 'Invalid coordinates']], 400);
         }
-        $zones = Zone::whereContains('coordinates', new Point($request->lat, $request->lng, POINT_SRID))->latest()->get(['id', 'status', 'minimum_shipping_charge',
+        $point = new Point((float)$request->lat, (float)$request->lng, POINT_SRID);
+        $zones = Zone::whereContains('coordinates', $point)->latest()->get(['id', 'status', 'minimum_shipping_charge',
         'increased_delivery_fee','increased_delivery_fee_status','increase_delivery_charge_message','per_km_shipping_charge','max_cod_order_amount','maximum_shipping_charge']);
         if (count($zones) < 1) {
             return response()->json([

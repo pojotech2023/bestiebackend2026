@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/firebase.png')}}" class="w--26" alt="">
+                    <img src="{{ asset('assets/admin/img/firebase.png')}}" class="w--26" alt="">
                 </span>
                 <span>{{translate('messages.firebase_push_notification_setup')}}
                 </span>

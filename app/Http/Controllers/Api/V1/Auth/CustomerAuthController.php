@@ -360,7 +360,7 @@ class CustomerAuthController extends Controller
             if($response != 'success')
             {
                 $errors = [];
-                array_push($errors, ['code' => 'otp', 'message' => translate('messages.faield_to_send_sms')]);
+                array_push($errors, ['code' => 'otp', 'message' => translate('messages.failed_to_send_sms')]);
                 return response()->json([
                     'errors' => $errors
                 ], 405);

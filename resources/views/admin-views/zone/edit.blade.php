@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="instructions-image mt-4">
-                                    <img src={{ asset('public/assets/admin/img/instructions.gif')}} alt="instructions">
+                                    <img src={{ asset('assets/admin/img/instructions.gif')}} alt="instructions">
                                 </div>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
 @endsection
 
 @push('script_2')
-<script src="https://maps.googleapis.com/maps/api/js?v=3.45.8&key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&libraries=drawing,places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.55&key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&libraries=drawing,places"></script>
 <script>
     auto_grow();
     function auto_grow() {

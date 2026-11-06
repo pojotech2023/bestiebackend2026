@@ -104,7 +104,7 @@
                                 <label class="d-block mb-lg-5 text-center">{{translate('messages.deliveryman_image')}} <small class="text-danger">* ( {{translate('messages.ratio_1:1')}} )</small></label>
                                 <center>
                                     <img class="initial-24" id="viewer"
-                                        onerror="this.src='{{ asset('public/assets/admin/img/100x100/user.png')}}'"
+                                        onerror="this.src='{{ asset('assets/admin/img/100x100/user.png')}}'"
                                             src="{{asset('storage/app/public/delivery-man').'/'.$delivery_man['image']}}" alt="delivery-man image"/>
                                 </center>
                                 <label class="d-block mb-lg-3 text-center"></label>
@@ -253,8 +253,8 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin/js/intlTelInput.js')}}"></script>
-    <script src="{{ asset('public/assets/admin/js/intlTelInput-jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/intlTelInput.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/intlTelInput-jquery.min.js')}}"></script>
     <script>
 
 
@@ -288,7 +288,7 @@
             $country=\App\Models\BusinessSetting::where('key','country')->first();
         ?>
         var phone = $("#phone").intlTelInput({
-            utilsScript: "{{ asset('public/assets/admin/js/intlTellInput-util.min.js')}}",
+            utilsScript: "{{ asset('assets/admin/js/intlTellInput-util.min.js')}}",
             nationalMode: true,
             autoHideDialCode: true,
             autoPlaceholder: "ON",
@@ -318,7 +318,7 @@
 
     </script>
 
-    <script src="{{ asset('public/assets/admin/js/spartan-multi-image-picker.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/spartan-multi-image-picker.js')}}"></script>
     <script type="text/javascript">
         $(function () {
             $("#coba").spartanMultiImagePicker({
@@ -328,7 +328,7 @@
                 groupClassName: 'col-6 col-lg-4',
                 maxFileSize: '',
                 placeholderImage: {
-                    image: '{{ asset('public/assets/admin/img/100x100/user2.png')}}',
+                    image: '{{ asset('assets/admin/img/100x100/user2.png')}}',
                     width: '100%'
                 },
                 dropFileLabel: "Drop Here",

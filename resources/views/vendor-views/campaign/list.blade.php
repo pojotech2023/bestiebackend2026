@@ -79,7 +79,7 @@
                                             <div class="overflow-hidden">
                                                 <img class="initial-75"
                                                     src="{{ asset('storage/app/public/campaign') }}/{{ $campaign['image'] }}"
-                                                    onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'">
+                                                    onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'">
                                             </div>
                                         </td>
                                         <td>

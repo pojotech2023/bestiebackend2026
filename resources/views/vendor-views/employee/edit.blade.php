@@ -71,7 +71,7 @@
                                     </h5>
                                     <center class="my-auto">
                                         <img class="initial-78" id="viewer"
-                                        onerror="this.src='{{ asset('public/assets/front-end/img/image-place-holder.png')}}'"
+                                        onerror="this.src='{{ asset('assets/front-end/img/image-place-holder.png')}}'"
                                         src="{{asset('storage/app/public/vendor')}}/{{$e['image']}}" alt="Employee thumbnail"/>
                                     </center>
                                     <label class="form-label mt-3">{{ translate('Employee image size max 2 MB') }} <span class="text-danger">*</span></label>

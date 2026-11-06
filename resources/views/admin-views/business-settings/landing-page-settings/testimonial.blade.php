@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -60,7 +60,7 @@
 
                             <center id="image-viewer-section" class="pt-2 mt-auto mb-auto">
                                 <img class="initial-5" id="viewer"
-                                        src="{{ asset('public/assets/admin/img/100x100/user.png')}}" alt=""/>
+                                        src="{{ asset('assets/admin/img/100x100/user.png')}}" alt=""/>
                             </center>
 
                             <div class="custom-file mt-2">
@@ -97,8 +97,8 @@
                             <td scope="row">{{$key + 1}}</td>
                             <td>
                                 <div class="media align-items-center">
-                                    <img class="avatar avatar-lg mr-3 img-circle bg-f4f4f4" src="{{ asset('public/assets/landing/image')}}/{{$sp['img']}}"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg')}}'" alt="{{$sp['name']}}">
+                                    <img class="avatar avatar-lg mr-3 img-circle bg-f4f4f4" src="{{ asset('assets/landing/image')}}/{{$sp['img']}}"
+                                            onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg')}}'" alt="{{$sp['name']}}">
                                     <div class="media-body">
                                         <h5 class="text-hover-primary mb-0">{{$sp['name']}}</h5>
                                     </div>
@@ -163,7 +163,7 @@
         });
 
         $('#reset_btn').click(function(){
-            $('#viewer').attr('src','{{ asset('public/assets/admin/img/100x100/user.png')}}');
+            $('#viewer').attr('src','{{ asset('assets/admin/img/100x100/user.png')}}');
         })
     </script>
 @endpush

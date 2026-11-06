@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -50,8 +50,8 @@
                                 </div>
                                 <center id="image-viewer-section">
                                     <img class="initial-7" id="viewer"
-                                            src="{{ asset('public/assets/landing')}}/image/{{isset($landing_page_images['top_content_image'])?$landing_page_images['top_content_image']:'double_screen_image.png'}}"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/400x400/img2.jpg')}}'"
+                                            src="{{ asset('assets/landing')}}/image/{{isset($landing_page_images['top_content_image'])?$landing_page_images['top_content_image']:'double_screen_image.png'}}"
+                                            onerror="this.src='{{ asset('assets/admin/img/400x400/img2.jpg')}}'"
                                             alt=""/>
                                 </center>
                             </label>
@@ -78,8 +78,8 @@
 
                                 <center id="image-viewer-section3" >
                                     <img class="initial-7" id="viewer3"
-                                            src="{{ asset('public/assets/landing')}}/image/{{isset($landing_page_images['feature_section_image'])?$landing_page_images['feature_section_image']:'feature_section_image.png'}}"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.png')}}'"
+                                            src="{{ asset('assets/landing')}}/image/{{isset($landing_page_images['feature_section_image'])?$landing_page_images['feature_section_image']:'feature_section_image.png'}}"
+                                            onerror="this.src='{{ asset('assets/admin/img/160x160/img2.png')}}'"
                                             alt=""/>
                                 </center>
                             </label>
@@ -106,8 +106,8 @@
 
                                 <center id="image-viewer-section2" >
                                     <img class="initial-7" id="viewer2"
-                                            src="{{ asset('public/assets/landing')}}/image/{{isset($landing_page_images['about_us_image'])?$landing_page_images['about_us_image']:'about_us_image.png'}}"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.png')}}'"
+                                            src="{{ asset('assets/landing')}}/image/{{isset($landing_page_images['about_us_image'])?$landing_page_images['about_us_image']:'about_us_image.png'}}"
+                                            onerror="this.src='{{ asset('assets/admin/img/160x160/img2.png')}}'"
                                             alt=""/>
                                 </center>
                             </label>
@@ -134,8 +134,8 @@
 
                                 <center id="image-viewer-section4" >
                                     <img class="initial-7" id="viewer4"
-                                            src="{{ asset('public/assets/landing')}}/image/{{isset($landing_page_images['mobile_app_section_image'])?$landing_page_images['mobile_app_section_image']:'our_app_image.png.png'}}"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.png')}}'"
+                                            src="{{ asset('assets/landing')}}/image/{{isset($landing_page_images['mobile_app_section_image'])?$landing_page_images['mobile_app_section_image']:'our_app_image.png.png'}}"
+                                            onerror="this.src='{{ asset('assets/admin/img/160x160/img2.png')}}'"
                                             alt=""/>
                                 </center>
                             </label>

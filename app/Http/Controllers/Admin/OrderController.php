@@ -36,12 +36,15 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\RestaurantOrderlistExport;
 use MatanYadaev\EloquentSpatial\Objects\Point;
+use App\Models\GroceryList;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderController extends Controller
 {
     public function list($status, Request $request)
     {
-        $key = explode(' ', $request['search']);
+        $searchKey = $request['search'] ?? null;
+        $key = !empty($searchKey) ? array_values(array_filter(explode(' ', trim($searchKey)))) : [];
 
         if (session()->has('zone_filter') == false) {
             session()->put('zone_filter', 0);
@@ -53,10 +56,18 @@ class OrderController extends Controller
 
         Order::where(['checked' => 0])->update(['checked' => 1]);
 
-        $orders = Order::with(['customer', 'restaurant'])
-            ->when(isset($request->zone), function ($query) use ($request) {
-                return $query->whereHas('restaurant', function ($q) use ($request) {
-                    return $q->whereIn('zone_id', $request->zone);
+        $orderType = is_object($request) && isset($request->order_type) ? $request->order_type : request('order_type');
+        $vendor = is_object($request) && isset($request->vendor) ? $request->vendor : request('vendor');
+        $zone = is_object($request) && isset($request->zone) ? $request->zone : request('zone');
+        $orderStatusFilter = is_object($request) && isset($request->orderStatus) ? $request->orderStatus : request('orderStatus');
+        $fromDate = is_object($request) && isset($request->from_date) ? $request->from_date : request('from_date');
+        $toDate = is_object($request) && isset($request->to_date) ? $request->to_date : request('to_date');
+        $scheduledFilter = is_object($request) && isset($request->scheduled) ? $request->scheduled : request('scheduled');
+
+        $ordersQuery = Order::with(['customer', 'restaurant'])
+            ->when(isset($zone) && count((array)$zone) > 0, function ($query) use ($zone) {
+                return $query->whereHas('restaurant', function ($q) use ($zone) {
+                    return $q->whereIn('zone_id', (array)$zone);
                 });
             })
             ->when($status == 'scheduled', function ($query) {
@@ -104,24 +115,27 @@ class OrderController extends Controller
             ->when(($status != 'all' && $status != 'scheduled' && $status != 'canceled' && $status != 'refund_requested' && $status != 'refunded' && $status != 'delivered' && $status != 'failed'), function ($query) {
                 return $query->OrderScheduledIn(30);
             })
-            ->when(isset($request->vendor), function ($query) use ($request) {
-                return $query->whereHas('restaurant', function ($query) use ($request) {
-                    return $query->whereIn('id', $request->vendor);
+            ->when(isset($vendor) && count((array)$vendor) > 0, function ($query) use ($vendor) {
+                return $query->whereHas('restaurant', function ($query) use ($vendor) {
+                    return $query->whereIn('id', (array)$vendor);
                 });
             })
-            ->when(isset($request->orderStatus) && $status == 'all', function ($query) use ($request) {
-                return $query->whereIn('order_status', $request->orderStatus);
+            ->when(isset($orderStatusFilter) && count((array)$orderStatusFilter) > 0 && $status == 'all', function ($query) use ($orderStatusFilter) {
+                return $query->whereIn('order_status', (array)$orderStatusFilter);
             })
-            ->when(isset($request->scheduled) && $status == 'all', function ($query) {
+            ->when(isset($scheduledFilter) && $status == 'all', function ($query) {
                 return $query->scheduled();
             })
-            ->when(isset($request->order_type), function ($query) use ($request) {
-                return $query->where('order_type', $request->order_type);
+            ->when(isset($orderType) && in_array($orderType, ['delivery', 'take_away']), function ($query) use ($orderType) {
+                return $query->where('order_type', $orderType);
             })
-            ->when($request?->from_date != null && $request?->to_date != null, function ($query) use ($request) {
-                return $query->whereBetween('created_at', [$request->from_date . " 00:00:00", $request->to_date . " 23:59:59"]);
+            ->when($orderType == 'bestie_buddy', function ($query) {
+                return $query->whereRaw('1=0');
             })
-            ->when(isset($key), function ($query) use ($key) {
+            ->when(!empty($fromDate) && !empty($toDate), function ($query) use ($fromDate, $toDate) {
+                return $query->whereBetween('created_at', [$fromDate . " 00:00:00", $toDate . " 23:59:59"]);
+            })
+            ->when(count($key) > 0, function ($query) use ($key) {
                 return $query->where(function ($q) use ($key) {
                     foreach ($key as $value) {
                         $q->orWhere('id', 'like', "%{$value}%")
@@ -132,19 +146,180 @@ class OrderController extends Controller
             })
             ->Notpos()
             ->hasSubscriptionToday()
-            ->orderBy('schedule_at', 'desc')
-            ->paginate(config('default_pagination'));
+            ->orderBy('schedule_at', 'desc');
 
-        $orderstatus = $request?->orderStatus ?? [];
-        $scheduled =  $request?->scheduled ?? 0;
-        $vendor_ids =  $request?->vendor ?? [];
-        $zone_ids = $request?->zone ?? [];
-        $from_date =  $request?->from_date ?? null;
-        $to_date = $request?->to_date ?? null;
-        $order_type =  $request?->order_type ?? null;
+        // Bestie Buddy (grocery_lists) query
+        $includeGrocery = true;
+        if ($orderType == 'take_away' || (isset($vendor) && count((array)$vendor) > 0) || in_array($status, ['scheduled', 'failed', 'requested', 'rejected', 'refunded'])) {
+            $includeGrocery = false;
+        }
+
+        $groceryQuery = GroceryList::with(['user', 'delivery_man'])
+            ->when(isset($zone) && count((array)$zone) > 0, function ($query) use ($zone) {
+                return $query->whereIn('zone_id', (array)$zone);
+            })
+            ->when($status == 'pending', function ($query) {
+                return $query->where('status', 'pending');
+            })
+            ->when($status == 'accepted', function ($query) {
+                return $query->where('status', 'assigned');
+            })
+            ->when($status == 'processing', function ($query) {
+                return $query->where('status', 'processing');
+            })
+            ->when($status == 'food_on_the_way', function ($query) {
+                return $query->whereIn('status', ['out_for_delivery', 'picked_up']);
+            })
+            ->when($status == 'delivered', function ($query) {
+                return $query->whereIn('status', ['completed', 'delivered']);
+            })
+            ->when($status == 'canceled', function ($query) {
+                return $query->whereIn('status', ['cancelled', 'canceled']);
+            })
+            ->when($status == 'on_going', function ($query) {
+                return $query->whereIn('status', ['processing', 'assigned', 'out_for_delivery', 'picked_up']);
+            })
+            ->when($status == 'searching_for_deliverymen', function ($query) {
+                return $query->where('status', 'processing')->whereNull('delivery_man_id');
+            })
+            ->when(isset($orderStatusFilter) && count((array)$orderStatusFilter) > 0 && $status == 'all', function ($query) use ($orderStatusFilter) {
+                $mapped = [];
+                foreach ((array)$orderStatusFilter as $st) {
+                    if ($st == 'pending') $mapped[] = 'pending';
+                    elseif ($st == 'confirmed' || $st == 'accepted') $mapped[] = 'assigned';
+                    elseif ($st == 'processing') $mapped[] = 'processing';
+                    elseif ($st == 'picked_up' || $st == 'food_on_the_way') { $mapped[] = 'out_for_delivery'; $mapped[] = 'picked_up'; }
+                    elseif ($st == 'delivered') { $mapped[] = 'completed'; $mapped[] = 'delivered'; }
+                    elseif ($st == 'canceled') { $mapped[] = 'cancelled'; $mapped[] = 'canceled'; }
+                }
+                return count($mapped) > 0 ? $query->whereIn('status', $mapped) : $query->whereRaw('1=0');
+            })
+            ->when(!empty($fromDate) && !empty($toDate), function ($query) use ($fromDate, $toDate) {
+                return $query->whereBetween('created_at', [$fromDate . " 00:00:00", $toDate . " 23:59:59"]);
+            })
+            ->when(count($key) > 0, function ($query) use ($key) {
+                return $query->where(function ($q) use ($key) {
+                    foreach ($key as $value) {
+                        if (!empty($value)) {
+                            $q->orWhere('id', 'like', "%{$value}%")
+                              ->orWhere('title', 'like', "%{$value}%")
+                              ->orWhere('description', 'like', "%{$value}%")
+                              ->orWhere('status', 'like', "%{$value}%");
+                        }
+                    }
+                });
+            });
+
+        $totalGrocery = $includeGrocery ? (clone $groceryQuery)->count() : 0;
+
+        if ($totalGrocery == 0) {
+            $orders = $ordersQuery->paginate(config('default_pagination'))->withQueryString();
+            foreach ($orders as $o) {
+                $o->order_source = 'food';
+                $o->is_bestie_buddy = false;
+            }
+        } else {
+            $orderIdQuery = (clone $ordersQuery)->select('id', DB::raw("'order' as source_type"), 'created_at');
+            $groceryIdQuery = (clone $groceryQuery)->select('id', DB::raw("'grocery' as source_type"), 'created_at');
+            $union = $orderIdQuery->unionAll($groceryIdQuery);
+
+            $total = DB::table(DB::raw("({$union->toSql()}) as combined"))
+                ->mergeBindings($union->getQuery())
+                ->count();
+
+            $page = (int) request()->input('page', 1);
+            if ($page < 1) $page = 1;
+            $perPage = config('default_pagination') ?? 25;
+            $offset = ($page - 1) * $perPage;
+
+            $pageItems = DB::table(DB::raw("({$union->toSql()}) as combined"))
+                ->mergeBindings($union->getQuery())
+                ->orderBy('created_at', 'desc')
+                ->offset($offset)
+                ->limit($perPage)
+                ->get();
+
+            $foodIds = [];
+            $groceryIds = [];
+            foreach ($pageItems as $item) {
+                if ($item->source_type === 'order') {
+                    $foodIds[] = $item->id;
+                } else {
+                    $groceryIds[] = $item->id;
+                }
+            }
+
+            $loadedFood = count($foodIds) > 0
+                ? Order::with(['customer', 'restaurant'])->whereIn('id', $foodIds)->get()->keyBy('id')
+                : collect();
+
+            $loadedGrocery = count($groceryIds) > 0
+                ? GroceryList::with(['user', 'delivery_man'])->whereIn('id', $groceryIds)->get()->keyBy('id')
+                : collect();
+
+            $combinedCollection = collect();
+            foreach ($pageItems as $item) {
+                if ($item->source_type === 'order' && isset($loadedFood[$item->id])) {
+                    $o = $loadedFood[$item->id];
+                    $o->order_source = 'food';
+                    $o->is_bestie_buddy = false;
+                    $combinedCollection->push($o);
+                } elseif ($item->source_type === 'grocery' && isset($loadedGrocery[$item->id])) {
+                    $g = $loadedGrocery[$item->id];
+                    $combinedCollection->push($this->transformGroceryToOrderObject($g));
+                }
+            }
+
+            $orders = new LengthAwarePaginator(
+                $combinedCollection,
+                $total,
+                $perPage,
+                $page,
+                ['path' => LengthAwarePaginator::resolveCurrentPath(), 'query' => request()->query()]
+            );
+        }
+
+        $orderstatus = (array) $orderStatusFilter;
+        $scheduled = $scheduledFilter ?? 0;
+        $vendor_ids = (array) $vendor;
+        $zone_ids = (array) $zone;
+        $from_date = $fromDate;
+        $to_date = $toDate;
+        $order_type = $orderType;
         $total = $orders->total();
 
         return view('admin-views.order.list', compact('orders', 'status', 'orderstatus', 'scheduled', 'vendor_ids', 'zone_ids', 'from_date', 'to_date', 'total', 'order_type'));
+    }
+
+    private function transformGroceryToOrderObject(GroceryList $grocery)
+    {
+        $statusMap = [
+            'pending' => 'pending',
+            'processing' => 'processing',
+            'assigned' => 'processing',
+            'out_for_delivery' => 'picked_up',
+            'completed' => 'delivered',
+            'cancelled' => 'canceled',
+        ];
+
+        $orderObj = new Order();
+        $orderObj->id = $grocery->id;
+        $orderObj->is_bestie_buddy = true;
+        $orderObj->order_source = 'bestie_buddy';
+        $orderObj->order_type = 'bestie_buddy';
+        $orderObj->user_id = $grocery->user_id;
+        $orderObj->order_amount = $grocery->total_amount ?? 0;
+        $orderObj->order_status = $statusMap[$grocery->status] ?? $grocery->status;
+        $orderObj->payment_status = ($grocery->status == 'completed' || $grocery->is_price_confirmed) ? 'paid' : 'unpaid';
+        $orderObj->created_at = $grocery->created_at;
+        $orderObj->updated_at = $grocery->updated_at;
+        $orderObj->customer = $grocery->user;
+        $orderObj->restaurant = null;
+        $orderObj->is_guest = 0;
+        $orderObj->delivery_man_id = $grocery->delivery_man_id;
+        $orderObj->delivery_man = $grocery->delivery_man;
+
+        return $orderObj;
     }
 
     public function export_orders($status, $type, Request $request)
@@ -851,6 +1026,7 @@ class OrderController extends Controller
             $data = [
                 'title' => translate('messages.order_push_title'),
                 'description' => translate('messages.you_are_unassigned_from_a_order'),
+                'order_type' => $order->order_type ?? 'delivery',
                 'order_id' => '',
                 'image' => '',
                 'type' => 'assign'
@@ -897,6 +1073,7 @@ class OrderController extends Controller
             $data = [
                 'title' => translate('messages.order_push_title'),
                 'description' => translate('messages.you_are_assigned_to_a_order'),
+                'order_type' => $order->order_type ?? 'delivery',
                 'order_id' => $order['id'],
                 'image' => '',
                 'type' => 'assign'

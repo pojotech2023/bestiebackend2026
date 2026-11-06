@@ -259,7 +259,7 @@
                             <div class="existing-img-wrap" id="eimg-{{ $img->id }}">
                                 <img src="{{ $img->file_url }}"
                                      alt="{{ $img->original_name ?? 'Image' }}"
-                                     onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'">
+                                     onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'">
                                 <div class="remove-existing" onclick="markDeleteImage({{ $img->id }})" title="Remove">
                                     &times;
                                 </div>

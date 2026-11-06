@@ -4475,4 +4475,5 @@
   'Choose whether to add commission on top of food price or deduct it from restaurant payout' => 'Choose whether to add commission on top of food price or deduct it from restaurant payout',
   'Admin Charge (Add on top of food price)' => 'Admin Charge (Add on top of food price)',
   'Food Commission (Deduct from restaurant payout)' => 'Food Commission (Deduct from restaurant payout)',
+  'Bestie Buddy' => 'Bestie Buddy',
 );

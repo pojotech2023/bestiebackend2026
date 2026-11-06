@@ -12,7 +12,7 @@
         <img
             width="200"
             src="{{asset('storage/app/public/business/'.$logo)}}"
-            onerror="this.src='{{ asset('public/assets/admin/img/favicon.png') }}'"
+            onerror="this.src='{{ asset('assets/admin/img/favicon.png') }}'"
             alt=""
             class="dark-support"
         />

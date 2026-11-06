@@ -200,8 +200,8 @@
                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#order-your-food">
                        <img
                        {{-- src="{{ asset('storage/app/public/landing') }}/{{ $order_platform['image'] ?? null }}" --}}
-                       src="{{ asset('public/assets/admin/img/order_platform_image.png') }}"
-                                onerror="this.src='{{ asset('public/assets/admin/img/400x400/img2.jpg')}}'"
+                       src="{{ asset('assets/admin/img/order_platform_image.png') }}"
+                                onerror="this.src='{{ asset('assets/admin/img/400x400/img2.jpg')}}'"
                        alt="">
                        {{-- {{$order_platform['title']}} --}}
                        {{  translate('Order_your_food') }}
@@ -213,9 +213,9 @@
                 <li>
                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#manage-restaurant">
                         <img
-                        src="{{ asset('public/assets/admin/img/manage_your_restaurant.png') }}"
+                        src="{{ asset('assets/admin/img/manage_your_restaurant.png') }}"
                         {{-- src="{{ asset('storage/app/public/landing') }}/{{ $restaurant_platform['image'] ?? null }}" --}}
-                                onerror="this.src='{{ asset('public/assets/admin/img/400x400/img2.jpg')}}'"
+                                onerror="this.src='{{ asset('assets/admin/img/400x400/img2.jpg')}}'"
                         alt="">
                         {{-- {{$restaurant_platform['title']}} --}}
                         {{  translate('manage_your_restaurant') }}
@@ -226,9 +226,9 @@
                 <li>
                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#earn-delivery">
                         <img
-                        src="{{ asset('public/assets/admin/img/earn_by_delivery.png') }}"
+                        src="{{ asset('assets/admin/img/earn_by_delivery.png') }}"
                         {{-- src="{{ asset('storage/app/public/landing') }}/{{ $delivery_platform['image'] ?? null }}" --}}
-                        onerror="this.src='{{ asset('public/assets/admin/img/400x400/img2.jpg')}}'"
+                        onerror="this.src='{{ asset('assets/admin/img/400x400/img2.jpg')}}'"
                         alt="">
                         {{-- {{$delivery_platform['title']}} --}}
                         {{  translate('earn_by_delivery') }}

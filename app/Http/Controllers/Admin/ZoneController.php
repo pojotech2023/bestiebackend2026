@@ -57,10 +57,10 @@ class ZoneController extends Controller
                 $lastcord = explode(',',$single_array);
             }
             $coords = explode(',',$single_array);
-            $polygon[] = new Point($coords[0], $coords[1]);
+            $polygon[] = new Point((float)$coords[0], (float)$coords[1]);
         }
         $zone_id=Zone::all()->count() + 1;
-        $polygon[] = new Point($lastcord[0], $lastcord[1]);
+        $polygon[] = new Point((float)$lastcord[0], (float)$lastcord[1]);
         $zone = new Zone();
         $zone->name = $request->name[array_search('default', $request->lang)];
         $zone->coordinates = new Polygon([new LineString($polygon)]);

@@ -20,7 +20,8 @@ class Notification extends Model
         return [
             'title'       => $this->title,
             'description' => $this->description,
-            'order_id'    => '',
+            'order_id'    => null,
+            'order_type'  => 'delivery',
             'image'       => $this->image,
             'type'        => 'order_status',
         ];

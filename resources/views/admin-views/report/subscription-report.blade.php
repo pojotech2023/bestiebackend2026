@@ -14,7 +14,7 @@
             <h1 class="page-header-title">
                 <span class="page-header-icon">
                     <i class="tio-filter-list"></i>
-                    {{-- <img src="{{ asset('public/assets/admin/img/report.png')}}" class="w--22" alt=""> --}}
+                    {{-- <img src="{{ asset('assets/admin/img/report.png')}}" class="w--22" alt=""> --}}
                 </span>
                 <span>
                     {{translate('messages.Subscription_report')}}
@@ -141,14 +141,14 @@
                                     <a id="export-excel" class="dropdown-item" href="{{route('admin.report.subscription-export', ['type'=>'excel',
                                         request()->getQueryString()]) }}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                            src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                             alt="Image Description">
                                         {{ translate('messages.excel') }}
                                     </a>
                                     <a id="export-csv" class="dropdown-item" href="{{route('admin.report.subscription-export', ['type'=>'csv',
                                         request()->getQueryString()]) }}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                            src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
                                         {{ translate('messages.csv') }}
                                     </a>

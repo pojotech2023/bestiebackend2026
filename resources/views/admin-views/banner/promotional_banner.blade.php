@@ -105,7 +105,7 @@
                         <div class="row g-3">
                             <div class="col-12 d-flex justify-content-between">
                                 <span class="d-flex g-1">
-                                    <img src="{{ asset('public/assets/admin/img/other-banner.png')}}" class="h-85"
+                                    <img src="{{ asset('assets/admin/img/other-banner.png')}}" class="h-85"
                                         alt="">
                                 </span>
                                 <div>

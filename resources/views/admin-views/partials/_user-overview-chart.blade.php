@@ -12,7 +12,7 @@
     <h3>{{ $data['customer'] + $data['restaurants'] + $data['delivery_man'] }}</h3>
 </div>
 
-<script src="{{ asset('public/assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="{{ asset('assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
 
 <script>
     var ctx = document.getElementById('user-overview');

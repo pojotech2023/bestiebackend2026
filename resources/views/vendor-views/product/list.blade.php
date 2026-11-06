@@ -294,7 +294,7 @@
           },
           language: {
             zeroRecords: '<div class="text-center p-4">' +
-                '<img class="mb-3 w-7rem" src="{{ asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                '<img class="mb-3 w-7rem" src="{{ asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
                 '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
                 '</div>'
           }

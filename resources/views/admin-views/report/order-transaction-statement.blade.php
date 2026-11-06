@@ -378,11 +378,11 @@
                 </tr>
                 <tr>
                     <td>{{translate('messages.admin_net_income')}}</td>
-                    <td>{{ \App\CentralLogics\Helpers::format_currency($order_transaction->admin_commission + $order_transaction->delivery_fee_comission) }}</td>
+                    <td>{{ \App\CentralLogics\Helpers::format_currency($order_transaction->admin_commission + $order_transaction->delivery_fee_comission + $order_transaction->tax) }}</td>
                 </tr>
                 <tr>
                     <td>{{translate('messages.restaurant_net_income')}}</td>
-                    <td>{{ \App\CentralLogics\Helpers::format_currency($order_transaction->restaurant_amount - $order_transaction->tax) }}</td>
+                    <td>{{ \App\CentralLogics\Helpers::format_currency($order_transaction->restaurant_amount) }}</td>
                 </tr>
             </tbody>
         </table>

@@ -14,7 +14,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h2 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="{{ asset('public/assets/admin/img/zone.png')}}" alt="">
+                            <img src="{{ asset('assets/admin/img/zone.png')}}" alt="">
                         </div>
                         <span>
                             {{translate('cuisine')}}
@@ -55,13 +55,13 @@
                             <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="{{route("admin.cuisine.export",['type'=>'excel' , request()->getQueryString() ])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
                                 {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="{{route("admin.cuisine.export",['type'=>'csv' , request()->getQueryString() ])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
                                 {{translate('messages.csv')}}
                             </a>
@@ -394,13 +394,13 @@
     <script>
         $('#reset_btn').click(function(){
             $('#name').val(null);
-            $('#viewer').attr('src', "{{ asset('public/assets/admin/img/100x100/food-default-image.png')}}");
+            $('#viewer').attr('src', "{{ asset('assets/admin/img/100x100/food-default-image.png')}}");
             $('#image').val(null);
 
         })
         $('#reset_btn1').click(function(){
             $('#name').val(null);
-            $('#viewer').attr('src', "{{ asset('public/assets/admin/img/100x100/food-default-image.png')}}");
+            $('#viewer').attr('src', "{{ asset('assets/admin/img/100x100/food-default-image.png')}}");
             $('#image').val(null);
 
         })

@@ -63,14 +63,14 @@
                                         <a id="export-excel" class="dropdown-item" href="{{route('admin.delivery-man.export-delivery-man', ['type'=>'excel',request()->getQueryString()])}}">
 
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                             src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                             src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                              alt="Image Description">
                                         {{translate('messages.excel')}}
                                     </a>
                                     <a id="export-csv" class="dropdown-item" href="javascript:;">
                                         <a id="export-csv" class="dropdown-item" href="{{route('admin.delivery-man.export-delivery-man', ['type'=>'csv',request()->getQueryString()])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                             src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                             src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                              alt="Image Description">
                                         {{translate('messages.csv')}}
                                     </a>
@@ -108,7 +108,7 @@
                                     <td>{{$key+$delivery_men->firstItem()}}</td>
                                     <td>
                                         <a class="table-rest-info" href="{{route('admin.delivery-man.preview',[$dm['id']])}}">
-                                            <img onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                                            <img onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                                                     src="{{asset('storage/app/public/delivery-man')}}/{{$dm['image']}}" alt="{{$dm['f_name']}} {{$dm['l_name']}}">
                                             <div class="info">
                                                 <h5 class="text-hover-primary mb-0">{{$dm['f_name'].' '.$dm['l_name']}}</h5>

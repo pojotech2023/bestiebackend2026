@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="instructions-image mt-4">
-                                    <img src={{ asset('public/assets/admin/img/instructions.gif')}} alt="instructions">
+                                    <img src={{ asset('assets/admin/img/instructions.gif')}} alt="instructions">
                                 </div>
                             </div>
                         </div>
@@ -157,13 +157,13 @@
                                     <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                                     <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.zone.export-zones', ['type'=>'excel'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
                                         {{translate('messages.excel')}}
                                     </a>
                                     <a target="__blank" id="export-csv" class="dropdown-item" href="{{route('admin.zone.export-zones', ['type'=>'csv'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                                src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                 alt="Image Description">
                                         {{translate('messages.csv')}}
                                     </a>
@@ -397,7 +397,7 @@
         });
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&libraries=drawing,places&v=3.45.8"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&libraries=drawing,places&v=3.55"></script>
 
     <script>
         var map; // Global declaration of the map
@@ -436,11 +436,132 @@
             });
         }
 
+        var customDrawingActive = true;
+        var polygonPath = [];
+        var vertexMarkers = [];
+
+        function initCustomDrawingTool(map) {
+            const controlDiv = document.createElement("div");
+            controlDiv.className = "custom-draw-controls shadow-sm rounded bg-white p-1 my-2 d-flex align-items-center";
+            controlDiv.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+            controlDiv.style.gap = "6px";
+            controlDiv.style.zIndex = "999";
+
+            controlDiv.innerHTML = `
+                <button type="button" id="tool-hand" class="btn btn-sm btn-outline-secondary py-1 px-2" title="Hand Tool (Pan Map)">
+                    <i class="tio-hand-draw"></i> Hand Tool
+                </button>
+                <button type="button" id="tool-shape" class="btn btn-sm btn-primary py-1 px-2" title="Shape Tool (Click map to draw zone)">
+                    <i class="tio-free-transform"></i> Shape Tool (Draw)
+                </button>
+                <button type="button" id="tool-clear" class="btn btn-sm btn-danger py-1 px-2" title="Clear Zone">
+                    <i class="tio-delete"></i> Clear
+                </button>
+            `;
+
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(controlDiv);
+
+            const handBtn = controlDiv.querySelector('#tool-hand');
+            const shapeBtn = controlDiv.querySelector('#tool-shape');
+            const clearBtn = controlDiv.querySelector('#tool-clear');
+
+            function clearCurrentDrawing() {
+                if (lastpolygon) {
+                    lastpolygon.setMap(null);
+                    lastpolygon = null;
+                }
+                vertexMarkers.forEach(m => m.setMap(null));
+                vertexMarkers = [];
+                polygonPath = [];
+                $('#coordinates').val('');
+                auto_grow();
+            }
+
+            function setMode(mode) {
+                if (mode === 'shape') {
+                    customDrawingActive = true;
+                    shapeBtn.className = "btn btn-sm btn-primary py-1 px-2";
+                    handBtn.className = "btn btn-sm btn-outline-secondary py-1 px-2";
+                    map.setOptions({ draggableCursor: 'crosshair' });
+                } else {
+                    customDrawingActive = false;
+                    handBtn.className = "btn btn-sm btn-primary py-1 px-2";
+                    shapeBtn.className = "btn btn-sm btn-outline-secondary py-1 px-2";
+                    map.setOptions({ draggableCursor: null });
+                }
+            }
+
+            handBtn.addEventListener('click', () => setMode('hand'));
+            shapeBtn.addEventListener('click', () => setMode('shape'));
+
+            clearBtn.addEventListener('click', () => clearCurrentDrawing());
+
+            setMode('shape');
+
+            function updatePathCoords() {
+                if (!lastpolygon) return;
+                var path = lastpolygon.getPath();
+                var str = "";
+                for (var i = 0; i < path.getLength(); i++) {
+                    var pt = path.getAt(i);
+                    str += "(" + pt.lat() + "," + pt.lng() + "),";
+                }
+                if (str.length > 0) {
+                    str = str.slice(0, -1);
+                }
+                $('#coordinates').val(str);
+                auto_grow();
+            }
+
+            map.addListener('click', function(e) {
+                if (!customDrawingActive) return;
+
+                polygonPath.push(e.latLng);
+
+                // Add visible red/white dot marker on clicked location
+                const marker = new google.maps.Marker({
+                    position: e.latLng,
+                    map: map,
+                    clickable: false,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 6,
+                        fillColor: "#FF0000",
+                        fillOpacity: 1,
+                        strokeColor: "#FFFFFF",
+                        strokeWeight: 2
+                    }
+                });
+                vertexMarkers.push(marker);
+
+                if (!lastpolygon) {
+                    lastpolygon = new google.maps.Polygon({
+                        paths: polygonPath,
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: "#FF0000",
+                        fillOpacity: 0.35,
+                        editable: true,
+                        draggable: true,
+                        map: map
+                    });
+
+                    lastpolygon.getPath().addListener('set_at', updatePathCoords);
+                    lastpolygon.getPath().addListener('insert_at', updatePathCoords);
+                    lastpolygon.getPath().addListener('remove_at', updatePathCoords);
+                } else {
+                    lastpolygon.setPath(polygonPath);
+                }
+
+                updatePathCoords();
+            });
+        }
+
         function initialize() {
             @php($default_location=\App\Models\BusinessSetting::where('key','default_location')->first())
             @php($default_location=$default_location->value?json_decode($default_location->value, true):0)
             var myLatlng = { lat: {{$default_location?$default_location['lat']:'23.757989'}}, lng: {{$default_location?$default_location['lng']:'90.360587'}} };
-
 
             var myOptions = {
                 zoom: 13,
@@ -448,23 +569,49 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }
             map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-            drawingManager = new google.maps.drawing.DrawingManager({
-                drawingMode: google.maps.drawing.OverlayType.POLYGON,
-                drawingControl: true,
-                drawingControlOptions: {
-                position: google.maps.ControlPosition.TOP_CENTER,
-                drawingModes: [google.maps.drawing.OverlayType.POLYGON]
-                },
-                polygonOptions: {
-                editable: true
-                }
-            });
-            drawingManager.setMap(map);
 
+            try {
+                if (typeof google.maps.drawing !== 'undefined' && google.maps.drawing.DrawingManager) {
+                    drawingManager = new google.maps.drawing.DrawingManager({
+                        drawingMode: google.maps.drawing.OverlayType.POLYGON,
+                        drawingControl: true,
+                        drawingControlOptions: {
+                            position: google.maps.ControlPosition.TOP_CENTER,
+                            drawingModes: [google.maps.drawing.OverlayType.POLYGON]
+                        },
+                        polygonOptions: {
+                            editable: true
+                        }
+                    });
+                    drawingManager.setMap(map);
+
+                    google.maps.event.addListener(drawingManager, "overlaycomplete", function(event) {
+                        if(lastpolygon)
+                        {
+                            lastpolygon.setMap(null);
+                        }
+                        var path = event.overlay.getPath();
+                        var str = "";
+                        for (var i = 0; i < path.getLength(); i++) {
+                            var pt = path.getAt(i);
+                            str += "(" + pt.lat() + "," + pt.lng() + "),";
+                        }
+                        if (str.length > 0) {
+                            str = str.slice(0, -1);
+                        }
+                        $('#coordinates').val(str);
+                        lastpolygon = event.overlay;
+                        auto_grow();
+                    });
+                } else {
+                    initCustomDrawingTool(map);
+                }
+            } catch(err) {
+                console.warn("DrawingManager unavailable, using custom drawing tool:", err);
+                initCustomDrawingTool(map);
+            }
 
             //get current location block
-            // infoWindow = new google.maps.InfoWindow();
-            // Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -475,16 +622,6 @@
                     map.setCenter(pos);
                 });
             }
-
-            google.maps.event.addListener(drawingManager, "overlaycomplete", function(event) {
-                if(lastpolygon)
-                {
-                    lastpolygon.setMap(null);
-                }
-                $('#coordinates').val(event.overlay.getPath().getArray());
-                lastpolygon = event.overlay;
-                auto_grow();
-            });
 
             const resetDiv = document.createElement("div");
             resetMap(resetDiv, lastpolygon);
@@ -567,6 +704,7 @@
                             strokeWeight: 2,
                             fillColor: "#FF0000",
                             fillOpacity: 0.1,
+                            clickable: false
                         }));
                         polygons[i].setMap(map);
                     }

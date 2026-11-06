@@ -349,7 +349,7 @@
             <div class="card-header border-0 align-items-center">
                 <h4 class="card-title">
                     <span class="card-header-icon">
-                        <img class="w-20px" src="{{ asset('public/assets/admin/img/subscription-plan.png')}}" alt="">
+                        <img class="w-20px" src="{{ asset('assets/admin/img/subscription-plan.png')}}" alt="">
                     </span>
                     <span>{{ translate('messages.Package_details') }}</span>
                 </h4>

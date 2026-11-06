@@ -71,11 +71,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{$tab=='delivery-log'?'active':''}}" href="{{route('vendor.order.subscription.show', ['subscription'=>$subscription->id])}}?tab=delivery-log"  aria-disabled="true">{{translate('messages.delivery_log')}}
-                        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_completed_subscription_deliveries_of_this_order_ID.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span></a>
+                        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_completed_subscription_deliveries_of_this_order_ID.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{$tab=='pause-log'?'active':''}}" href="{{route('vendor.order.subscription.show', ['subscription'=>$subscription->id])}}?tab=pause-log"  aria-disabled="true">{{translate('messages.pause_log')}}
-                            <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_paused_subscription_deliveries_of_this_order_ID_and_who_paused_it.')}}" class="input-label-secondary"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span></a>
+                            <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_paused_subscription_deliveries_of_this_order_ID_and_who_paused_it.')}}" class="input-label-secondary"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="i"></span></a>
                     </li>
                 </ul>
                 <!-- End Nav -->
@@ -134,7 +134,7 @@
                                 <div class="avatar avatar-circle mr-3">
                                     <img
                                         class="avatar-img"
-                                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                                        onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                                         src="{{asset('storage/app/public/profile/'.$subscription->customer->image)}}"
                                         alt="Image Description">
                                 </div>

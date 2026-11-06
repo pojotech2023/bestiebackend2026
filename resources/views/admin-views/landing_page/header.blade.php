@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -61,7 +61,7 @@
                 <div class="d-flex justify-content-between __gap-12px mb-3">
                     <h5 class="card-title d-flex align-items-center">
                         <span class="card-header-icon mr-2">
-                            <img src="{{ asset('public/assets/admin/img/react_header.png')}}" alt="" class="mw-100">
+                            <img src="{{ asset('assets/admin/img/react_header.png')}}" alt="" class="mw-100">
                         </span>
                         {{translate('Header_Content_Section')}}
                     </h5>
@@ -273,7 +273,7 @@
                 <div class="d-flex justify-content-between __gap-12px mb-3">
                     <h5 class="card-title d-flex align-items-center">
                         <span class="card-header-icon mr-2">
-                            <img src="{{ asset('public/assets/admin/img/react_header.png')}}" alt="" class="mw-100">
+                            <img src="{{ asset('assets/admin/img/react_header.png')}}" alt="" class="mw-100">
                         </span>
                         {{translate('Image_Content')}}
                     </h5>
@@ -363,7 +363,7 @@
                 <div class="d-flex justify-content-between __gap-12px mb-3">
                     <h5 class="card-title d-flex align-items-center">
                         <span class="card-header-icon mr-2">
-                            <img src="{{ asset('public/assets/admin/img/react_header.png')}}" alt="" class="mw-100">
+                            <img src="{{ asset('assets/admin/img/react_header.png')}}" alt="" class="mw-100">
                         </span>
                         {{translate('Floating_Icon_Content')}}
                     </h5>

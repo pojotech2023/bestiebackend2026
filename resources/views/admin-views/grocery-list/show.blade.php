@@ -211,7 +211,7 @@
                                      class="img-fluid rounded"
                                      style="height:100px;width:100%;object-fit:cover;"
                                      alt="{{ $img->original_name ?? 'Reference Image' }}"
-                                     onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'">
+                                     onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'">
                             </a>
                             @if($img->original_name)
                                 <small class="text-muted d-block text-center mt-1"

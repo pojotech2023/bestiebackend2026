@@ -85,7 +85,7 @@
                             class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar"
                             for="avatarUploader">
                             <img id="viewer"
-                                 onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                                 onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                                  class="avatar-img"
                                  src="{{asset('storage/app/public/vendor')}}/{{auth('vendor')->check()?auth('vendor')->user()->image:auth('vendor_employee')->user()->image}}"
                                  alt="Image">

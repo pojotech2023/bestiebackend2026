@@ -40,7 +40,7 @@ if($order->delivery_address){
 
             <h1 class="page-header-title text-capitalize">
                 <div class="card-header-icon d-inline-flex mr-2 img">
-                    <img src="{{ asset('public/assets/admin/img/orders.png')}}" alt="public">
+                    <img src="{{ asset('assets/admin/img/orders.png')}}" alt="public">
                 </div>
                 <span>
                     {{ translate('messages.Order Details') }}
@@ -341,7 +341,7 @@ if($order->delivery_address){
                                                         <div class="media">
                                                             <a class="avatar mr-3 cursor-pointer initial-80"
                                                                 href="{{ route('vendor.food.view', $detail->food['id']) }}">
-                                                                <img class="img-fluid rounded initial-80" src="{{ asset('storage/app/public/product') }}/{{ $detail->food['image'] }}" onerror="this.src='{{ asset('public/assets/admin/img/100x100/1.png') }}'"
+                                                                <img class="img-fluid rounded initial-80" src="{{ asset('storage/app/public/product') }}/{{ $detail->food['image'] }}" onerror="this.src='{{ asset('assets/admin/img/100x100/1.png') }}'"
                                                                     alt="Image Description">
                                                             </a>
                                                             <div class="media-body">
@@ -431,7 +431,7 @@ if($order->delivery_address){
                                                     <div class="avatar avatar-xl mr-3">
                                                         <img class="img-fluid rounded initial-80"
                                                             src="{{ asset('storage/app/public/campaign') }}/{{ $detail->campaign['image'] }}"
-                                                            onerror="this.src='{{ asset('public/assets/admin/img/100x100/1.png') }}'"
+                                                            onerror="this.src='{{ asset('assets/admin/img/100x100/1.png') }}'"
                                                             alt="Image Description">
                                                     </div>
                                                     <div class="media-body">
@@ -764,7 +764,7 @@ if($order->delivery_address){
 
                         <div class="media align-items-center deco-none customer--information-single ml-3 border-0 text-center pb-0" href="javascript:">
                             <div class="avatar avatar-circle">
-                                <img class="avatar-img  initial-81" onerror="this.src='{{ asset('public/assets/admin/img/160x160/img3.png') }}'"
+                                <img class="avatar-img  initial-81" onerror="this.src='{{ asset('assets/admin/img/160x160/img3.png') }}'"
                                     src="{{ asset('storage/app/public/delivery-man/' . $order->delivery_man->image) }}"
                                     alt="Image Description">
                             </div>
@@ -869,7 +869,7 @@ if($order->delivery_address){
                             <div class="col-3">
                                 <img class="img__aspect-1 rounded border w-100" data-toggle="modal"
                                     data-target="#imagemodal{{ $key }}"
-                                    onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}"
+                                    onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}"
                                     src="{{ asset('storage/app/public/order') . '/' . $img }}">
                             </div>
                             <div class="modal fade" id="imagemodal{{ $key }}" tabindex="-1"
@@ -931,7 +931,7 @@ if($order->delivery_address){
                             <div class="media align-items-center deco-none customer--information-single" href="javascript:">
                                 <div class="avatar avatar-circle">
                                     <img class="avatar-img  initial-81"
-                                        onerror="this.src='{{ asset('public/assets/admin/img/resturant-panel/customer.png') }}'"
+                                        onerror="this.src='{{ asset('assets/admin/img/resturant-panel/customer.png') }}'"
                                         src="{{ asset('storage/app/public/profile/' . $order->customer->image) }}"
                                         alt="Image Description">
                                 </div>
@@ -1205,7 +1205,7 @@ if($order->delivery_address){
                                     <div class="d-flex align-items-center gap-2 justify-content-between">
                                             <div class="dm_list_selected media gap-2" data-id="{{ $selected_delivery_man['id'] }}">
                                                 <img class="avatar avatar-60 rounded-10"
-                                                    onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
+                                                    onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"
                                                     src="{{ asset('storage/app/public/delivery-man') }}/{{ $selected_delivery_man['image'] }}"
                                                     alt="{{ $selected_delivery_man['name'] }}">
                                                     <div class="media-body d-flex gap-1 flex-column">
@@ -1234,7 +1234,7 @@ if($order->delivery_address){
                                             <div class="d-flex align-items-center gap-2 justify-content-between">
                                                     <div class="dm_list media gap-2" data-id="{{ $dm['id'] }}">
                                                         <img class="avatar avatar-60 rounded-10"
-                                                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
+                                                            onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"
                                                             src="{{ asset('storage/app/public/delivery-man') }}/{{ $dm['image'] }}"
                                                             alt="{{ $dm['name'] }}">
                                                             <div class="media-body d-flex gap-1 flex-column">
@@ -1510,13 +1510,13 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                         {{ isset($order->restaurant) ? $order->restaurant->longitude : 0 }}),
                     map: map,
                     title: "{{ isset($order->restaurant) ? Str::limit($order->restaurant->name, 15, '...') : '' }}",
-                    icon: "{{ asset('public/assets/admin/img/restaurant_map_1.png') }}"
+                    icon: "{{ asset('assets/admin/img/restaurant_map_1.png') }}"
                 });
 
                 google.maps.event.addListener(Restaurantmarker, 'click', (function(Restaurantmarker) {
                     return function() {
                         infowindow.setContent(
-                            `<div class='float--left'><img class='js--design-1' onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='text-break float--right p--10px'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>`
+                            `<div class='float--left'><img class='js--design-1' onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='text-break float--right p--10px'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>`
                         );
                         infowindow.open(map, Restaurantmarker);
                     }
@@ -1530,9 +1530,9 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                     map.fitBounds(dmbounds);
                     var d_man = "{{ $order?->delivery_man_id ?? 0 }}" ;
                     if ( deliveryMan[i].id ==  d_man){
-                        var dm_default_image=  "{{ asset('public/assets/admin/img/delivery_boy_map_2.png') }}";
+                        var dm_default_image=  "{{ asset('assets/admin/img/delivery_boy_map_2.png') }}";
                     } else {
-                        var dm_default_image=  "{{ asset('public/assets/admin/img/delivery_boy_map_1.png') }}";
+                        var dm_default_image=  "{{ asset('assets/admin/img/delivery_boy_map_1.png') }}";
                     }
 
                     var marker = new google.maps.Marker({
@@ -1547,7 +1547,7 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                             infowindow.setContent(
-                                `<div class='float--left'><img class='js--design-1 mt-2' onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/delivery-man') }}/` +
+                                `<div class='float--left'><img class='js--design-1 mt-2' onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/delivery-man') }}/` +
                                 deliveryMan[i].image +
                                 "'></div><div class='float--right p--10px'><b>" + deliveryMan[i]
                                 .name + "</b><br/> <div> {{ translate('messages.Active_Orders') }} :" + deliveryMan[i].current_orders + "</div> </b>" + deliveryMan[i].location + "</div>");
@@ -1592,13 +1592,13 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                             {{ $c_address['longitude'] }}),
                         map: map,
                         title: "{{ $order->customer ? $order->customer->f_name .' '. $order->customer->l_name : $c_address['contact_person_name'] }}",
-                        icon: "{{ asset('public/assets/admin/img/customer_location.png') }}"
+                        icon: "{{ asset('assets/admin/img/customer_location.png') }}"
                     });
 
                     google.maps.event.addListener(marker, 'click', (function(marker) {
                         return function() {
                             infowindow.setContent(
-                                `<div class='float--left'><img class='js--design-1' onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"  src='{{ $order->customer ? asset('storage/app/public/profile/' . $order?->customer?->image) : asset('public/assets/admin/img/160x160/img3.png') }}'></div><div class='float--right p--10px'><b>{{ $order->customer ? $order->customer->f_name .' '. $order->customer->l_name : $c_address['contact_person_name'] }}</b><br/>{{ $c_address['address'] }}</div>`
+                                `<div class='float--left'><img class='js--design-1' onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"  src='{{ $order->customer ? asset('storage/app/public/profile/' . $order?->customer?->image) : asset('public/assets/admin/img/160x160/img3.png') }}'></div><div class='float--right p--10px'><b>{{ $order->customer ? $order->customer->f_name .' '. $order->customer->l_name : $c_address['contact_person_name'] }}</b><br/>{{ $c_address['address'] }}</div>`
                             );
                             infowindow.open(map, marker);
                         }
@@ -1611,13 +1611,13 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                             {{ $order->dm_last_location['longitude'] }}),
                         map: map,
                         title: "{{ $order->delivery_man->f_name }}  {{ $order->delivery_man->l_name }}",
-                        icon: "{{ asset('public/assets/admin/img/delivery_boy_map_2.png') }}"
+                        icon: "{{ asset('assets/admin/img/delivery_boy_map_2.png') }}"
                     });
 
                     google.maps.event.addListener(dmmarker, 'click', (function(dmmarker) {
                         return function() {
                             infowindow.setContent(
-                                `<div class='float--left'><img class='js--design-1 mt-2' onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/delivery-man/' . $order->delivery_man->image) }}'></div><div class='float--right p--10px'><b>{{ $order->delivery_man->f_name }}  {{ $order->delivery_man->l_name }}</b><br/>  <div> {{ translate('messages.Active_Orders') }} : {{ $order->delivery_man->current_orders }} </div> </b>{{ $order->dm_last_location['location'] }}</div>`
+                                `<div class='float--left'><img class='js--design-1 mt-2' onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/delivery-man/' . $order->delivery_man->image) }}'></div><div class='float--right p--10px'><b>{{ $order->delivery_man->f_name }}  {{ $order->delivery_man->l_name }}</b><br/>  <div> {{ translate('messages.Active_Orders') }} : {{ $order->delivery_man->current_orders }} </div> </b>{{ $order->dm_last_location['location'] }}</div>`
                             );
                             infowindow.open(map, dmmarker);
                         }
@@ -1631,13 +1631,13 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                             {{ $order->restaurant->longitude }}),
                         map: map,
                         title: "{{ Str::limit($order->restaurant->name, 15, '...') }}",
-                        icon: "{{ asset('public/assets/admin/img/restaurant_map_1.png') }}"
+                        icon: "{{ asset('assets/admin/img/restaurant_map_1.png') }}"
                     });
 
                     google.maps.event.addListener(Retaurantmarker, 'click', (function(Retaurantmarker) {
                         return function() {
                             infowindow.setContent(
-                                `<div class='float--left'><img class='js--design-1' onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='float--right p--10px'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>`
+                                `<div class='float--left'><img class='js--design-1' onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"  src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='float--right p--10px'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>`
                             );
                             infowindow.open(map, Retaurantmarker);
                         }
@@ -1691,7 +1691,7 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
     </script>
 
 
-    <script src="{{ asset('public/assets/admin/js/spartan-multi-image-picker.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/spartan-multi-image-picker.js') }}"></script>
     <script type="text/javascript">
         $(function() {
             $("#coba").spartanMultiImagePicker({
@@ -1701,7 +1701,7 @@ src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting:
                 groupClassName: 'spartan_item_wrapper min-w-100px max-w-100px',
                 maxFileSize: '',
                 placeholderImage: {
-                    image: "{{ asset('public/assets/admin/img/upload.png') }}",
+                    image: "{{ asset('assets/admin/img/upload.png') }}",
                     width: '100px'
                 },
                 dropFileLabel: "Drop Here",

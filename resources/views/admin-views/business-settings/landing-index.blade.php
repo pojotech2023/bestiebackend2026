@@ -17,7 +17,7 @@ $custom_file = File::exists($filePath);
             <div class="d-flex flex-wrap justify-content-between align-items-start">
                 <h1 class="page-header-title mr-3">
                     <span class="page-header-icon">
-                        <img src="{{ asset('public/assets/admin/img/business.png') }}" class="w--20" alt="">
+                        <img src="{{ asset('assets/admin/img/business.png') }}" class="w--20" alt="">
                     </span>
                     <span>
                         {{ translate('messages.business_setup') }}
@@ -273,7 +273,7 @@ $custom_file = File::exists($filePath);
 @endsection
 @push('script_2')
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script href="{{ asset('public/assets/admin/vendor/swiper/swiper-bundle.min.js')}}"></script>
+<script href="{{ asset('assets/admin/vendor/swiper/swiper-bundle.min.js')}}"></script>
 
 <script>
     $("img.svg").each(function () {

@@ -6,6 +6,8 @@ use App\CentralLogics\Helpers;
 use App\Http\Controllers\Controller;
 use App\CentralLogics\BestieOrderLogic;
 use App\Models\BestieBuddySetting;
+use App\Models\Zone;
+use MatanYadaev\EloquentSpatial\Objects\Point;
 use App\Models\DeliveryMan;
 use App\Models\GroceryImage;
 use App\Models\GroceryList;
@@ -33,6 +35,11 @@ class GroceryListController extends Controller
             ], 401);
         }
 
+        // Normalize empty / string null address_id so it passes validation and won't trigger DB constraint issues
+        if ($request->has('address_id') && ($request->address_id === '' || $request->address_id === 'null' || $request->address_id === '0' || $request->address_id === 0)) {
+            $request->merge(['address_id' => null]);
+        }
+
         $validator = Validator::make($request->all(), [
             'title'         => 'nullable|string|max:255',
             'description'   => 'nullable|string|max:1000',
@@ -49,7 +56,7 @@ class GroceryListController extends Controller
             'street_number' => 'nullable|string|max:100',
             'house'         => 'nullable|string|max:100',
             'floor'         => 'nullable|string|max:50',
-            'images.*'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'images.*'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -59,16 +66,47 @@ class GroceryListController extends Controller
         }
 
         try {
+            $addressId = $request->input('address_id');
+            if (empty($addressId) || $addressId === 'null' || (int)$addressId <= 0) {
+                $addressId = null;
+            } else {
+                $addressId = (int)$addressId;
+            }
+
+            $latitude = $request->input('latitude');
+            $longitude = $request->input('longitude');
+            $address = $request->input('address');
+
+            // If a saved address_id was provided, fallback to saved address details for missing fields
+            if ($addressId && (!$latitude || !$longitude || !$address)) {
+                $savedAddress = DB::table('customer_addresses')->where('id', $addressId)->first();
+                if ($savedAddress) {
+                    $latitude = $latitude ?? $savedAddress->latitude;
+                    $longitude = $longitude ?? $savedAddress->longitude;
+                    $address = $address ?? $savedAddress->address;
+                }
+            }
+
+            // Resolve zone_id from live GPS coordinates if available, otherwise fallback to user's default zone
+            $zoneId = $user->zone_id;
+            if ($latitude && $longitude && is_numeric($latitude) && is_numeric($longitude)) {
+                $point = new Point((float)$latitude, (float)$longitude, POINT_SRID);
+                $zone = Zone::whereContains('coordinates', $point)->first();
+                if ($zone) {
+                    $zoneId = $zone->id;
+                }
+            }
+
             $groceryList = GroceryList::create([
                 'user_id'       => $user->id,
-                'zone_id'       => $user->zone_id,
+                'zone_id'       => $zoneId,
                 'title'         => $request->input('title') ?? 'Grocery List - ' . now()->format('d M Y'),
                 'description'   => $request->input('description'),
                 'status'        => 'processing',
-                'address_id'    => $request->input('address_id'),
-                'latitude'      => $request->input('latitude'),
-                'longitude'     => $request->input('longitude'),
-                'address'       => $request->input('address'),
+                'address_id'    => $addressId,
+                'latitude'      => $latitude,
+                'longitude'     => $longitude,
+                'address'       => $address,
                 'street_number' => $request->input('street_number'),
                 'house'         => $request->input('house'),
                 'floor'         => $request->input('floor'),
@@ -79,6 +117,9 @@ class GroceryListController extends Controller
                 foreach ($request->file('images') as $index => $image) {
                     $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
                     $image->storeAs('public/grocery-list', $imageName);
+                    $orderDir = storage_path('app/public/order');
+                    if (!file_exists($orderDir)) { @mkdir($orderDir, 0777, true); }
+                    @copy(storage_path('app/public/grocery-list/' . $imageName), $orderDir . '/' . $imageName);
                     $fileUrl = asset('public/storage/grocery-list/' . $imageName);
 
                     GroceryImage::create([
@@ -351,6 +392,9 @@ class GroceryListController extends Controller
                     $maxImgSort++;
                     $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
                     $image->storeAs('public/grocery-list', $imageName);
+                    $orderDir = storage_path('app/public/order');
+                    if (!file_exists($orderDir)) { @mkdir($orderDir, 0777, true); }
+                    @copy(storage_path('app/public/grocery-list/' . $imageName), $orderDir . '/' . $imageName);
                     $fileUrl = asset('public/storage/grocery-list/' . $imageName);
 
                     GroceryImage::create([
@@ -963,6 +1007,9 @@ public function confirmPrice(Request $request, $id)
                 $maxImgSort++;
                 $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/grocery-list', $imageName);
+                $orderDir = storage_path('app/public/order');
+                if (!file_exists($orderDir)) { @mkdir($orderDir, 0777, true); }
+                @copy(storage_path('app/public/grocery-list/' . $imageName), $orderDir . '/' . $imageName);
                 $fileUrl = asset('public/storage/grocery-list/' . $imageName);
 
                 GroceryImage::create([

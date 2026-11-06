@@ -101,7 +101,7 @@
                                     </label>
                                     <center class="mt-auto mb-auto">
                                         <img class="initial-24" id="viewer"
-                                        src="{{ asset('public/assets/admin/img/100x100/user.png')}}" alt="Employee thumbnail"/>
+                                        src="{{ asset('assets/admin/img/100x100/user.png')}}" alt="Employee thumbnail"/>
                                     </center>
                                     <div class="form-group mt-3">
                                         <div class="custom-file">

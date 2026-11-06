@@ -65,9 +65,9 @@
                 <div class="text-center pb-4">
                     <h3 class="mb-3 export--template-title">{{ translate('Download_Spreadsheet_Template') }}</h3>
                     <div class="btn--container justify-content-center export--template-btns">
-                        <a href="{{ asset('public/assets/restaurants_bulk_format.xlsx')}}" download=""
+                        <a href="{{ asset('assets/restaurants_bulk_format.xlsx')}}" download=""
                             class="btn btn-dark">{{ translate('Template_with_Existing_Data') }}</a>
-                        <a href="{{ asset('public/assets/restaurants_bulk_format_nodata.xlsx')}}" download=""
+                        <a href="{{ asset('assets/restaurants_bulk_format_nodata.xlsx')}}" download=""
                             class="btn btn-dark">{{ translate('Template_without_Data') }}</a>
                     </div>
                 </div>

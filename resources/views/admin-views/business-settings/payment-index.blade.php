@@ -52,7 +52,7 @@
                                     <span class="line--limit-1">
                                         {{translate('Cash_On_Delivery')}}
                                     </span>
-                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_COD_as_a_payment_method_during_checkout')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_COD_as_a_payment_method_during_checkout')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
                                 </span>
                                 <input class="toggle-switch-input" type="checkbox" id="cash_on_delivery_status" onclick="toogleStatusModal(event,'cash_on_delivery_status','digital-payment-on.png','digital-payment-off.png','{{translate('By_Turning_ON_Cash_On_Delivery_Option')}}','{{translate('By_Turning_OFF_Cash_On_Delivery_Option')}}',`<p>{{translate('Customers_will_not_be_able_to_select_COD_as_a_payment_method_during_checkout._Please_review_your_settings_and_enable_COD_if_you_wish_to_offer_this_payment_option_to_customers.')}}</p>`,`<p>{{translate('Customers_will_be_able_to_select_COD_as_a_payment_method_during_checkout.')}}</p>`)" name="status" value="1" {{$config?($config['status']==1?'checked':''):''}}>
 
@@ -73,7 +73,7 @@
                                     <span class="line--limit-1">
                                         {{translate('digital payment')}}
                                     </span>
-                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_digital_payment_as_a_payment_method_during_checkout')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_digital_payment_as_a_payment_method_during_checkout')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
                                 </span>
                                 <input class="toggle-switch-input" type="checkbox" id="digital_payment_status" onclick="toogleStatusModal(event,'digital_payment_status','digital-payment-on.png','digital-payment-off.png','{{translate('By Turning ON Digital Payment Option')}}','{{translate('By Turning OFF Digital Payment Option')}}',`<p>{{translate('Customers will not be able to select digital payment as a payment method during checkout. Please review your settings and enable digital payment if you wish to offer this payment option to customers.')}}</p>`,`<p>{{translate('Customers will be able to select digital payment as a payment method during checkout.')}}</p>`)" name="status" value="1" {{$digital_payment?($digital_payment['status']==1?'checked':''):''}}>
 
@@ -98,7 +98,7 @@
                                     <span class="line--limit-1">
                                         {{translate('Offline_Payment')}}
                                     </span>
-                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Customers will be able to select Offline_Payment as a payment method during checkout.')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Customers will be able to select Offline_Payment as a payment method during checkout.')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
                                 </span>
                                 <input type="hidden" name="toggle_type" value="offline_payment_status" >
                                 <input class="toggle-switch-input" type="checkbox" id="offline_payment_status" onclick="toogleStatusModal(event,'offline_payment_status','digital-payment-on.png','digital-payment-off.png','{{translate('By_Turning_ON_Offline_Payment_Option')}}','{{translate('By_Turning_OFF_Offline_Payment_Option')}}',`<p>{{translate('Customers_will_be_able_to_select_Offline_Payment_as_a_payment_method_during_checkout')}}</p>`,`<p>{{translate('Customers_will_not_be_able_to_select_Offline_Payment_as_a_payment_method_during_checkout._Please_review_your_settings_and_enable_Offline_Payment_if_you_wish_to_offer_this_payment_option_to_customers.')}}</p>`)" name="status" value="1" {{$Offline_Payment == 1?'checked':''}}>

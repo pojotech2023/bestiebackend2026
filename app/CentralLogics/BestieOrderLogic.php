@@ -214,7 +214,7 @@ class BestieOrderLogic
     private static function notifyDeliveryPerson(GroceryList $groceryList, DeliveryMan $deliveryMan): void
     {
         try {
-            if (!$deliveryMan->fcm_token) {
+            if (false) {
                 return;
             }
 
@@ -224,13 +224,20 @@ class BestieOrderLogic
                 : '';
 
             $data = [
-                'title'       => 'New Bestie Buddy Order!',
-                'description' => 'New grocery order #' . $groceryList->id . ' assigned to you.' . $addressHint,
+                'title'       => 'New Bestie Buddy Request',
+                'description' => 'You have a new Bestie Buddy order request',
                 'order_id'    => $groceryList->id,
                 'image'       => '',
                 'type'        => 'new_order',
                 'order_type'  => 'bestie_buddy',
             ];
+
+            \DB::table('user_notifications')->insert([
+                'data'            => json_encode($data),
+                'delivery_man_id' => $deliveryMan->id,
+                'created_at'      => now(),
+                'updated_at'      => now(),
+            ]);
 
             $response = Helpers::send_push_notif_to_device($deliveryMan->fcm_token, $data);
 

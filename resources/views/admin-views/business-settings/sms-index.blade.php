@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/sms.png')}}" class="w--26" alt="">
+                    <img src="{{ asset('assets/admin/img/sms.png')}}" class="w--26" alt="">
                 </span>
                 <span>
                     {{translate('messages.sms_gateway_setup')}}
@@ -35,7 +35,7 @@
                                 <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
                                     <span>{{translate('messages.twilio_sms')}}</span>
                                     <div class="pl-2">
-                                        <img src="{{ asset('public/assets/admin/img/twilio.png')}}" alt="public" width="38px" height="38px">
+                                        <img src="{{ asset('assets/admin/img/twilio.png')}}" alt="public" width="38px" height="38px">
                                     </div>
                                 </h5>
                                 <span class="badge badge-soft-info mb-3">{{ translate('NB : #OTP# will be replace with otp') }}</span>
@@ -99,7 +99,7 @@
                                 <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
                                     <span>{{translate('messages.nexmo_sms')}}</span>
                                     <div class="pl-2">
-                                        <img src="{{ asset('public/assets/admin/img/nexmo.png')}}" alt="public" width="38px" height="38px">
+                                        <img src="{{ asset('assets/admin/img/nexmo.png')}}" alt="public" width="38px" height="38px">
                                     </div>
                                 </h5>
                                 <span class="badge badge-soft-info mb-3">{{ translate('messages.NB : #OTP# will be replace with otp') }}</span>
@@ -157,7 +157,7 @@
                                 <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
                                     <span>{{translate('messages.2factor_sms')}}</span>
                                     <div class="pl-2">
-                                        <img src="{{ asset('public/assets/admin/img/two_factor.png')}}" alt="public" width="38px" height="38px">
+                                        <img src="{{ asset('assets/admin/img/two_factor.png')}}" alt="public" width="38px" height="38px">
                                     </div>
                                 </h5>
                                 <div>
@@ -207,7 +207,7 @@
                                 <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
                                     <span>{{translate('messages.msg91_sms')}}</span>
                                     <div class="pl-2">
-                                        <img src="{{ asset('public/assets/admin/img/msg91.png')}}" alt="public" width="38px" height="38px">
+                                        <img src="{{ asset('assets/admin/img/msg91.png')}}" alt="public" width="38px" height="38px">
                                     </div>
                                 </h5>
                                 <span class="badge badge-soft-info mb-3">{{ translate('NB : Keep an OTP variable in your SMS providers OTP Template.') }}</span>

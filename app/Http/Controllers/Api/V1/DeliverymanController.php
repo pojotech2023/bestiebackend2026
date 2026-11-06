@@ -39,6 +39,13 @@ class DeliverymanController extends Controller
     public function get_profile(Request $request)
     {
         $dm = DeliveryMan::with(['rating','userinfo','dm_shift'])->where(['auth_token' => $request['token']])->first();
+        if (!$dm) {
+            return response()->json([
+                'errors' => [
+                    ['code' => 'auth-001', 'message' => translate('messages.Unauthorized')]
+                ]
+            ], 401);
+        }
         $min_amount_to_pay_dm = BusinessSetting::where('key' , 'min_amount_to_pay_dm')->first()->value ?? 0;
 
         $dm['avg_rating'] = (double)($dm?->rating[0]?->average ?? 0);
@@ -173,6 +180,9 @@ class DeliverymanController extends Controller
 public function get_current_orders(Request $request)
 {
     $dm = DeliveryMan::where(['auth_token' => $request['token']])->first();
+    if (!$dm) {
+        return response()->json([], 200);
+    }
  
     // ✅ Existing food order logic — touch பண்ணலை
     $orders = Order::with(['customer', 'restaurant'])
@@ -208,6 +218,9 @@ $groceryOrders = GroceryList::with(['items', 'image_records', 'user'])
 public function get_latest_orders(Request $request)
 {
     $dm = DeliveryMan::where(['auth_token' => $request['token']])->first();
+    if (!$dm) {
+        return response()->json([], 200);
+    }
  
     // ✅ Existing food order logic — touch பண்ணலை
     $orders = Order::with(['customer', 'restaurant']);
@@ -551,9 +564,9 @@ public function get_latest_orders(Request $request)
 
     // ✅ Bestie Buddy grocery order check (accepts "BB-130" or plain "130")
     $is_bestie_buddy = str_starts_with($order_id, 'BB-');
-    $grocery_id = $is_bestie_buddy ? str_replace('BB-', '', $order_id) : null;
+    $grocery_id = $is_bestie_buddy ? str_replace('BB-', '', $order_id) : $order_id;
 
-    if ($is_bestie_buddy) {
+    if ($is_bestie_buddy || (is_numeric($grocery_id) && GroceryList::where('id', $grocery_id)->exists())) {
         $grocery = GroceryList::with(['items', 'image_records', 'user'])
             ->where('id', $grocery_id)
             ->where(function ($query) use ($dm) {
@@ -632,6 +645,9 @@ public function get_latest_orders(Request $request)
     }
 
     $dm = DeliveryMan::where(['auth_token' => $request['token']])->first();
+    if (!$dm) {
+        return response()->json(['total_size' => 0, 'limit' => $request['limit'], 'offset' => $request['offset'], 'orders' => []], 200);
+    }
 
     $orders = Order::with(['customer', 'restaurant'])
     ->whereIn('order_status', ['delivered','canceled','refund_requested','refunded','refund_request_canceled','failed'])
@@ -733,21 +749,67 @@ public function get_latest_orders(Request $request)
     }
 
     public function get_notifications(Request $request){
-
-        $dm = DeliveryMan::where(['auth_token' => $request['token']])->first();
-
-        $notifications = Notification::active()->where(function($q) use($dm){
-                $q->whereNull('zone_id')->orWhere('zone_id', $dm->zone_id);
-            })->where('tergat', 'deliveryman')->where('created_at', '>=', \Carbon\Carbon::today()->subDays(7))->get();
-
-        $user_notifications = UserNotification::where('delivery_man_id', $dm->id)->where('created_at', '>=', \Carbon\Carbon::today()->subDays(7))->get();
-
-        $notifications->append('data');
-
-        $notifications =  $notifications->merge($user_notifications);
         try {
-            return response()->json($notifications, 200);
-        } catch (\Exception $e) {
+            $dm = DeliveryMan::where(['auth_token' => $request['token']])->first();
+            if (!$dm) {
+                return response()->json([], 200);
+            }
+
+            $notifications = Notification::active()->where(function($q) use($dm){
+                    $q->whereNull('zone_id')->orWhere('zone_id', $dm->zone_id);
+                })->where('tergat', 'deliveryman')->where('created_at', '>=', \Carbon\Carbon::today()->subDays(7))->get();
+
+            $user_notifications = UserNotification::where('delivery_man_id', $dm->id)->where('created_at', '>=', \Carbon\Carbon::today()->subDays(7))->get();
+
+            $notifications->append('data');
+
+            $formatted = $notifications->merge($user_notifications)
+                ->sortByDesc('created_at')
+                ->values()
+                ->map(function ($item) {
+                    $raw_data = [];
+                    if (is_array($item->data)) {
+                        $raw_data = $item->data;
+                    } elseif (is_string($item->data)) {
+                        $decoded = json_decode($item->data, true);
+                        $raw_data = is_array($decoded) ? $decoded : [];
+                    }
+
+                    $order_id = $raw_data['order_id'] ?? ($item->order_id ?? null);
+                    if (!empty($order_id)) {
+                        $numeric_id = is_numeric($order_id) ? (int)$order_id : (int)preg_replace('/[^0-9]/', '', (string)$order_id);
+                        $order_id = $numeric_id > 0 ? $numeric_id : null;
+                    } else {
+                        $order_id = null;
+                    }
+
+                    $order_type = $raw_data['order_type'] ?? null;
+                    if (!$order_type) {
+                        $title_desc = ($raw_data['title'] ?? '') . ' ' . ($raw_data['description'] ?? '') . ' ' . ($item->title ?? '');
+                        if (stripos($title_desc, 'buddy') !== false) {
+                            $order_type = 'bestie_buddy';
+                        } else {
+                            $order_type = 'delivery';
+                        }
+                    }
+
+                    $dataObject = [
+                        'title'       => (string)($raw_data['title'] ?? ($item->title ?? '')),
+                        'description' => (string)($raw_data['description'] ?? ($item->description ?? '')),
+                        'order_id'    => $order_id,
+                        'order_type'  => (string)$order_type,
+                        'type'        => (string)($raw_data['type'] ?? 'order_status'),
+                        'image'       => $raw_data['image'] ?? ($item->image ?? null),
+                    ];
+
+                    $itemArray = $item->toArray();
+                    $itemArray['data'] = $dataObject;
+                    return $itemArray;
+                });
+
+            return response()->json($formatted, 200);
+        } catch (\Throwable $e) {
+            info('Deliveryman get_notifications error: ' . $e->getMessage());
             return response()->json([], 200);
         }
     }
@@ -784,11 +846,16 @@ public function get_latest_orders(Request $request)
     }
 
     public function dm_shift(Request $request){
-        $shift= Shift::where('status',1)
-            ->latest()
-            ->get();
-            return response()->json($shift, 200);
+        try {
+            $shift = Shift::where('status', 1)
+                ->latest()
+                ->get();
+            return response()->json($shift ?? [], 200);
+        } catch (\Throwable $e) {
+            info('dm_shift error: ' . $e->getMessage());
+            return response()->json([], 200);
         }
+    }
     // public function assign_vehicle(Request $request){
     //     $validator = Validator::make($request->all(), [
     //         'vehicle_id' => 'required',
@@ -1207,8 +1274,47 @@ public function get_latest_orders(Request $request)
         return response()->json($data, 200);
     }
     
+private function sanitizeOrderImage(?string $imageName): ?string
+{
+    if (empty($imageName)) {
+        return null;
+    }
+    $trimmed = trim($imageName);
+    if (in_array(strtolower($trimmed), ['def.png', 'default.png', 'null', 'undefined', 'none', '""', "''", '[]', '{}'])) {
+        return null;
+    }
+    $base = basename($trimmed);
+    if (in_array(strtolower($base), ['def.png', 'default.png', 'null', 'undefined', 'none', ''])) {
+        return null;
+    }
+
+    // Ensure the image file is accessible at storage/app/public/order/
+    // Flutter Rider App loads via order_attachment_url which points to https://bestie.co.in/storage/order/{filename}
+    $orderPath = storage_path('app/public/order/' . $base);
+    $groceryPath = storage_path('app/public/grocery-list/' . $base);
+
+    if (file_exists($groceryPath) && !file_exists($orderPath)) {
+        $orderDir = storage_path('app/public/order');
+        if (!file_exists($orderDir)) {
+            @mkdir($orderDir, 0777, true);
+        }
+        @copy($groceryPath, $orderPath);
+    }
+
+    return $base;
+}
+
 private function formatGroceryAsOrder(GroceryList $grocery): array
 {
+    $imageName = null;
+    if (!empty($grocery->images) && is_array($grocery->images) && count($grocery->images) > 0) {
+        $imageName = basename($grocery->images[0]);
+    } elseif ($grocery->relationLoaded('image_records') && $grocery->image_records && $grocery->image_records->count() > 0) {
+        $firstRec = $grocery->image_records->first();
+        $imageName = basename($firstRec->file_path ?? $firstRec->original_name ?? '');
+    }
+    $imageName = $this->sanitizeOrderImage($imageName);
+
     return [
         // Frontend order list-ல் conflict ஆகாம இருக்க 'BB-' prefix
         'id'                => 'BB-' . $grocery->id,
@@ -1228,8 +1334,12 @@ private function formatGroceryAsOrder(GroceryList $grocery): array
         'is_price_confirmed' => (bool) ($grocery->is_price_confirmed ?? false),
  
         // Items summary
-        'items_count'       => $grocery->items->count(),
+        'items_count'       => $grocery->items ? $grocery->items->count() : 0,
         'title'             => $grocery->title ?? 'Bestie Buddy Order',
+ 
+        // Order image (Bestie Buddy list photo for mobile app)
+        'order_image'       => $imageName,
+        'image'             => $imageName,
  
         // Delivery address
         'delivery_address'  => $grocery->address,
@@ -1267,6 +1377,8 @@ private function formatGroceryOrderDetails(GroceryList $grocery): array
         'gst_amount'        => (float) ($grocery->gst_amount ?? 0),
         'total_amount'      => (float) ($grocery->total_amount ?? 0),
         'is_price_confirmed'=> (bool) ($grocery->is_price_confirmed ?? false),
+        'order_image'       => $this->sanitizeOrderImage((!empty($grocery->images) && is_array($grocery->images) && count($grocery->images) > 0) ? basename($grocery->images[0]) : ($grocery->image_records->first() ? basename($grocery->image_records->first()->file_path) : null)),
+        'image'             => $this->sanitizeOrderImage((!empty($grocery->images) && is_array($grocery->images) && count($grocery->images) > 0) ? basename($grocery->images[0]) : ($grocery->image_records->first() ? basename($grocery->image_records->first()->file_path) : null)),
         'items' => $grocery->items->map(function ($item) {
             return [
                 'id'       => $item->id,

@@ -23,7 +23,7 @@
                     <label class="label_1">{{ translate('messages.orders') }} : {{$item['count']}}</label>
                     <center class="mt-6">
                         <img class="initial-41"
-                             onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                             onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                              src="{{asset('storage/app/public/profile/'.$item->customer->image??'')}}">
                     </center>
                     <div class="text-center mt-2">

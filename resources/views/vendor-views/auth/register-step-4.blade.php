@@ -1,7 +1,7 @@
 @extends('layouts.landing.app')
 @section('title', translate('messages.restaurant_registration'))
 @push('css_or_js')
-<link rel="stylesheet" href="{{ asset('public/assets/landing') }}/css/style.css" />
+<link rel="stylesheet" href="{{ asset('assets/landing') }}/css/style.css" />
 @endpush
 @section('content')
 <!-- Page Header Gap -->
@@ -32,7 +32,7 @@
         <div class="card __card">
             <div class="card-body">
                 <div class="succeed--status">
-                    <img class="img" onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png') }}'" src="{{ asset('storage/app/public/restaurant') }}/{{ $logo }}">
+                    <img class="img" onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png') }}'" src="{{ asset('storage/app/public/restaurant') }}/{{ $logo }}">
                     <h4 class="title">{{ translate('Congratulations!') }}</h4>
                     <h6 class="subtitle">
                         {{ translate('messages.Your_registration_has_been_completed_successfully.') }}

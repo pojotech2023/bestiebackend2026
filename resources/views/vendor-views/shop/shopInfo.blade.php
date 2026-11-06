@@ -21,10 +21,10 @@
                 <section class="shop-details-banner">
                     <div class="card">
                         <div class="card-body px-0 pt-0">
-                            <img src="{{asset('storage/app/public/restaurant/cover/'.$shop->cover_photo)}}"  onerror="this.src='{{ asset('public/assets/admin/img/900x400/img1.jpg')}}'"class="shop-details-banner-img" alt="">
+                            <img src="{{asset('storage/app/public/restaurant/cover/'.$shop->cover_photo)}}"  onerror="this.src='{{ asset('assets/admin/img/900x400/img1.jpg')}}'"class="shop-details-banner-img" alt="">
                             <div class="shop-details-banner-content">
                                 <div class="shop-details-banner-content-thumbnail">
-                                    <img src="{{asset('storage/app/public/restaurant/'.$shop->logo)}}"  onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'" class="thumbnail" alt="">
+                                    <img src="{{asset('storage/app/public/restaurant/'.$shop->logo)}}"  onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'" class="thumbnail" alt="">
                                     <h3 class="mt-4 pt-3 mb-4 d-sm-none">{{$shop->name}}</h3>
                                 </div>
                                 <div class="shop-details-banner-content-content">

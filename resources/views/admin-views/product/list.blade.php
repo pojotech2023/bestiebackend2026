@@ -103,13 +103,13 @@
                                     <span class="dropdown-header">{{ translate('messages.download_options') }}</span>
                                     <a id="export-excel" class="dropdown-item" href="{{ route('admin.food.export', ['type' => 'excel', request()->getQueryString()]) }}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                            src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                             alt="Image Description">
                                         {{ translate('messages.excel') }}
                                     </a>
                                     <a id="export-csv" class="dropdown-item" href="{{ route('admin.food.export', ['type' => 'csv', request()->getQueryString()]) }}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                            src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
                                         .{{ translate('messages.csv') }}
                                     </a>
@@ -278,7 +278,7 @@
                                                 href="{{ route('admin.food.view', [$food['id']]) }}">
                                                 <img class="avatar avatar-lg mr-3"
                                                     src="{{ asset('storage/app/public/product') }}/{{ $food['image'] }}"
-                                                    onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png') }}'"
+                                                    onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png') }}'"
                                                     alt="{{ $food->name }} image">
                                                 <div class="media-body">
                                                     <h5 class="text-hover-primary mb-0">
@@ -378,7 +378,7 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="w-7rem mb-3" src="{{ asset('public/assets/admin/svg/illustrations/sorry.svg') }}" alt="Image Description">' +
+                        '<img class="w-7rem mb-3" src="{{ asset('assets/admin/svg/illustrations/sorry.svg') }}" alt="Image Description">' +
                         '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
                         '</div>'
                 }

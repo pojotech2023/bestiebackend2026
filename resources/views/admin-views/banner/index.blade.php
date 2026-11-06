@@ -131,7 +131,7 @@
                                         <div class="form-group mt-auto">
                                             <center>
                                                 <img class="initial-2" id="viewer"
-                                                    src="{{ asset('public/assets/admin/img/900x400/img1.jpg')}}" alt="campaign image"/>
+                                                    src="{{ asset('assets/admin/img/900x400/img1.jpg')}}" alt="campaign image"/>
                                             </center>
                                         </div>
                                         <div class="form-group mt-auto">
@@ -200,7 +200,7 @@
                                     <td>
                                         <span class="media align-items-center">
                                             <img class="avatar avatar-lg mr-3 avatar--3-1" src="{{asset('storage/app/public/banner')}}/{{$banner['image']}}"
-                                                 onerror="this.src='{{ asset('public/assets/admin/img/900x400/img1.jpg')}}'" alt="{{$banner->name}} image">
+                                                 onerror="this.src='{{ asset('assets/admin/img/900x400/img1.jpg')}}'" alt="{{$banner->name}} image">
                                             <div class="media-body">
                                                 <h5 class="text-hover-primary mb-0">{{Str::limit($banner['title'], 25, '...')}}</h5>
                                             </div>
@@ -350,7 +350,7 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                    '<img class="w-7rem mb-3" src="{{ asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                    '<img class="w-7rem mb-3" src="{{ asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
                     '<p class="mb-0">{{ translate('messages.No_data_to_show') }}</p>' +
                     '</div>'
                 }
@@ -464,7 +464,7 @@
         $('#reset_btn').click(function(){
             $('#zone').val(null).trigger('change');
             $('#choice_item').val(null).trigger('change');
-            $('#viewer').attr('src','{{ asset('public/assets/admin/img/900x400/img1.jpg')}}');
+            $('#viewer').attr('src','{{ asset('assets/admin/img/900x400/img1.jpg')}}');
         })
     </script>
                 <script>

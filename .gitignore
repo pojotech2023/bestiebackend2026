@@ -13,3 +13,4 @@ npm-debug.log
 yarn-error.log
 error_log
 app/CentralLogics/*firebase-adminsdk*.json
+storage/app/*firebase-adminsdk*.json

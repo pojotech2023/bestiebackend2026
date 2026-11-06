@@ -13,7 +13,7 @@
             @endif
             <!-- Product gallery-->
             <div class="d-flex align-items-center justify-content-center active h-9rem">
-                <img class="img-responsive mr-3 img--100" src="{{asset('storage/app/public/product')}}/{{$product['image']}}"  onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg')}}'"
+                <img class="img-responsive mr-3 img--100" src="{{asset('storage/app/public/product')}}/{{$product['image']}}"  onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg')}}'"
                         data-zoom="{{asset('storage/app/public/product')}}/{{$product['image']}}"
                         alt="Product image">
                 <div class="cz-image-zoom-pane"></div>

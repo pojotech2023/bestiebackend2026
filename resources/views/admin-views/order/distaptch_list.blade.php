@@ -52,13 +52,13 @@
                                 <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                                 <a id="export-excel" class="dropdown-item" href="{{route("admin.order.export",['status'=>$status,'type'=>'excel' , request()->getQueryString() ])}}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                            src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                             alt="Image Description">
                                     {{translate('messages.excel')}}
                                 </a>
                                 <a id="export-csv" class="dropdown-item" href="{{route("admin.order.export",['status'=>$status,'type'=>'csv' , request()->getQueryString() ])}}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                            src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
                                     {{translate('messages.csv')}}
                                 </a>
@@ -492,7 +492,7 @@
 @endsection
 
 @push('script_2')
-    <!-- <script src="{{ asset('public/assets/admin')}}/js/bootstrap-select.min.js"></script> -->
+    <!-- <script src="{{ asset('assets/admin')}}/js/bootstrap-select.min.js"></script> -->
     <script>
         <?php
             $filter_count=0;
@@ -599,7 +599,7 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3 w-7rem" src="{{ asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                        '<img class="mb-3 w-7rem" src="{{ asset('assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
                         '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
                         '</div>'
                 }

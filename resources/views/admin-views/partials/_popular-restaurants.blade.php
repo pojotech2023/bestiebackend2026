@@ -21,7 +21,7 @@
         @foreach ($popular as $key => $item)
             <li onclick="location.href='{{ route('admin.restaurant.view', $item->restaurant_id) }}'" class="cursor-pointer">
                 <div class="img-container">
-                    <img onerror="this.src='{{ asset('public/assets/admin/img/100x100/1.png') }}'"
+                    <img onerror="this.src='{{ asset('assets/admin/img/100x100/1.png') }}'"
                         src="{{ asset('storage/app/public/restaurant') }}/{{ $item->restaurant['logo'] }}">
                     <span class="ml-2">
                         {{ Str::limit($item->restaurant->name ?? translate('messages.Restaurant_deleted!'), 20, '...') }} </span>

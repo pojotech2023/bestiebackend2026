@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/report/report.png')}}" class="w--22" alt="">
+                    <img src="{{ asset('assets/admin/img/report/report.png')}}" class="w--22" alt="">
                 </span>
                 <span>
                     {{ translate('messages.Camapign_Order_Report') }}
@@ -94,7 +94,7 @@
             <div class="row g-4">
                 <div class="col-lg-3">
                     <a class="__card-1 h-100" href="#">
-                        <img src="{{ asset('public/assets/admin/img/report/new/total.png')}}" class="icon" alt="report/new">
+                        <img src="{{ asset('assets/admin/img/report/new/total.png')}}" class="icon" alt="report/new">
                         <h3 class="title">{{$total_orders}}</h3>
                         <h6 class="subtitle">{{translate('messages.total_orders')}}</h6>
                     </a>
@@ -104,43 +104,43 @@
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-1" href="#">
                             <h4 class="title">{{$total_progress_count}}</h4>
-                            <span class="subtitle">{{translate('messages.in_progress_orders')}} <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Including accepted and processing orders')}}"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="{{translate('messages.in_progress_orders')}}"></span></span>
-                            <img src="{{ asset('public/assets/admin/img/report/new/progress-report.png')}}" alt="report/new" class="card-icon">
+                            <span class="subtitle">{{translate('messages.in_progress_orders')}} <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Including accepted and processing orders')}}"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="{{translate('messages.in_progress_orders')}}"></span></span>
+                            <img src="{{ asset('assets/admin/img/report/new/progress-report.png')}}" alt="report/new" class="card-icon">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-2" href="#">
                             <h4 class="title">{{$total_on_the_way_count}}</h4>
                             <span class="subtitle">{{translate('messages.on_the_way')}}</span>
-                            <img src="{{ asset('public/assets/admin/img/report/new/on-the-way.png')}}" alt="report/new" class="card-icon">
+                            <img src="{{ asset('assets/admin/img/report/new/on-the-way.png')}}" alt="report/new" class="card-icon">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-3" href="#">
                             <h4 class="title">{{$total_delivered_count}}</h4>
                             <span class="subtitle">{{ translate('Delivered_Orders') }}</span>
-                            <img src="{{ asset('public/assets/admin/img/report/new/delivered.png')}}" alt="report/new" class="card-icon">
+                            <img src="{{ asset('assets/admin/img/report/new/delivered.png')}}" alt="report/new" class="card-icon">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-4" href="#">
                             <h4 class="title">{{$total_failed_count}}</h4>
                             <span class="subtitle">{{translate('messages.failed_orders')}}</span>
-                            <img src="{{ asset('public/assets/admin/img/report/new/failed.png')}}" alt="report/new" class="card-icon">
+                            <img src="{{ asset('assets/admin/img/report/new/failed.png')}}" alt="report/new" class="card-icon">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-5" href="#">
                             <h4 class="title">{{$total_refunded_count}}</h4>
                             <span class="subtitle">{{translate('messages.refunded_orders')}}</span>
-                            <img src="{{ asset('public/assets/admin/img/report/new/refunded.png')}}" alt="report/new" class="card-icon">
+                            <img src="{{ asset('assets/admin/img/report/new/refunded.png')}}" alt="report/new" class="card-icon">
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-6" href="#">
                             <h4 class="title">{{$total_canceled_count}}</h4>
                             <span class="subtitle">{{translate('messages.canceled_orders')}}</span>
-                            <img src="{{ asset('public/assets/admin/img/report/new/canceled.png')}}" alt="report/new" class="card-icon">
+                            <img src="{{ asset('assets/admin/img/report/new/canceled.png')}}" alt="report/new" class="card-icon">
                             </a>
                         </div>
                     </div>
@@ -186,14 +186,14 @@
                             <a id="export-excel" class="dropdown-item"
                                 href="{{ route('vendor.report.campaign_report_export', ['type' => 'excel', request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                    src="{{ asset('public/assets/admin/svg/components/excel.svg') }}"
+                                    src="{{ asset('assets/admin/svg/components/excel.svg') }}"
                                     alt="Image Description">
                                 {{ translate('messages.excel') }}
                             </a>
                             <a id="export-csv" class="dropdown-item"
                                 href="{{ route('vendor.report.campaign_report_export', ['type' => 'csv', request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                    src="{{ asset('public/assets/admin/svg/components/placeholder-csv-format.svg') }}"
+                                    src="{{ asset('assets/admin/svg/components/placeholder-csv-format.svg') }}"
                                     alt="Image Description">
                                 {{ translate('messages.csv') }}
                             </a>

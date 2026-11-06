@@ -1,7 +1,7 @@
 @extends('layouts.landing.app')
 @section('title', translate('messages.restaurant_registration'))
 @push('css_or_js')
-<link rel="stylesheet" href="{{ asset('public/assets/landing') }}/css/style.css" />
+<link rel="stylesheet" href="{{ asset('assets/landing') }}/css/style.css" />
 @endpush
 @section('content')
 <!-- Page Header Gap -->
@@ -44,7 +44,7 @@
                     @php($login_data = App\Models\DataSetting::where('key', 'restaurant_login_url')->pluck('value')->first())
 
                     @if (request()?->flag == 'success' || request()?->type == "new_join?flag=success")
-                    <img class="img" onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png') }}'" src="{{ asset('public/assets/admin/img/gif/success.gif') }}">
+                    <img class="img" onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png') }}'" src="{{ asset('assets/admin/img/gif/success.gif') }}">
                         <h4 class="title">{{ translate('Congratulations!') }}</h4>
                         <h5 class="subtitle">
                             {{ translate('messages.Your_Payment_is_Successfull.') }}
@@ -61,7 +61,7 @@
                             @endif
                         </div>
                     @else
-                    <img class="img" onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png') }}'" src="{{ asset('public/assets/admin/img/gif/error.gif') }}">
+                    <img class="img" onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png') }}'" src="{{ asset('assets/admin/img/gif/error.gif') }}">
                         <div>
                             <h4 class="title">{{ translate('Payment_error_!') }}</h4>
                             <h5 class="subtitle">{{ translate('Due_to_payment_transaction_error_your_registration_could_not_complete.') }}</h5>

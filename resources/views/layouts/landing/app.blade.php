@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{asset('/assets/landing/assets_new/css/all.min.css')}}" />
     <link rel="stylesheet" href="{{asset('/assets/landing/assets_new/css/owl.min.css')}}" />
     <link rel="stylesheet" href="{{asset('/assets/landing/assets_new/css/main.css')}}" />
-    <link rel="stylesheet" href="{{ asset('public/assets/admin') }}/css/toastr.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin') }}/css/toastr.css">
     @php($icon = \App\CentralLogics\Helpers::get_settings('icon'))
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/app/public/business/'. $icon ?? '') }}">
 

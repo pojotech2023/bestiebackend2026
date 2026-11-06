@@ -136,18 +136,18 @@
                         if ($order->transaction) {
                             $admin_commission_value = $order->transaction->admin_commission;
                         } else {
-                            if ($logic == 'old') {
+                            if ($order->total_commission_amount > 0 || $logic == 'new') {
+                                $admin_commission_value = $order->total_commission_amount;
+                            } else {
                                 $commission_pct = 0;
                                 if ($restaurant) {
                                     $commission_pct = $restaurant->comission ?? \App\Models\BusinessSetting::where('key','admin_commission')->first()?->value ?? 0;
                                 }
                                 $food_base = $order['order_amount'] - $order['additional_charge'] - $order['delivery_charge'] - $order['total_tax_amount'] - $order['dm_tips'] + $order['coupon_discount_amount'] + $order['restaurant_discount_amount'];
                                 $admin_commission_value = ($food_base * $commission_pct) / 100;
-                            } else {
-                                $admin_commission_value = $order->total_commission_amount;
                             }
                         }
-                        $commission_type = $logic == 'old' ? translate('Food Commission') : translate('Admin Charge');
+                        $commission_type = ($order->total_commission_amount > 0 || $logic == 'new') ? translate('Admin Charge') : translate('Food Commission');
                     @endphp
                     {{ \App\CentralLogics\Helpers::format_currency($admin_commission_value) }}
                 </td>

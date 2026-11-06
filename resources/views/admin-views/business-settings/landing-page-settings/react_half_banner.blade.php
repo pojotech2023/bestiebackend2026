@@ -2,7 +2,7 @@
 @section('title', translate('messages.landing_page_settings'))
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="content container-fluid">
@@ -95,7 +95,7 @@
                                         {{ translate('messages.size') }}: {{ translate('140 X 140 px') }} )</small></label>
                                 <center id="image-viewer-section" class="pt-2 mt-auto mb-auto">
                                     <img class="initial-5" id="viewer"
-                                        src="{{ asset('public/assets/admin/img/400x400/img2.jpg') }}" alt="Image" />
+                                        src="{{ asset('assets/admin/img/400x400/img2.jpg') }}" alt="Image" />
                                 </center>
                                 <div class="custom-file mt-2">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
@@ -134,7 +134,7 @@
                                             <div class="media align-items-center">
                                                 <img class="avatar avatar-lg mr-3"
                                                     src="{{asset("storage/app/public/react_landing/{$feature_item['img']}") }}"
-                                                    onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
+                                                    onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'"
                                                     alt="{{ $feature_item['title'] }}">
                                             </div>
                                         </td>
@@ -195,7 +195,7 @@
         $(document).on('ready', function() {});
 
         $('#reset_btn').click(function(){
-            $('#viewer').attr('src','{{ asset('public/assets/admin/img/100x100/user.png')}}');
+            $('#viewer').attr('src','{{ asset('assets/admin/img/100x100/user.png')}}');
         })
     </script>
 @endpush

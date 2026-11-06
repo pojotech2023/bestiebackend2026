@@ -24,6 +24,11 @@ class RestaurantController extends Controller
             ], 403);
         }
 
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
+
         $additional_data=[
             'zone_id'=> json_decode($request->header('zoneId'), true),
             'filter'=> $request->query('filter_data') ?? 'all',
@@ -31,8 +36,8 @@ class RestaurantController extends Controller
             'offset' =>$request['offset'] ?? 1,
             'type' =>$request->query('type', 'all') ?? 'all',
             'name' =>$request->query('name') ?? null,
-            'longitude' =>$request->header('longitude') ?? 0,
-            'latitude' => $request->header('latitude') ?? 0,
+            'longitude' =>$longitude,
+            'latitude' => $latitude,
             'cuisine' => $request->query('cuisine', 'all') ?? 'all',
             'veg' =>$request->veg ?? null,
             'non_veg' =>$request->non_veg ?? null,
@@ -64,9 +69,11 @@ class RestaurantController extends Controller
         }
 
         $type = $request->query('type', 'all');
-        $longitude= $request->header('longitude');
-        $latitude= $request->header('latitude');
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
+        $zone_id = json_decode($request->header('zoneId'), true);
         $restaurants = RestaurantLogic::get_latest_restaurants(zone_id:$zone_id, limit:$request['limit'], offset:$request['offset'], type:$type ,longitude:$longitude,latitude:$latitude,veg:$request->veg ,non_veg:$request->non_veg, discount:$request->discount,top_rated: $request->top_rated);
         $restaurants['restaurants'] = Helpers::restaurant_data_formatting(data:$restaurants['restaurants'],multi_data: true );
 
@@ -82,10 +89,15 @@ class RestaurantController extends Controller
                 'errors' => $errors
             ], 403);
         }
-        $longitude= $request->header('longitude');
-        $latitude= $request->header('latitude');
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
         $type = $request->query('type', 'all');
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $zone_id = json_decode($request->header('zoneId'), true);
+        if (!is_array($zone_id)) {
+            $zone_id = is_numeric($request->header('zoneId')) ? [(int)$request->header('zoneId')] : [];
+        }
         $restaurants = RestaurantLogic::get_popular_restaurants(zone_id:$zone_id,limit: $request['limit'], offset:$request['offset'],type: $type,longitude:$longitude,latitude:$latitude,veg:$request->veg ,non_veg:$request->non_veg, discount:$request->discount,top_rated: $request->top_rated);
         $restaurants['restaurants'] = Helpers::restaurant_data_formatting(data:$restaurants['restaurants'], multi_data:true);
         return response()->json($restaurants['restaurants'], 200);
@@ -101,10 +113,12 @@ class RestaurantController extends Controller
                 'errors' => $errors
             ], 403);
         }
-        $longitude= $request->header('longitude');
-        $latitude= $request->header('latitude');
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
         $type = $request->query('type', 'all');
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $zone_id = json_decode($request->header('zoneId'), true);
         $restaurants = RestaurantLogic::recently_viewed_restaurants_data(zone_id:$zone_id, limit:$request['limit'], offset:$request['offset'],type: $type,longitude:$longitude,latitude:$latitude);
         $restaurants['restaurants'] = Helpers::restaurant_data_formatting(data:$restaurants['restaurants'], multi_data:true);
 
@@ -126,10 +140,12 @@ class RestaurantController extends Controller
             $restaurant = Helpers::restaurant_data_formatting(data: $restaurant);
             $restaurant['category_ids'] = array_map('intval', $category_ids->pluck('categories')->toArray());
 
-            if(auth('api')->user() !== null){
-                $customer_id =auth('api')->user()->id;
-                Helpers::visitor_log(model:'restaurant',user_id:$customer_id,visitor_log_id:$restaurant->id,order_count:false);
-            }
+            try {
+                if(auth('api')->user() !== null){
+                    $customer_id = auth('api')->user()->id;
+                    Helpers::visitor_log(model:'restaurant',user_id:$customer_id,visitor_log_id:$restaurant->id,order_count:false);
+                }
+            } catch (\Throwable $e) {}
         }
 
         return response()->json($restaurant, 200);
@@ -153,9 +169,11 @@ class RestaurantController extends Controller
         }
 
         $type = $request->query('type', 'all');
-        $longitude= $request->header('longitude');
-        $latitude= $request->header('latitude');
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
+        $zone_id = json_decode($request->header('zoneId'), true);
         $restaurants = RestaurantLogic::search_restaurants(name:$request['name'], zone_id:$zone_id, category_id:$request->category_id,limit:$request['limit'], offset:$request['offset'],type: $type,longitude:$longitude,latitude:$latitude ,popular: $request->popular ,new: $request->new ,rating: $request->rating,discounted: $request->discounted ,sort_by: $request->sort_by );
         $restaurants['restaurants'] = Helpers::restaurant_data_formatting( data: $restaurants['restaurants'],multi_data: true);
         return response()->json($restaurants, 200);
@@ -242,10 +260,12 @@ class RestaurantController extends Controller
             ], 403);
         }
 
-        $longitude= $request->header('longitude') ?? 0;
-        $latitude= $request->header('latitude') ?? 0;
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
         // $user_id = $request->user ? $request->user->id : $request['guest_id'];
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $zone_id = json_decode($request->header('zoneId'), true);
         $data = Restaurant::withOpen($longitude,$latitude)
 
         ->withcount('foods')
@@ -275,11 +295,13 @@ class RestaurantController extends Controller
             ], 403);
         }
 
-        $longitude= $request->header('longitude') ?? 0;
-        $latitude= $request->header('latitude') ?? 0;
+        $longitude = $request->header('longitude');
+        $latitude = $request->header('latitude');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? $longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? $latitude : 0;
         $user_id = $request->user ? $request->user->id : $request['guest_id'];
         // dd($user_id);
-        $zone_id= json_decode($request->header('zoneId'), true);
+        $zone_id = json_decode($request->header('zoneId'), true);
         $data = Restaurant::withOpen($longitude,$latitude)
         ->wherehas('users', function($q) use($user_id) {
             $q->where('user_id',$user_id);

@@ -205,14 +205,14 @@
                                         <a id="export-excel" class="dropdown-item"
                                             href="{{ route('admin.report.food-wise-report-export', ['export_type' => 'excel', request()->getQueryString()]) }}">
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin') }}/svg/components/excel.svg"
+                                                src="{{ asset('assets/admin') }}/svg/components/excel.svg"
                                                 alt="Image Description">
                                             {{ translate('messages.excel') }}
                                         </a>
                                         <a id="export-csv" class="dropdown-item"
                                             href="{{ route('admin.report.food-wise-report-export', ['export_type' => 'csv', request()->getQueryString()]) }}">
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                                src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                                 alt="Image Description">
                                             {{ translate('messages.csv') }}
                                         </a>
@@ -270,7 +270,7 @@
                                                     href="{{ route('admin.food.view', [$food['id']]) }}">
                                                     <img class="avatar avatar-lg mr-3"
                                                         src="{{ asset('storage/app/public/product') }}/{{ $food['image'] }}"
-                                                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
+                                                        onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'"
                                                         alt="{{ $food->name }} image">
                                                     <div class="media-body">
                                                         <h5 class="text-hover-primary mb-0">{{ Str::limit($food['name'], 20, '...') }}</h5>
@@ -335,10 +335,10 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('public/assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('public/assets/admin') }}/vendor/chart.js.extensions/chartjs-extensions.js"></script>
+    <script src="{{ asset('assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{ asset('assets/admin') }}/vendor/chart.js.extensions/chartjs-extensions.js"></script>
     <script
-        src="{{ asset('public/assets/admin') }}/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js">
+        src="{{ asset('assets/admin') }}/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js">
     </script>
 @endpush
 

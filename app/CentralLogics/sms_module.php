@@ -97,9 +97,51 @@ class SMS_module
         $response = 'error';
         if (isset($config) && $config['status'] == 1) {
             $api_key = $config['api_key'];
+            $clean_receiver = str_replace(['+', ' ', '-'], '', trim($receiver));
+
+            $sender_id = $config['sender_id'] ?? $config['from'] ?? null;
+            $template_name = $config['otp_template'] ?? $config['template_name'] ?? null;
+
+            // 1. If Sender ID and TemplateName are configured, attempt Transactional SMS (TSMS) API first
+            if ($sender_id && $template_name) {
+                $tsms_url = "https://2factor.in/API/V1/" . $api_key . "/ADDON_SERVICES/SEND/TSMS";
+                $post_data = [
+                    'From' => $sender_id,
+                    'To' => $clean_receiver,
+                    'TemplateName' => $template_name,
+                    'VAR1' => $otp
+                ];
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => $tsms_url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => http_build_query($post_data),
+                ));
+                $res_tsms = curl_exec($curl);
+                curl_close($curl);
+                if ($res_tsms) {
+                    $res_tsms_data = json_decode($res_tsms, true);
+                    if (isset($res_tsms_data['Status']) && strtolower($res_tsms_data['Status']) == 'success') {
+                        return 'success';
+                    }
+                }
+            }
+
+            // 2. Standard 2Factor OTP API URL
+            if ($template_name) {
+                $url = "https://2factor.in/API/V1/" . $api_key . "/SMS/" . $clean_receiver . "/" . $otp . "/" . urlencode($template_name);
+            } else {
+                $url = "https://2factor.in/API/V1/" . $api_key . "/SMS/" . $clean_receiver . "/" . $otp;
+            }
+
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://2factor.in/API/V1/" . $api_key . "/SMS/" . $receiver . "/" . $otp . "",
+                CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
@@ -107,14 +149,20 @@ class SMS_module
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "GET",
             ));
-            $response = curl_exec($curl);
+            $res = curl_exec($curl);
             $err = curl_error($curl);
             curl_close($curl);
 
-            if (!$err) {
-                $response = 'success';
+            if (!$err && $res) {
+                $res_data = json_decode($res, true);
+                if (isset($res_data['Status']) && strtolower($res_data['Status']) == 'success') {
+                    return 'success';
+                }
+                info("2Factor API Error Response: " . $res);
+                return 'error';
             } else {
-                $response = 'error';
+                info("2Factor cURL Error: " . $err);
+                return 'error';
             }
         }
         return $response;

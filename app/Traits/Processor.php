@@ -74,7 +74,19 @@ trait  Processor
         if (!Storage::disk('public')->exists($dir)) {
             Storage::disk('public')->makeDirectory($dir);
         }
-        Storage::disk('public')->put($dir . $imageName, file_get_contents($image));
+        try {
+            $imageFormats = ['png', 'jpg', 'jpeg', 'webp', 'gif'];
+            if (in_array(strtolower($format), $imageFormats) && class_exists('\Intervention\Image\Facades\Image')) {
+                $img = \Intervention\Image\Facades\Image::make($image);
+                // Encodes image ensuring standard sRGB color profile (GD automatically decodes CMYK to truecolor RGB)
+                $encoded = (string) $img->encode($format, 90);
+                Storage::disk('public')->put($dir . $imageName, $encoded);
+            } else {
+                Storage::disk('public')->put($dir . $imageName, file_get_contents($image));
+            }
+        } catch (\Throwable $e) {
+            Storage::disk('public')->put($dir . $imageName, file_get_contents($image));
+        }
 
         return $imageName;
     }

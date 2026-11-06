@@ -184,13 +184,13 @@
                                     <a id="export-excel" class="dropdown-item"
                                         href="{{ route('admin.report.restaurant-wise-report-export', ['export_type' => 'excel', request()->getQueryString()]) }}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin') }}/svg/components/excel.svg" alt="Image Description">
+                                            src="{{ asset('assets/admin') }}/svg/components/excel.svg" alt="Image Description">
                                         {{ translate('messages.excel') }}
                                     </a>
                                     <a id="export-csv" class="dropdown-item"
                                         href="{{ route('admin.report.restaurant-wise-report-export', ['export_type' => 'csv', request()->getQueryString()]) }}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                            src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
+                                            src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
                                         {{ translate('messages.csv') }}
                                     </a>
@@ -245,7 +245,7 @@
                                             <td>
                                                 <a href="{{ route('admin.restaurant.view', $restaurant->id) }}" alt="view restaurant"
                                                     class="table-rest-info">
-                                                    <img onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png') }}'"
+                                                    <img onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png') }}'"
                                                         src="{{ asset('storage/app/public/restaurant') }}/{{ $restaurant['logo'] }}">
                                                     <div class="info">
                                                         <span class="d-block text-body">
@@ -322,10 +322,10 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('public/assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('public/assets/admin') }}/vendor/chart.js.extensions/chartjs-extensions.js"></script>
+    <script src="{{ asset('assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{ asset('assets/admin') }}/vendor/chart.js.extensions/chartjs-extensions.js"></script>
     <script
-        src="{{ asset('public/assets/admin') }}/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js">
+        src="{{ asset('assets/admin') }}/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js">
     </script>
 @endpush
 

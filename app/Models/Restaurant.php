@@ -233,9 +233,14 @@ class Restaurant extends Model
         return $query->where('active', 1);
     }
 
-    public function scopeWithOpen($query,$longitude,$latitude)
+    public function scopeWithOpen($query, $longitude = 0, $latitude = 0)
     {
-        $query->selectRaw('*, IF(((select count(*) from `restaurant_schedule` where `restaurants`.`id` = `restaurant_schedule`.`restaurant_id` and `restaurant_schedule`.`day` = '.now()->dayOfWeek.' and `restaurant_schedule`.`opening_time` < "'.now()->format('H:i:s').'" and `restaurant_schedule`.`closing_time` >"'.now()->format('H:i:s').'") > 0), true, false) as open,ST_Distance_Sphere(point(longitude, latitude),point('.$longitude.', '.$latitude.')) as distance');
+        $longitude = (!empty($longitude) && is_numeric($longitude)) ? (float)$longitude : 0;
+        $latitude = (!empty($latitude) && is_numeric($latitude)) ? (float)$latitude : 0;
+        $distance_query = ($longitude != 0 && $latitude != 0)
+            ? "ST_Distance_Sphere(point(longitude, latitude), point({$longitude}, {$latitude}))"
+            : "0";
+        $query->selectRaw('*, IF(((select count(*) from `restaurant_schedule` where `restaurants`.`id` = `restaurant_schedule`.`restaurant_id` and `restaurant_schedule`.`day` = '.now()->dayOfWeek.' and `restaurant_schedule`.`opening_time` < "'.now()->format('H:i:s').'" and `restaurant_schedule`.`closing_time` >"'.now()->format('H:i:s').'") > 0), true, false) as open, ' . $distance_query . ' as distance');
     }
 
     public function scopeWeekday($query)

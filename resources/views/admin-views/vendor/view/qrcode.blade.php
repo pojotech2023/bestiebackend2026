@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
     <style>
         @media print {
             * {
@@ -123,14 +123,14 @@
                         </div>
 
                         <div class="qr-wrapper">
-                            <div class="qr-wrap-top-bg" style="background-image: url({{ asset('public/assets/admin/img/qr-bg.svg')}})">
-                                <img width="429" src="{{ asset('public/assets/admin/img/bg-logo.png')}}" alt="" class="qr-code-bg-logo">
+                            <div class="qr-wrap-top-bg" style="background-image: url({{ asset('assets/admin/img/qr-bg.svg')}})">
+                                <img width="429" src="{{ asset('assets/admin/img/bg-logo.png')}}" alt="" class="qr-code-bg-logo">
                             </div>
-                            <div class="qr-wrap-bottom-bg" style="background-image: url({{ asset('public/assets/admin/img/line-shape.svg')}})"></div>
+                            <div class="qr-wrap-bottom-bg" style="background-image: url({{ asset('assets/admin/img/line-shape.svg')}})"></div>
                             <div class="d-flex justify-content-center">
                                 <a href="" class="qr-logo">
                                     <img width="200" src="{{asset('storage/app/public/restaurant')}}/{{$restaurant->logo}}" class="mw-100"
-                                            onerror="this.src='{{ asset('public/assets/admin/img/logo2.png')}}'" alt="">
+                                            onerror="this.src='{{ asset('assets/admin/img/logo2.png')}}'" alt="">
                                 </a>
                             </div>
                             <div class="d-flex justify-content-center mt-3">
@@ -140,13 +140,13 @@
                             </div>
                             <div class="text-center mt-4">
                                 <div>
-                                    <img src="{{ asset('public/assets/admin/img/scan-me.png')}}" class="mw-100" alt="">
+                                    <img src="{{ asset('assets/admin/img/scan-me.png')}}" class="mw-100" alt="">
                                 </div>
                                 <div class="my-3">
                                     <div class="d-flex justify-content-center">
                                         <div class="bg-white rounded">
                                             {!! $code !!}
-                                            {{-- <img width="218" src="{{ asset('public/assets/admin/img/qr-code.png')}}" class="mw-100" alt=""> --}}
+                                            {{-- <img width="218" src="{{ asset('assets/admin/img/qr-code.png')}}" class="mw-100" alt=""> --}}
                                         </div>
                                     </div>
                                 </div>

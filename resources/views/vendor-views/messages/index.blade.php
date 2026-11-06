@@ -47,7 +47,7 @@
 @endsection
 
 @push('script_2')
-<script src="{{ asset('public/assets/admin/js/spartan-multi-image-picker.js') }}"></script>
+<script src="{{ asset('assets/admin/js/spartan-multi-image-picker.js') }}"></script>
     <script>
         function viewConvs(url, id_to_active, conv_id, sender_id) {
             $('.customer-list').removeClass('conv-active');

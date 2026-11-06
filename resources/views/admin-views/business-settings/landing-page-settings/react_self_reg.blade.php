@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -141,7 +141,7 @@
                                                 <center id="image-viewer-section" class="pt-2 mt-auto mb-auto">
                                                     <img class="initial-5" id="viewer"
                                                         src="{{ asset('storage/app/public/react_landing') }}/{{ $react_self_registration_restaurant['image'] ?? null }}"
-                                                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.png') }}'"
+                                                        onerror="this.src='{{ asset('assets/admin/img/160x160/img2.png') }}'"
                                                         alt="" />
                                                 </center>
 
@@ -256,7 +256,7 @@
                                                 <center id="image-viewer-section2" class="pt-2 mt-auto mb-auto">
                                                     <img class="initial-5" id="viewer2"
                                                         src="{{ asset('storage/app/public/react_landing') }}/{{ $react_self_registration_delivery_man['image'] ?? null }}"
-                                                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.png') }}'"
+                                                        onerror="this.src='{{ asset('assets/admin/img/160x160/img2.png') }}'"
                                                         alt="" />
                                                 </center>
 

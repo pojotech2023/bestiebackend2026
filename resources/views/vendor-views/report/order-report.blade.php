@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/report/new/order_report.png')}}" class="w--22" alt="">
+                    <img src="{{ asset('assets/admin/img/report/new/order_report.png')}}" class="w--22" alt="">
                 </span>
                 <span>
                     {{ translate('messages.order_report') }}
@@ -86,7 +86,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/schedule.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/schedule.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Scheduled_Orders') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#0661CB">
@@ -99,7 +99,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/pending.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/pending.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Pending_Orders') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#0661CB">
@@ -112,7 +112,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/accepted.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/accepted.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Accepted_Orders') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#0661CB">
@@ -125,7 +125,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/processing.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/processing.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Processing_Orders') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#00AA6D">
@@ -138,7 +138,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/on-the-way.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/on-the-way.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Food_On_the_Way') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#00AA6D">
@@ -151,7 +151,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/delivered.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/delivered.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{  translate('Delivered') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#00AA6D">
@@ -164,7 +164,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/canceled.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/canceled.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Canceled') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#FF7500">
@@ -177,7 +177,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/failed.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/failed.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Payment_Failed') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#FF7500">
@@ -190,7 +190,7 @@
                     <a class="order--card h-100" href="#">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
-                                <img src="{{ asset('public/assets/admin/img/order-icons/refunded.png')}}" alt="dashboard" class="oder--card-icon">
+                                <img src="{{ asset('assets/admin/img/order-icons/refunded.png')}}" alt="dashboard" class="oder--card-icon">
                                 <span>{{ translate('Refunded') }}</span>
                             </h6>
                             <span class="card-title" style="--base-clr:#FF7500">
@@ -239,14 +239,14 @@
                             <a id="export-excel" class="dropdown-item"
                                 href="{{ route('vendor.report.order-report-export', ['type' => 'excel', request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                    src="{{ asset('public/assets/admin/svg/components/excel.svg') }}"
+                                    src="{{ asset('assets/admin/svg/components/excel.svg') }}"
                                     alt="Image Description">
                                 {{ translate('messages.excel') }}
                             </a>
                             <a id="export-csv" class="dropdown-item"
                                 href="{{ route('vendor.report.order-report-export', ['type' => 'csv', request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                    src="{{ asset('public/assets/admin/svg/components/placeholder-csv-format.svg') }}"
+                                    src="{{ asset('assets/admin/svg/components/placeholder-csv-format.svg') }}"
                                     alt="Image Description">
                                 {{ translate('messages.csv') }}
                             </a>
@@ -462,10 +462,10 @@
 @endpush
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{ asset('public/assets/admin') }}/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js">
+    <script src="{{ asset('assets/admin') }}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{ asset('assets/admin') }}/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js">
     </script>
-    <script src="{{ asset('public/assets/admin') }}/js/hs.chartjs-matrix.js"></script>
+    <script src="{{ asset('assets/admin') }}/js/hs.chartjs-matrix.js"></script>
 
     <script>
         $(document).on('ready', function() {

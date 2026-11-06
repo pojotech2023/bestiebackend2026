@@ -8,11 +8,11 @@
                     @php($restaurant_data=\App\CentralLogics\Helpers::get_restaurant_data())
                     <a class="navbar-brand pt-0 pb-0" href="{{route('vendor.dashboard')}}" aria-label="Front">
                         <img class="navbar-brand-logo"
-                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg')}}'"
+                            onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg')}}'"
                             src="{{asset('storage/app/public/restaurant/'.$restaurant_data->logo)}}"
                             alt="Logo">
                         <img class="navbar-brand-logo-mini"
-                            onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg')}}'"
+                            onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg')}}'"
                             src="{{asset('storage/app/public/restaurant/'.$restaurant_data->logo)}}" alt="Logo">
                         <div class="ps-2">
                             <h6>

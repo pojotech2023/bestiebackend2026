@@ -10,7 +10,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center __gap-15px">
                 <h1 class="page-header-title mr-3 mb-0">
                     <span class="page-header-icon">
-                        <img src="{{ asset('public/assets/admin/img/email-setting.png') }}" class="w--26" alt="">
+                        <img src="{{ asset('assets/admin/img/email-setting.png') }}" class="w--26" alt="">
                     </span>
                     <span>
                         {{ translate('messages.Email Templates') }}
@@ -31,7 +31,7 @@
                             <h5 class="text-capitalize m-0 text--primary pl-2">
                                 {{translate('Send_Mail_on_Offline_Payment’?')}}
                         <span class="form-label-secondary text--primary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('If_Admin_approves_an_offline_payment,_the_user_will_get_an_automatic_disapproval_mail_from_the_system.') }}">
-                                    <img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                    <img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="">
                                 </span>
                             </h5>
                             <label class="toggle-switch toggle-switch-sm">
@@ -105,7 +105,7 @@
                                     <br>
                                     <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{ asset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <img src="{{ asset('assets/admin/img/pointer.png')}}" class="mr-2" alt="">
                                             {{translate('Header Content')}}
                                         </h5>
                                         @if ($language)
@@ -183,7 +183,7 @@
 
                                     <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{ asset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <img src="{{ asset('assets/admin/img/pointer.png')}}" class="mr-2" alt="">
                                             {{translate('Footer Content')}}
                                         </h5>
                                         <div class="__bg-F8F9FC-card">

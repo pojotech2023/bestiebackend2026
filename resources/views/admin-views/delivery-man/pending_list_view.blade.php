@@ -45,7 +45,7 @@
                             <div class="shop-details-banner-content m-0">
                                 <div class="shop-details-banner-content-thumbnail mt-3">
                                     <img src="{{ asset('storage/app/public/restaurant/' . $dm->logo) }}"
-                                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
+                                        onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg') }}'"
                                         class="thumbnail" alt="">
                                     <h3 class="mt-4 pt-3 mb-4 d-sm-none">{{ $dm->f_name.' '. $dm->l_name }}</h3>
                                 </div>

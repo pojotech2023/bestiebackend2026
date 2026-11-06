@@ -11,7 +11,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/report.png') }}" class="w--22" alt="">
+                    <img src="{{ asset('assets/admin/img/report.png') }}" class="w--22" alt="">
                 </span>
                 <span>
                     {{ translate('messages.transection_report') }}
@@ -225,14 +225,14 @@
                             <a id="export-excel" class="dropdown-item"
                                 href="{{ route('admin.report.day-wise-report-export', ['type' => 'excel', request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                    src="{{ asset('public/assets/admin/svg/components/excel.svg') }}"
+                                    src="{{ asset('assets/admin/svg/components/excel.svg') }}"
                                     alt="Image Description">
                                 {{ translate('messages.excel') }}
                             </a>
                             <a id="export-csv" class="dropdown-item"
                                 href="{{ route('admin.report.day-wise-report-export', ['type' => 'csv', request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                    src="{{ asset('public/assets/admin/svg/components/placeholder-csv-format.svg') }}"
+                                    src="{{ asset('assets/admin/svg/components/placeholder-csv-format.svg') }}"
                                     alt="Image Description">
                                 {{ translate('messages.csv') }}
                             </a>
@@ -349,10 +349,10 @@
                                         {{ \App\CentralLogics\Helpers::format_currency($ot->delivery_fee_comission) }}
                                     </td>
                                     <td class="white-space-nowrap">
-                                        {{ \App\CentralLogics\Helpers::format_currency($ot->admin_commission + $ot->delivery_fee_comission) }}
+                                        {{ \App\CentralLogics\Helpers::format_currency($ot->admin_commission + $ot->delivery_fee_comission + $ot->tax) }}
                                     </td>
                                     <td class="white-space-nowrap">
-                                        {{ \App\CentralLogics\Helpers::format_currency($ot->restaurant_amount - $ot->tax) }}
+                                        {{ \App\CentralLogics\Helpers::format_currency($ot->restaurant_amount) }}
                                     </td>
                                     @if ($ot->received_by == 'admin')
                                         <td class="text-capitalize white-space-nowrap">{{ translate('messages.admin') }}

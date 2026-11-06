@@ -39,7 +39,7 @@
                             <span class="subtitle">
                                 {{translate('messages.total_delivered_orders')}}
                             </span>
-                            <img class="resturant-icon" src="{{ asset('public/assets/admin/img/resturant-panel/deliveryman/delivered.png')}}" alt="dashboard">
+                            <img class="resturant-icon" src="{{ asset('assets/admin/img/resturant-panel/deliveryman/delivered.png')}}" alt="dashboard">
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                         <div class="resturant-card dashboard--card bg--3">
                             <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($dm->wallet?$dm->wallet->collected_cash:0.0)}}</h4>
                             <span class="subtitle">{{translate('messages.cash_in_hand')}}</span>
-                            <img class="resturant-icon" src="{{ asset('public/assets/admin/img/resturant-panel/deliveryman/cash.png')}}" alt="dashboard">
+                            <img class="resturant-icon" src="{{ asset('assets/admin/img/resturant-panel/deliveryman/cash.png')}}" alt="dashboard">
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                         <div class="resturant-card dashboard--card bg--1">
                             <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($dm->wallet?$dm->wallet->total_earning:0.00)}}</h4>
                             <span class="subtitle">{{translate('messages.total_earning')}}</span>
-                            <img class="resturant-icon" src="{{ asset('public/assets/admin/img/resturant-panel/deliveryman/earning.png')}}" alt="dashboard">
+                            <img class="resturant-icon" src="{{ asset('assets/admin/img/resturant-panel/deliveryman/earning.png')}}" alt="dashboard">
                         </div>
                     </div>
 
@@ -81,7 +81,7 @@
                     <div class="col-md-6">
                         <div class="d-flex align-items-center justify-content-center">
                             <img class="avatar avatar-xxl avatar-4by3 mr-4 mw-120px"
-                                 onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                                 onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                                  src="{{asset('storage/app/public/delivery-man')}}/{{$dm['image']}}"
                                  alt="Image Description">
 
@@ -324,7 +324,7 @@
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-circle">
                                         <img class="avatar-img" width="75" height="75"
-                                             onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                                             onerror="this.src='{{ asset('assets/admin/img/160x160/img1.jpg')}}'"
                                              src="{{asset('storage/app/public/profile/'.$review->customer->image)}}"
                                              alt="Image Description">
                                     </div>
@@ -358,7 +358,7 @@
                             </td>
                             {{--<td>
                                 @foreach(json_decode($review['attachment'],true) as $attachment)
-                                    <img width="100" onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg')}}'" src="{{asset('storage/app/public')}}/{{$attachment}}">
+                                    <img width="100" onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg')}}'" src="{{asset('storage/app/public')}}/{{$attachment}}">
                                 @endforeach
                             </td>--}}
                             <td>

@@ -79,7 +79,7 @@
                                 <a class="dropdown-item"
                                    href="{{ route('admin.grocery-list.export', ['type' => 'csv', request()->getQueryString()]) }}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                         src="{{ asset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg">
+                                         src="{{ asset('assets/admin') }}/svg/components/placeholder-csv-format.svg">
                                     .{{ translate('messages.csv') }}
                                 </a>
                             </div>

@@ -11,7 +11,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ asset('public/assets/admin/img/captcha.png')}}" class="w--26" alt="">
+                    <img src="{{ asset('assets/admin/img/captcha.png')}}" class="w--26" alt="">
                 </span>
                 <span>
                     {{translate('Social_Login_Setup')}}
@@ -35,7 +35,7 @@
                                     <img src="{{asset('/public/assets/admin/img/google.png')}}" class="mr-1 w-20" alt="">
                                     {{translate('messages.'.$socialLoginService['login_medium'])}}
                                     <span class="d-flex align-items-center switch--label ml-1">
-                                        <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="Lorem ipsum dolor set amet"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                        <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="Lorem ipsum dolor set amet"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
                                     </span>
                                 </h5>
                                 <label class="toggle-switch toggle-switch-sm p-0">
@@ -94,7 +94,7 @@
                                         <img src="{{asset('/public/assets/admin/img/apple.png')}}" class="mr-1 w--20" alt="">
                                         {{translate('messages.'.$appleLoginService['login_medium'])}}
                                         <span class="d-flex align-items-center switch--label ml-1">
-                                            <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="Lorem ipsum dolor set amet"><img src="{{ asset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                            <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="Lorem ipsum dolor set amet"><img src="{{ asset('assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
                                         </span>
                                     </h5>
                                     <label class="toggle-switch toggle-switch-sm p-0">

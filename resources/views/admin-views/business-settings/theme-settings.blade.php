@@ -4,7 +4,7 @@ $theme_value = \App\Models\BusinessSetting::where('key', 'theme')->first()->valu
 @extends('layouts.admin.app')
 @section('title', translate('themes'))
 @push('css_or_js')
-    <link rel="stylesheet" href="{{ asset('public/assets/admin/css/radio-image.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/radio-image.css') }}">
 @endpush
 @section('content')
     <div class="content container-fluid">
@@ -34,14 +34,14 @@ $theme_value = \App\Models\BusinessSetting::where('key', 'theme')->first()->valu
 
                                 <label for="img1">
                                     <img class="img-thumbnail rounded"
-                                        src="{{ asset('public/assets/admin/img/Theme-1.png') }}" alt="Image 1">
+                                        src="{{ asset('assets/admin/img/Theme-1.png') }}" alt="Image 1">
                                 </label>
                             </div>
                             <div class='col-md-3 col-sm-6 col-12 text-center'>
                                 <input type="radio" name="theme" require id="img2" class="d-none imgbgchk" value="2" {{ $theme_value == 2 ? 'checked' : '' }}>
                                 <label for="img2">
                                     <img class="img-thumbnail rounded"
-                                        src="{{ asset('public/assets/admin/img/Theme-2.png') }}" alt="Image 2">
+                                        src="{{ asset('assets/admin/img/Theme-2.png') }}" alt="Image 2">
                                 </label>
                             </div>
                         </div>

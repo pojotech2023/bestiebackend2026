@@ -23,7 +23,7 @@
                             <h5 class="card-title">{{ translate('Withdraw_Request_Table')}} <span id="itemCount"
                                     class="badge badge-soft-dark ml-2">{{$withdraw_req->total()}}</span></h5>
 
-                            <form  class="my-2 ml-auto mr-sm-2 mr-xl-4 ml-sm-auto flex-grow-1 flex-grow-sm-0">
+                            <form action="{{ route('admin.restaurant.withdraw_list') }}" method="get" class="my-2 ml-auto mr-sm-2 mr-xl-4 ml-sm-auto flex-grow-1 flex-grow-sm-0">
                                 <!-- Search -->
                                 <div class="input--group input-group input-group-merge input-group-flush">
                                     <input id="datatableSearch_" type="search" name="search" value="{{ request()?->search ?? null}}" class="form-control" placeholder="{{ translate('Ex:_search_by_Restaurant_name_of_Phone_number') }}" aria-label="Search">
@@ -72,14 +72,14 @@
 
                                     <a id="export-excel" class="dropdown-item" href="{{route('admin.restaurant.withdraw-list-export', ['type'=>'excel',request()->getQueryString()])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                                src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                                 alt="Image Description">
                                         {{translate('messages.excel')}}
                                     </a>
 
                                     <a id="export-csv" class="dropdown-item" href="{{route('admin.restaurant.withdraw-list-export', ['type'=>'csv',request()->getQueryString()])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                                src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                                src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                 alt="Image Description">
                                         {{translate('messages.csv')}}
                                     </a>

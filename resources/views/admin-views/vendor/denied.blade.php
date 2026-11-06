@@ -141,7 +141,7 @@
                                     <td>
                                         <a href="{{route('admin.restaurant.view',  ['restaurant'=>$dm->id, 'tab'=> 'pending-list'])}}" alt="view restaurant" class="table-rest-info">
                                         <img
-                                                onerror="this.src='{{ asset('public/assets/admin/img/100x100/food-default-image.png')}}'"
+                                                onerror="this.src='{{ asset('assets/admin/img/100x100/food-default-image.png')}}'"
                                                 src="{{asset('storage/app/public/restaurant')}}/{{$dm['logo']}}">
                                             <div class="info">
                                                 <span class="d-block text-body">

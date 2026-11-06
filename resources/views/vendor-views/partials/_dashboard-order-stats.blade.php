@@ -2,7 +2,7 @@
     <a class="resturant-card dashboard--card bg--2" href="{{route('vendor.order.list',['confirmed'])}}">
         <h4 class="title">{{$data['confirmed']}}</h4>
         <span class="subtitle">{{translate('messages.confirmed')}}</span>
-        <img class="resturant-icon max-width-34px" src="{{ asset('public/assets/admin/img/resturant-panel/dashboard/confirmed.png')}}" alt="dashboard">
+        <img class="resturant-icon max-width-34px" src="{{ asset('assets/admin/img/resturant-panel/dashboard/confirmed.png')}}" alt="dashboard">
     </a>
 </div>
 
@@ -11,7 +11,7 @@
     <a class="resturant-card dashboard--card bg--3" href="{{route('vendor.order.list',['cooking'])}}">
         <h4 class="title">{{$data['cooking']}}</h4>
         <span class="subtitle">{{translate('messages.cooking')}}</span>
-        <img class="resturant-icon max-width-34px" src="{{ asset('public/assets/admin/img/resturant-panel/dashboard/cooking.png')}}" alt="dashboard">
+        <img class="resturant-icon max-width-34px" src="{{ asset('assets/admin/img/resturant-panel/dashboard/cooking.png')}}" alt="dashboard">
     </a>
     <!-- End Card -->
 </div>
@@ -21,7 +21,7 @@
     <a class="resturant-card dashboard--card bg--5" href="{{route('vendor.order.list',['ready_for_delivery'])}}">
         <h4 class="title">{{$data['ready_for_delivery']}}</h4>
         <span class="subtitle">{{translate('messages.ready_for_delivery')}}</span>
-        <img class="resturant-icon max-width-34px" src="{{ asset('public/assets/admin/img/resturant-panel/dashboard/ready.png')}}" alt="dashboard">
+        <img class="resturant-icon max-width-34px" src="{{ asset('assets/admin/img/resturant-panel/dashboard/ready.png')}}" alt="dashboard">
     </a>
     <!-- End Card -->
 </div>
@@ -31,7 +31,7 @@
     <a class="resturant-card dashboard--card bg--14" href="{{route('vendor.order.list',['food_on_the_way'])}}">
         <h4 class="title">{{$data['food_on_the_way']}}</h4>
         <span class="subtitle">{{translate('messages.food_on_the_way')}}</span>
-        <img class="resturant-icon max-width-34px" src="{{ asset('public/assets/admin/img/resturant-panel/dashboard/on-the-way.png')}}" alt="dashboard">
+        <img class="resturant-icon max-width-34px" src="{{ asset('assets/admin/img/resturant-panel/dashboard/on-the-way.png')}}" alt="dashboard">
     </a>
     <!-- End Card -->
 </div>

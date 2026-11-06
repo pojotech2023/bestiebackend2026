@@ -100,7 +100,7 @@ $company_links = json_decode(BusinessSetting::where('key','landing_page_links')-
                                 @foreach ($social_media as $item)
                                 <div style="display: inline-block;" >
                                     <a href="{{$item->link}}" target=”_blank”>
-                                    <img src="{{ asset('public/assets/admin/img/'.$item->name.'.png')}}" alt="" style="height: 14px; width:14px;object-fit:contain">
+                                    <img src="{{ asset('assets/admin/img/'.$item->name.'.png')}}" alt="" style="height: 14px; width:14px;object-fit:contain">
                                     </a>
                                 </div>
                                 @endforeach

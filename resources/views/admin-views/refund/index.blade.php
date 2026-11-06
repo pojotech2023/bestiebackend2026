@@ -13,7 +13,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-start">
                 <h1 class="page-header-title mr-3">
                     <span class="page-header-icon">
-                        <img src="{{ asset('public/assets/admin/img/business.png') }}" class="w--20" alt="">
+                        <img src="{{ asset('assets/admin/img/business.png') }}" class="w--20" alt="">
                     </span>
                     <span>
                         {{ translate('messages.business_setup') }}

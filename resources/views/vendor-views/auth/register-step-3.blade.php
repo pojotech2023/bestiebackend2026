@@ -2,7 +2,7 @@
 @extends('layouts.landing.app')
 @section('title', translate('messages.restaurant_registration'))
 @push('css_or_js')
-    <link rel="stylesheet" href="{{ asset('public/assets/landing') }}/css/style.css" />
+    <link rel="stylesheet" href="{{ asset('assets/landing') }}/css/style.css" />
 @endpush
 @section('content')
     <!-- Page Header Gap -->

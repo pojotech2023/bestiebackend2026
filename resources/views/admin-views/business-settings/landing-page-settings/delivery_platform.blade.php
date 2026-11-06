@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -85,7 +85,7 @@
                             <center id="image-viewer-section" class="pt-2 mt-auto mb-auto">
                                 <img class="initial-5" id="viewer3"
                                 src="{{ asset('storage/app/public/landing') }}/{{ $delivery_platform['image'] ?? null }}"
-                                onerror="this.src='{{ asset('public/assets/admin/img/400x400/img2.jpg')}}'"
+                                onerror="this.src='{{ asset('assets/admin/img/400x400/img2.jpg')}}'"
                                  alt=""/>
                             </center>
                             <div class="custom-file mt-2">
@@ -200,7 +200,7 @@
 @push('script_2')
     <script>
         $('#reset_btn').click(function(){
-            $('#viewer').attr('src','{{ asset('public/assets/admin/img/100x100/user.png')}}');
+            $('#viewer').attr('src','{{ asset('assets/admin/img/100x100/user.png')}}');
         })
     </script>
         <script>

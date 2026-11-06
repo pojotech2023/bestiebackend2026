@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('public/assets/admin/css/tags-input.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/tags-input.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 @endpush
@@ -124,7 +124,7 @@
                                 <label>
                                     <center id="image-viewer-section" class="my-auto">
                                         <img class="initial-52 object--cover border--dashed" id="viewer"
-                                            src="{{ asset('public/assets/admin/img/upload.png') }}"
+                                            src="{{ asset('assets/admin/img/upload.png') }}"
                                             alt="banner image" />
                                         <input type="file" name="image" id="customFileEg1" class="d-none" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                                     </center>
@@ -166,7 +166,7 @@
                                                 class="input-label-secondary" data-toggle="tooltip"
                                                 data-placement="right"
                                                 data-original-title="{{ translate('messages.category_required_warning') }}"><img
-                                                    src="{{ asset('public/assets/admin/img/info-circle.svg') }}"
+                                                    src="{{ asset('assets/admin/img/info-circle.svg') }}"
                                                     alt="{{ translate('messages.category_required_warning') }}"></span></label>
                                                     <select name="sub_category_id" id="sub-categories"
                                                     class="form-control h--45px js-select2-custom"
@@ -208,7 +208,7 @@
                                     class="input-label-secondary" data-toggle="tooltip"
                                     data-placement="right"
                                     data-original-title="{{ translate('messages.restaurant_required_warning') }}"><img
-                                        src="{{ asset('public/assets/admin/img/info-circle.svg') }}"
+                                        src="{{ asset('assets/admin/img/info-circle.svg') }}"
                                         alt="{{ translate('messages.restaurant_required_warning') }}"></span></label>
                             <select name="addon_ids[]" class="form-control border js-select2-custom"
                                 multiple="multiple" id="add_on">
@@ -641,7 +641,7 @@
     </script>
 
 
-    <script src="{{ asset('public/assets/admin')}}/js/tags-input.min.js"></script>
+    <script src="{{ asset('assets/admin')}}/js/tags-input.min.js"></script>
 
 
 
@@ -714,7 +714,7 @@
                         $('#sub-categories').val(null).trigger('change');
                         $('#veg').val(0).trigger('change');
                         $('#add_on').val(null).trigger('change');
-                        $('#viewer').attr('src','{{ asset('public/assets/admin/img/100x100/food-default-image.png')}}');
+                        $('#viewer').attr('src','{{ asset('assets/admin/img/100x100/food-default-image.png')}}');
                     })
                 </script>
                 <script>

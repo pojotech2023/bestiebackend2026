@@ -579,6 +579,7 @@ class OrderController extends Controller
                 $data = [
                     'title' => translate('messages.order_push_title'),
                     'description' => translate('messages.you_are_unassigned_from_a_order'),
+                    'order_type' => $order->order_type ?? 'delivery',
                     'order_id' => '',
                     'image' => '',
                     'type' => 'assign'
@@ -623,6 +624,7 @@ class OrderController extends Controller
                 $data = [
                     'title' => translate('messages.order_push_title'),
                     'description' => translate('messages.you_are_assigned_to_a_order'),
+                    'order_type' => $order->order_type ?? 'delivery',
                     'order_id' => $order['id'],
                     'image' => '',
                     'type' => 'assign'

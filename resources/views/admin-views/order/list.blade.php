@@ -67,13 +67,13 @@
                             <span class="dropdown-header">{{translate('messages.download_options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
                                 {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
-                                        src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                                        src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
                                 {{translate('messages.csv')}}
                             </a>
@@ -257,7 +257,21 @@
                                 {{$key+$orders->firstItem()}}
                             </td>
                             <td class="table-column-pl-0">
-                                <a href="{{route('admin.order.details',['id'=>$order['id']])}}">{{$order['id']}}</a>
+                                @if(isset($order->is_bestie_buddy) && $order->is_bestie_buddy)
+                                    <a href="{{route('admin.grocery-list.show',['id'=>$order['id']])}}">#{{$order['id']}}</a>
+                                    <div class="mt-1">
+                                        <span class="badge" style="background-color: #7b2cbf; color: #ffffff; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px;">
+                                            <i class="tio-shopping-basket mr-1"></i>Bestie Buddy
+                                        </span>
+                                    </div>
+                                @else
+                                    <a href="{{route('admin.order.details',['id'=>$order['id']])}}">{{$order['id']}}</a>
+                                    <div class="mt-1">
+                                        <span class="badge badge-soft-info" style="font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px;">
+                                            <i class="tio-restaurant mr-1"></i>Food Order
+                                        </span>
+                                    </div>
+                                @endif
                             </td>
                             <td class="text-uppercase">
                                 <div>
@@ -294,11 +308,17 @@
                             </td>
 
                             <td>
-                                <label class="m-0">
-                                    <a href="{{route('admin.restaurant.view', $order->restaurant_id)}}" class="text--title" alt="view restaurant">
-                                        {{Str::limit($order->restaurant?$order->restaurant->name:translate('messages.Restaurant_deleted!'),20,'...')}}
-                                    </a>
-                                </label>
+                                @if(isset($order->is_bestie_buddy) && $order->is_bestie_buddy)
+                                    <span class="badge badge-soft-primary" style="font-size: 12px; padding: 4px 8px;">
+                                        <i class="tio-shopping-cart mr-1"></i> Bestie Buddy (Customer Errand)
+                                    </span>
+                                @else
+                                    <label class="m-0">
+                                        <a href="{{route('admin.restaurant.view', $order->restaurant_id)}}" class="text--title" alt="view restaurant">
+                                            {{Str::limit($order->restaurant?$order->restaurant->name:translate('messages.Restaurant_deleted!'),20,'...')}}
+                                        </a>
+                                    </label>
+                                @endif
                             </td>
                             <td>
                                 <div class="text-right mw-85px">
@@ -358,7 +378,11 @@
                                     </span>
                                 @endif
                                 <div class="text-capitalze opacity-7">
-                                @if($order['order_type']=='take_away')
+                                @if(isset($order->is_bestie_buddy) && $order->is_bestie_buddy)
+                                    <span class="text-primary font-weight-bold">
+                                        {{translate('Bestie Buddy')}}
+                                    </span>
+                                @elseif($order['order_type']=='take_away')
                                     <span>
                                         {{translate('messages.take_away')}}
                                     </span>
@@ -371,9 +395,14 @@
                             </td>
                             <td>
                                 <div class="btn--container justify-content-center">
-                                    <a class="ml-2 btn btn-sm btn--warning btn-outline-warning action-btn" href="{{route('admin.order.details',['id'=>$order['id']])}}"><i class="tio-invisible"></i></a>
+                                    @if(isset($order->is_bestie_buddy) && $order->is_bestie_buddy)
+                                        <a class="ml-2 btn btn-sm btn--warning btn-outline-warning action-btn" href="{{route('admin.grocery-list.show',['id'=>$order['id']])}}" title="{{translate('messages.view')}}"><i class="tio-invisible"></i></a>
+                                        <a class="ml-2 btn btn-sm btn--primary btn-outline-primary action-btn" href="{{route('admin.grocery-list.edit',['id'=>$order['id']])}}" title="{{translate('messages.edit')}}"><i class="tio-edit"></i></a>
+                                    @else
+                                        <a class="ml-2 btn btn-sm btn--warning btn-outline-warning action-btn" href="{{route('admin.order.details',['id'=>$order['id']])}}"><i class="tio-invisible"></i></a>
 
-                                    <a class="ml-2 btn btn-sm btn--primary btn-outline-primary download--btn action-btn" href={{ route('admin.order.generate-invoice', [$order['id']]) }}><i class="tio-print"></i></a>
+                                        <a class="ml-2 btn btn-sm btn--primary btn-outline-primary download--btn action-btn" href={{ route('admin.order.generate-invoice', [$order['id']]) }}><i class="tio-print"></i></a>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -517,6 +546,10 @@
                         <input type="radio" id="delivery" name="order_type" class="custom-control-input" value="delivery" {{isset($order_type)?($order_type=='delivery'?'checked':''):''}}>
                         <label class="custom-control-label text-uppercase" for="delivery">{{translate('messages.delivery')}}</label>
                     </div>
+                    <div class="custom-control custom-radio mb-2">
+                        <input type="radio" id="bestie_buddy" name="order_type" class="custom-control-input" value="bestie_buddy" {{isset($order_type)?($order_type=='bestie_buddy'?'checked':''):''}}>
+                        <label class="custom-control-label" for="bestie_buddy">Bestie Buddy</label>
+                    </div>
                     <hr class="my-4">
 
                     <small class="text-cap mb-3">{{translate('messages.date_between')}}</small>
@@ -554,7 +587,7 @@
 @endsection
 
 @push('script_2')
-    <!-- <script src="{{ asset('public/assets/admin')}}/js/bootstrap-select.min.js"></script> -->
+    <!-- <script src="{{ asset('assets/admin')}}/js/bootstrap-select.min.js"></script> -->
     <script>
         $(document).on('ready', function () {
             @if($filter_count>0)
@@ -651,7 +684,7 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3 w-7rem" src="{{ asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                        '<img class="mb-3 w-7rem" src="{{ asset('assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
                         '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
                         '</div>'
                 }

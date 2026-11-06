@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css')}}" rel="stylesheet">
 
 @endpush
 
@@ -119,13 +119,13 @@
 
                         <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.order.export-orders', ['type'=>'excel', 'restaurant_id'=>$restaurant->id , request()->getQueryString()]) }}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                            src="{{ asset('public/assets/admin')}}/svg/components/excel.svg"
+                            src="{{ asset('assets/admin')}}/svg/components/excel.svg"
                             alt="Image Description">
                             {{translate('messages.excel')}}
                         </a>
                         <a target="__blank" id="export-csv" class="dropdown-item" href="{{route('admin.order.export-orders', ['type'=>'csv', 'restaurant_id'=>$restaurant->id , request()->getQueryString()]) }}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
-                            src="{{ asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
+                            src="{{ asset('assets/admin')}}/svg/components/placeholder-csv-format.svg"
                             alt="Image Description">
                             {{translate('messages.csv')}}
                         </a>

@@ -20,7 +20,7 @@
                     <td scope="row">{{$k+$digital_transaction->firstItem()}}</td>
                     <td><a href="{{route('admin.order.details',$dt->order_id)}}">{{$dt->order_id}}</a></td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->order_amount)}}</td>
-                    <td>{{\App\CentralLogics\Helpers::format_currency($dt->restaurant_amount - $dt->tax)}}</td>
+                    <td>{{\App\CentralLogics\Helpers::format_currency($dt->restaurant_amount)}}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->admin_commission)}}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->delivery_charge)}}</td>
                     <td>{{\App\CentralLogics\Helpers::format_currency($dt->tax)}}</td>

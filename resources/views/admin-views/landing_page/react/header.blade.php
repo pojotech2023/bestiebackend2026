@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -59,7 +59,7 @@
             @csrf
             <h5 class="card-title d-felx align-items-center mr-2 mb-2">
                 <span class="card-header-icon mr-2">
-                    <img src="{{ asset('public/assets/admin/img/react_header.png')}}" alt="" class="mw-100">
+                    <img src="{{ asset('assets/admin/img/react_header.png')}}" alt="" class="mw-100">
                 </span>
                 <span>{{translate('messages.Header_Section')}}</span>
             </h5>

@@ -83,7 +83,7 @@ $schedules = $subscription->schedules()->get();
                                 @else
                                 src="{{ asset('storage/app/public/campaign')}}/{{ isset($detail->campaign['image']) ? $detail->campaign['image'] :'' }}"
                                 @endif
-                                onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg')}}'" alt="{{isset($detail->food_id) ? $detail->food['name'] : $detail->campaign['name']}} image">
+                                onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg')}}'" alt="{{isset($detail->food_id) ? $detail->food['name'] : $detail->campaign['name']}} image">
                                 <div class="media-body">
                                     <h5 class="text-hover-primary mb-0">{{isset($detail->food_id) ?  Str::limit($detail->food['name'],30)  : Str::limit($detail->campaign['name'],30) }}</h5>
                                     @if (count(json_decode($detail['variation'], true)) > 0)

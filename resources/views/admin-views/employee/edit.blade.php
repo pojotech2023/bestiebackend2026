@@ -102,7 +102,7 @@
                                     </label>
                                     <center class="mt-auto mb-auto">
                                         <img class="initial-24" id="viewer"
-                                        onerror="this.src='{{ asset('public/assets/admin/img/100x100/user.png')}}'"
+                                        onerror="this.src='{{ asset('assets/admin/img/100x100/user.png')}}'"
                                         src="{{asset('storage/app/public/admin')}}/{{$e['image']}}" alt="Employee thumbnail"/>
                                     </center>
                                     <div class="form-group mt-3 mb-0">

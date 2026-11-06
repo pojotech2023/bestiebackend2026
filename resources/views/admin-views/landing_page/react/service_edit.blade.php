@@ -44,7 +44,7 @@
                 @csrf
                 <h5 class="card-title mb-3 mt-3">
                     <span class="card-header-icon mr-2">
-                        <img src="{{ asset('public/assets/admin/img/react_services.png')}}" alt="" class="mw-100">
+                        <img src="{{ asset('assets/admin/img/react_services.png')}}" alt="" class="mw-100">
                     </span>
 
                     <span>{{translate('service_edit')}}</span>

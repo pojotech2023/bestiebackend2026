@@ -1,8 +1,8 @@
 @extends('layouts.landing.app')
 @section('title', translate('messages.restaurant_registration'))
 @push('css_or_js')
-    <link rel="stylesheet" href="{{ asset('public/assets/landing') }}/css/style.css" />
-    <link href="{{ asset('public/assets/admin/css/tags-input.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/landing') }}/css/style.css" />
+    <link href="{{ asset('assets/admin/css/tags-input.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
         <!-- Page Header Gap -->
@@ -421,7 +421,7 @@
 
     @endsection
     @push('script_2')
-        <script src="{{ asset('public/assets/admin') }}/js/tags-input.min.js"></script>
+        <script src="{{ asset('assets/admin') }}/js/tags-input.min.js"></script>
         @if ($errors->any())
             <script>
                 @foreach ($errors->all() as $error)
@@ -464,7 +464,7 @@
             });
         </script>
 
-        <script src="{{ asset('public/assets/admin/js/spartan-multi-image-picker.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/spartan-multi-image-picker.js') }}"></script>
         <script type="text/javascript">
             $(function() {
                 $("#coba").spartanMultiImagePicker({
@@ -474,7 +474,7 @@
                     groupClassName: 'col-lg-2 col-md-4 col-sm-4 col-6',
                     maxFileSize: '',
                     placeholderImage: {
-                        image: '{{ asset('public/assets/admin/img/400x400/img2.jpg') }}',
+                        image: '{{ asset('assets/admin/img/400x400/img2.jpg') }}',
                         width: '100%'
                     },
                     dropFileLabel: "Drop Here",

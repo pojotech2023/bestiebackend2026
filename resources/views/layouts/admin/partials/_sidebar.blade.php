@@ -32,10 +32,10 @@
                 @php($restaurant_logo = \App\Models\BusinessSetting::where(['key' => 'logo'])->first()->value)
                 <a class="navbar-brand d-block p-0" href="{{ route('admin.dashboard') }}" aria-label="Front">
                     <img class="navbar-brand-logo sidebar--logo-design"
-                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
+                        onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'"
                         src="{{ asset('storage/business/' . $restaurant_logo) }}" alt="Logo">
                     <img class="navbar-brand-logo-mini sidebar--logo-design-2"
-                        onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
+                        onerror="this.src='{{ asset('assets/admin/img/160x160/img2.jpg') }}'"
                         src="{{ asset('storage/business/' . $restaurant_logo) }}" alt="Logo">
                 </a>
                 <!-- End Logo -->

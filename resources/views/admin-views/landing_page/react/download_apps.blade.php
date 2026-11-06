@@ -4,7 +4,7 @@
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
-    <link href="{{ asset('public/assets/admin/css/croppie.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/croppie.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -40,7 +40,7 @@
         <div class="d-flex justify-content-between __gap-12px mt-3 mb-2">
             <h5 class="title mr-2 d-flex align-items-center">
                 {{-- <span class="card-header-icon mr-2">
-                    <img src="{{ asset('public/assets/admin/img/seller.png')}}" alt="" class="mw-100">
+                    <img src="{{ asset('assets/admin/img/seller.png')}}" alt="" class="mw-100">
                 </span> --}}
                 <span class="card-header-icon mr-2">
                     <i class="tio-settings-outlined"></i>
@@ -88,7 +88,7 @@
         <div class="d-flex justify-content-between __gap-12px  mt-5 mb-2">
             <h5 class="card-title d-flex align-items-center">
                 {{-- <span class="card-header-icon mr-2">
-                    <img src="{{ asset('public/assets/admin/img/seller.png')}}" alt="" class="mw-100">
+                    <img src="{{ asset('assets/admin/img/seller.png')}}" alt="" class="mw-100">
                 </span> --}}
                 <span class="card-header-icon mr-2">
                     <i class="tio-settings-outlined"></i>

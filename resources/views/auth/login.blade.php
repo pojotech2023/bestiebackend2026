@@ -20,13 +20,13 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/vendor.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/vendor/icon-set/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/vendor.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/vendor/icon-set/style.css">
     <!-- CSS Front Template -->
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/theme.minc619.css?v=1.0">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/style.css">
-    <link rel="stylesheet" href="{{ asset('public/assets/admin')}}/css/toastr.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/theme.minc619.css?v=1.0">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin')}}/css/toastr.css">
     <style>
         /* FIX: neat inline field-error look under email/password inputs */
         .form-control.is-invalid {
@@ -54,9 +54,9 @@
                 @php($role = $role ?? null )
                <a class="auth-logo mb-5" href="javascript:" style="height: 100px;">
     @if($role === 'admin' || $role === 'admin_employee')
-        <img class="z-index-2" onerror="this.src='{{ asset('public/assets/admin/img/admin-login-logo.png') }}'" src="{{ asset('public/assets/admin/img/admin-login-logo.png') }}">
+        <img class="z-index-2" onerror="this.src='{{ asset('assets/admin/img/admin-login-logo.png') }}'" src="{{ asset('assets/admin/img/admin-login-logo.png') }}">
     @elseif($role === 'vendor' || $role === 'vendor_employee')
-        <img class="z-index-2" onerror="this.src='{{ asset('public/assets/admin/img/restaurant-login-logo.png') }}'" src="{{ asset('public/assets/admin/img/restaurant-login-logo.png') }}">
+        <img class="z-index-2" onerror="this.src='{{ asset('assets/admin/img/restaurant-login-logo.png') }}'" src="{{ asset('assets/admin/img/restaurant-login-logo.png') }}">
     @else
         @php($systemlogo=\App\Models\BusinessSetting::where(['key'=>'logo'])->first())
         <img class="z-index-2" onerror="this.src='{{ asset('/public/assets/admin/img/auth-fav.png') }}'"
@@ -306,11 +306,11 @@
 
 
 <!-- JS Implementing Plugins -->
-<script src="{{ asset('public/assets/admin')}}/js/vendor.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/vendor.min.js"></script>
 
 <!-- JS Front -->
-<script src="{{ asset('public/assets/admin')}}/js/theme.min.js"></script>
-<script src="{{ asset('public/assets/admin')}}/js/toastr.js"></script>
+<script src="{{ asset('assets/admin')}}/js/theme.min.js"></script>
+<script src="{{ asset('assets/admin')}}/js/toastr.js"></script>
 {!! Toastr::message() !!}
 
 {{-- FIX: login errors are now shown inline under email/password fields (see form above),

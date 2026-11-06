@@ -41,7 +41,7 @@
                     <div class="card mt-2 rest-part">
                         <div class="card-header">
                             <h4>{{ translate('Import Attributes File') }}</h4>
-                            <a href="{{ asset('public/assets/attributes_bulk_format.xlsx')}}" download=""
+                            <a href="{{ asset('assets/attributes_bulk_format.xlsx')}}" download=""
                                class="btn btn-secondary">{{ translate('Download Format') }}</a>
                         </div>
                         <div class="card-body">
